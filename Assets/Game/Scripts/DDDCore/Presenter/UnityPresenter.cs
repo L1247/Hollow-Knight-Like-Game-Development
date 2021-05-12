@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 #if UniRx
 using UniRx;
-
 #endif
 
 namespace DDDCore.Adapter.Presenter.Unity

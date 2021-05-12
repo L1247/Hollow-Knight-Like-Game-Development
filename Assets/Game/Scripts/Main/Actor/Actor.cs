@@ -1,6 +1,9 @@
+using DDDCore.Model;
+using Main.Actor.Events;
+
 namespace Main.Actor
 {
-    public class Actor
+    public class Actor : AggregateRoot
     {
     #region Public Variables
 
@@ -11,10 +14,11 @@ namespace Main.Actor
 
     #region Constructor
 
-        public Actor(string actorId , string actorDataId)
+        public Actor(string actorId , string actorDataId) : base(actorId)
         {
-            ActorId          = actorId;
+            ActorId     = actorId;
             ActorDataId = actorDataId;
+            AddDomainEvent(new ActorCreated());
         }
 
     #endregion
