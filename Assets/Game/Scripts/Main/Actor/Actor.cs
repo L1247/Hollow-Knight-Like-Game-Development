@@ -18,7 +18,7 @@ namespace Main.Actor
         {
             ActorId     = actorId;
             ActorDataId = actorDataId;
-            AddDomainEvent(new ActorCreated());
+            AddDomainEvent(new ActorCreated(actorId , actorDataId));
         }
 
     #endregion
