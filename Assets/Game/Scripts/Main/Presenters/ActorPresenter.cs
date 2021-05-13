@@ -14,6 +14,9 @@ namespace Main.Presenters
         [SerializeField]
         private Button button_CreateActor;
 
+        [SerializeField]
+        private GameObject actorPrefab;
+
         [Inject]
         private CreateActorUseCase createActorUseCase;
 
@@ -31,7 +34,12 @@ namespace Main.Presenters
 
         public void OnActorCreated(ActorCreated actorCreated)
         {
-            Debug.Log($"OnActorCreated {actorCreated.ActorId} , {actorCreated.ActorDataId}");
+            var actorId                 = actorCreated.ActorId;
+            var actorDataId = actorCreated.ActorDataId;
+            Debug.Log($"OnActorCreated {actorId} , {actorDataId}");
+            var actorInstance       = Instantiate(actorPrefab , Random.insideUnitCircle * 5 , Quaternion.identity);
+            var textComponent = actorInstance.GetComponentInChildren<Text>();
+            textComponent.text = $"{actorDataId} - {actorId.Substring(actorId.Length - 2 , 2)}";
         }
     }
 }

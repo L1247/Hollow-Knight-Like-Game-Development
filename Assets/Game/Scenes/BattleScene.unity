@@ -724,6 +724,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button_CreateActor: {fileID: 330706803}
+  actorPrefab: {fileID: 2318797795964718036, guid: 43bcbd1d8c0a5eb47b00d8e27a4146ca, type: 3}
 --- !u!114 &1938814966
 MonoBehaviour:
   m_ObjectHideFlags: 0
