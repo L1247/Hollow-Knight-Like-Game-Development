@@ -1,3 +1,4 @@
+using System;
 using DDDCore.Model;
 using Main.Actor.Events;
 
@@ -16,9 +17,9 @@ namespace Main.Actor
 
         public Actor(string actorId , string actorDataId) : base(actorId)
         {
-            ActorId     = actorId;
+            ActorId     = ActorId == null ? Guid.NewGuid().ToString() : actorId;
             ActorDataId = actorDataId;
-            AddDomainEvent(new ActorCreated(actorId , actorDataId));
+            AddDomainEvent(new ActorCreated(ActorId , ActorDataId));
         }
 
     #endregion

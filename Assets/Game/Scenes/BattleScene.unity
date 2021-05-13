@@ -689,6 +689,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1938814964}
   - component: {fileID: 1938814965}
+  - component: {fileID: 1938814966}
   m_Layer: 0
   m_Name: ActorPresenter
   m_TagString: Untagged
@@ -723,3 +724,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button_CreateActor: {fileID: 330706803}
+--- !u!114 &1938814966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1938814963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 1938814965}
+  _identifier: 
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 0

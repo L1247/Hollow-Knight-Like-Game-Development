@@ -20,6 +20,7 @@ namespace Main.UseCases.Actor.Create
         {
             var actor = new Main.Actor.Actor(input.ActorId , input.ActorDataId);
             repository.Save(actor);
+            domainEventBus.PostAll(actor);
         }
     }
 }
