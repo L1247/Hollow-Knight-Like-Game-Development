@@ -1,19 +1,32 @@
+using DDDCore.Model;
 using Main.Actor;
+using Main.UseCases.Actor.Create;
+using Main.UseCases.Repository;
+using MainTests.ExtenjectTestFramwork;
 using NUnit.Framework;
 
 namespace MainTests.ActorTests
 {
-    public class CreateActorUseCaseTests
+    public class CreateActorUseCaseTests : DDDUnitTestFixture
     {
         [Test]
         public void Should_Succeed_When_Create_Actor()
         {
-            var actor = new Actor("1234" , "Pokemon");
+            var actorId            = "1234";
+            var actorDataId        = "Pokemon";
+            var actorRepository    = new ActorRepository();
+            var createActorUseCase = new CreateActorUseCase(_domainEventBus , actorRepository);
+            var input              = new CreateActorInput();
+            input.ActorId = actorId;
+            input.ActorDataId = actorDataId;
+            createActorUseCase.Execute(input);
 
-            Assert.NotNull( actor.ActorId );
-            Assert.AreEqual( "1234" , actor.ActorId );
-            Assert.NotNull( actor.ActorDataId );
-            Assert.AreEqual( "Pokemon" , actor.ActorDataId );
+            var actor = actorRepository.FindById(actorId);
+            Assert.NotNull( actor );
+            Assert.NotNull(actor.ActorId);
+            Assert.AreEqual(actorId , actor.ActorId);
+            Assert.NotNull(actor.ActorDataId);
+            Assert.AreEqual(actorDataId , actor.ActorDataId);
         }
     }
 }
