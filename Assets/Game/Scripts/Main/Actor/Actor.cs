@@ -17,7 +17,7 @@ namespace Main.Actor
 
         public Actor(string actorId , string actorDataId) : base(actorId)
         {
-            ActorId     = ActorId == null ? Guid.NewGuid().ToString() : actorId;
+            ActorId     = actorId == null ? Guid.NewGuid().ToString() : actorId;
             ActorDataId = actorDataId;
             AddDomainEvent(new ActorCreated(ActorId , ActorDataId));
         }
