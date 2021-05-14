@@ -19,7 +19,6 @@ namespace Main.ViewComponent
             spriteRenderer.sprite = sprite;
         }
 
-
         public void SetText(string displayText)
         {
             text_IdAndDataId.text = displayText;

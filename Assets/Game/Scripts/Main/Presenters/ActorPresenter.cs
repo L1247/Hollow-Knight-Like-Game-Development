@@ -1,6 +1,7 @@
 using DDDCore.Adapter.Presenter.Unity;
 using Main.Controller;
 using Main.Entity.Model.Events;
+using Main.ViewComponent;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -40,9 +41,10 @@ namespace Main.Presenters
             var actorId     = actorCreated.ActorId;
             var actorDataId = actorCreated.ActorDataId;
             Debug.Log($"OnActorCreated {actorId} , {actorDataId}");
-            var actorInstance = Instantiate(actorPrefab , Random.insideUnitCircle * 5 , Quaternion.identity);
-            var textComponent = actorInstance.GetComponentInChildren<Text>();
-            textComponent.text = $"{actorDataId} - {actorId.Substring(actorId.Length - 2 , 2)}";
+            var actorInstance  = Instantiate(actorPrefab , Random.insideUnitCircle * 5 , Quaternion.identity);
+            var actorComponent = actorInstance.GetComponent<ActorComponent>();
+            var text           = $"{actorDataId} - {actorId.Substring(actorId.Length - 2 , 2)}";
+            actorComponent.SetText(text);
         }
 
     #endregion
