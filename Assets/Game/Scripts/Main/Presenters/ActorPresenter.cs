@@ -1,6 +1,6 @@
 using DDDCore.Adapter.Presenter.Unity;
-using Main.Actor.Events;
 using Main.Controller;
+using Main.Entity.Model.Events;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;

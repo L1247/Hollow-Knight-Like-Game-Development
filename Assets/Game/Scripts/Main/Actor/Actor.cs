@@ -1,15 +1,13 @@
-using System;
 using DDDCore.Model;
-using Main.Actor.Events;
+using Main.Entity.Model.Events;
 
-namespace Main.Actor
+namespace Main.Entity.Model
 {
     public class Actor : AggregateRoot
     {
     #region Public Variables
 
         public string ActorDataId { get; }
-        public string ActorId     { get; }
 
     #endregion
 
@@ -17,9 +15,8 @@ namespace Main.Actor
 
         public Actor(string actorId , string actorDataId) : base(actorId)
         {
-            ActorId     = actorId == null ? Guid.NewGuid().ToString() : actorId;
             ActorDataId = actorDataId;
-            AddDomainEvent(new ActorCreated(ActorId , ActorDataId));
+            AddDomainEvent(new ActorCreated(GetId() , ActorDataId));
         }
 
     #endregion

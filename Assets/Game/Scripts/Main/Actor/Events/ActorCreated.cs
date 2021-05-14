@@ -1,6 +1,6 @@
 using DDDCore.Model;
 
-namespace Main.Actor.Events
+namespace Main.Entity.Model.Events
 {
     public class ActorCreated : DomainEvent
     {
@@ -16,7 +16,7 @@ namespace Main.Actor.Events
 
         public ActorCreated(string actorId , string actorDataId)
         {
-            ActorId          = actorId;
+            ActorId     = actorId;
             ActorDataId = actorDataId;
         }
 
