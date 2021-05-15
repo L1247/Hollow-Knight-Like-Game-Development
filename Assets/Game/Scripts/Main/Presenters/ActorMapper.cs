@@ -1,5 +1,8 @@
 using System.Collections.Generic;
+using Game.ScriptableObjects;
 using Main.ViewComponent;
+using UnityEngine;
+using Zenject;
 
 namespace Main.Presenters
 {
@@ -7,14 +10,26 @@ namespace Main.Presenters
     {
     #region Private Variables
 
+        [Inject]
+        private ActorDataOverView actorDataOverView;
+
+        [Inject]
+        private GameObject actorPrefab;
+
         private readonly List<ActorViewData> actorViewDatas = new List<ActorViewData>();
 
     #endregion
 
     #region Public Methods
 
-        public void CreateActorViewData(string actorId , string actorDataId , ActorComponent actorComponent)
+        public void CreateActorViewData(string actorId , string actorDataId)
         {
+            var actorData      = actorDataOverView.FindActorData(actorDataId);
+            var actorInstance  = Object.Instantiate(actorPrefab , Random.insideUnitCircle * 5 , Quaternion.identity);
+            var actorComponent = actorInstance.GetComponent<ActorComponent>();
+            var text           = $"{actorDataId} - {actorId.Substring(actorId.Length - 2 , 2)}";
+            actorComponent.SetText(text);
+            actorComponent.SetSprite(actorData.Sprite);
             var actorViewData = new ActorViewData(actorId , actorDataId , actorComponent);
             actorViewDatas.Add(actorViewData);
         }
