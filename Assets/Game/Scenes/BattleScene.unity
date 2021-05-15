@@ -806,9 +806,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   button_CreateActor_A: {fileID: 330706803}
   button_CreateActor_B: {fileID: 2069341537}
-  actorPrefab: {fileID: 2318797795964718036, guid: 43bcbd1d8c0a5eb47b00d8e27a4146ca, type: 3}
-  sprite_A: {fileID: 21300000, guid: f782ada428eba8b40a92286f440060c8, type: 3}
-  sprite_B: {fileID: 21300000, guid: 98669ea49f47bbb4d80419a7cbbaafc8, type: 3}
 --- !u!114 &1938814966
 MonoBehaviour:
   m_ObjectHideFlags: 0

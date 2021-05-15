@@ -25,24 +25,24 @@ namespace MainTests.ActorTests
             Assert.AreEqual(displayText , actorComponent.text_IdAndDataId.text);
         }
 
-        [Test]
-        public void Should_Succeed_When_Call_SetSprite()
-        {
-            // arrange
-            var gameObject     = new GameObject();
-            var actorComponent = gameObject.AddComponent<ActorComponent>();
-            var spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
-            actorComponent.spriteRenderer = spriteRenderer;
-            var texture = new Texture2D(32 , 32);
-            var sprite = Sprite.Create(texture , new Rect(0 , 0 , 32 , 32)
-                , new Vector2(16 , 16));
-            // act
-            actorComponent.SetSprite(sprite);
-            // assert
-            Assert.NotNull(actorComponent.spriteRenderer);
-            Assert.AreEqual(sprite , actorComponent.spriteRenderer.sprite);
-        }
-
     #endregion
+
+        // [Test]
+        // public void Should_Succeed_When_Call_SetSprite()
+        // {
+        //     // arrange
+        //     var gameObject     = new GameObject();
+        //     var actorComponent = gameObject.AddComponent<ActorComponent>();
+        //     var spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
+        //     actorComponent.spriteRenderer = spriteRenderer;
+        //     var texture = new Texture2D(32 , 32);
+        //     var sprite = Sprite.Create(texture , new Rect(0 , 0 , 32 , 32)
+        //         , new Vector2(16 , 16));
+        //     // act
+        //     actorComponent.SetSprite(sprite);
+        //     // assert
+        //     Assert.NotNull(actorComponent.spriteRenderer);
+        //     Assert.AreEqual(sprite , actorComponent.spriteRenderer.sprite);
+        // }
     }
 }

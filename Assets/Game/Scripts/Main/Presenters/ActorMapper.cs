@@ -13,9 +13,6 @@ namespace Main.Presenters
         [Inject]
         private ActorDataOverView actorDataOverView;
 
-        [Inject]
-        private GameObject actorPrefab;
-
         private readonly List<ActorViewData> actorViewDatas = new List<ActorViewData>();
 
     #endregion
@@ -25,11 +22,11 @@ namespace Main.Presenters
         public void CreateActorViewData(string actorId , string actorDataId)
         {
             var actorData      = actorDataOverView.FindActorData(actorDataId);
+            var actorPrefab    = actorData.ActorPrefab;
             var actorInstance  = Object.Instantiate(actorPrefab , Random.insideUnitCircle * 5 , Quaternion.identity);
             var actorComponent = actorInstance.GetComponent<ActorComponent>();
             var text           = $"{actorDataId} - {actorId.Substring(actorId.Length - 2 , 2)}";
             actorComponent.SetText(text);
-            actorComponent.SetSprite(actorData.Sprite);
             var actorViewData = new ActorViewData(actorId , actorDataId , actorComponent);
             actorViewDatas.Add(actorViewData);
         }

@@ -7,17 +7,18 @@ namespace Main.ViewComponent
     {
     #region Public Variables
 
-        public SpriteRenderer spriteRenderer;
-        public Text           text_IdAndDataId;
+        public Text text_IdAndDataId;
+
+    #endregion
+
+    #region Private Variables
+
+        [SerializeField]
+        private Animator animator;
 
     #endregion
 
     #region Public Methods
-
-        public void SetSprite(Sprite sprite)
-        {
-            spriteRenderer.sprite = sprite;
-        }
 
         public void SetText(string displayText)
         {

@@ -7,7 +7,8 @@ namespace Game.ScriptableObjects
     {
     #region Public Variables
 
-        public Sprite Sprite;
+        public GameObject ActorPrefab;
+
         public string ActorDataId;
 
     #endregion

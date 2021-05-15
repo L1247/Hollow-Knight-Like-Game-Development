@@ -8,7 +8,6 @@ namespace Game.ScriptableObjects
     {
     #region Public Variables
 
-        public GameObject      ActorPrefab;
         public List<ActorData> ActorDatas = new List<ActorData>();
 
     #endregion
