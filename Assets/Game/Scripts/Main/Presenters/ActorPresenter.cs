@@ -15,6 +15,9 @@ namespace Main.Presenters
         [Inject]
         private ActorContoller actorContoller;
 
+        [Inject]
+        private ActorMapper actorMapper;
+
         private readonly string defaultActorDataId_A = "Pikachu";
         private readonly string defaultActorDataId_B = "Star";
 
@@ -58,6 +61,7 @@ namespace Main.Presenters
             var text           = $"{actorDataId} - {actorId.Substring(actorId.Length - 2 , 2)}";
             actorComponent.SetText(text);
             actorComponent.SetSprite(sprite);
+            actorMapper.CreateActorViewData(actorId , actorDataId , actorComponent);
         }
 
     #endregion

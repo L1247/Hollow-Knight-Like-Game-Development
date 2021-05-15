@@ -2,6 +2,7 @@ using DDDCore;
 using DDDCore.Model;
 using Main.Controller;
 using Main.EventHandler.View;
+using Main.Presenters;
 using Main.UseCases.Actor.Create;
 using Main.UseCases.Repository;
 using Zenject;
@@ -27,6 +28,8 @@ namespace Main.Application
             Container.Bind<ActorRepository>().AsSingle();
             // UseCases
             Container.Bind<CreateActorUseCase>().AsSingle();
+            // View
+            Container.Bind<ActorMapper>().AsSingle();
         }
 
     #endregion
