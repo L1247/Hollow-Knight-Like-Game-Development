@@ -6,9 +6,8 @@ namespace DDDCore.Usecase
     /// <summary>
     /// </summary>
     /// <typeparam name="I">Input</typeparam>
-    /// <typeparam name="O">Output</typeparam>
     /// <typeparam name="R">Repository</typeparam>
-    public abstract class UseCase<I , O , R> where O : Output
+    public abstract class UseCase<I ,  R> where I : Input
     {
     #region Protected Variables
 
@@ -20,7 +19,7 @@ namespace DDDCore.Usecase
 
     #region Public Methods
 
-        public abstract void Execute(I input , O output);
+        public abstract void Execute(I input);
 
     #endregion
 

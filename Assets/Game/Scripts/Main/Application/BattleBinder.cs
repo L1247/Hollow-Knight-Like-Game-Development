@@ -1,0 +1,37 @@
+using DDDCore;
+using DDDCore.Model;
+using Main.Controller;
+using Main.EventHandler.View;
+using Main.Presenters;
+using Main.UseCases.Actor.Create;
+using Main.UseCases.Repository;
+using Zenject;
+
+namespace Main.Application
+{
+    public class BattleBinder : MonoInstaller
+    {
+    #region Public Methods
+
+        public override void InstallBindings()
+        {
+            // Event
+            SignalBusInstaller.Install(Container);
+            Container.DeclareSignal<DomainEvent>();
+            Container.Bind<EventStore>().AsSingle().NonLazy();
+            Container.Bind<DomainEventBus>().AsSingle();
+            // EventHandler
+            Container.Bind<ViewEventHandlerActor>().AsSingle().NonLazy();
+            // Controller
+            Container.Bind<ActorContoller>().AsSingle();
+            // Repository
+            Container.Bind<ActorRepository>().AsSingle();
+            // UseCases
+            Container.Bind<CreateActorUseCase>().AsSingle();
+            // View
+            Container.Bind<ActorMapper>().AsSingle();
+        }
+
+    #endregion
+    }
+}

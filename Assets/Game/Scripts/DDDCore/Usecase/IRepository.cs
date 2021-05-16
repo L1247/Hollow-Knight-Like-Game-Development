@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DDDCore.Model;
 
 namespace DDDCore.Usecase
 {
