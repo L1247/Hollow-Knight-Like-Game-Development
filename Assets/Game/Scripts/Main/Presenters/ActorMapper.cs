@@ -32,6 +32,12 @@ namespace Main.Presenters
             actorViewDatas.Add(actorViewData);
         }
 
+        public ActorComponent GetActorComponent(string actorId)
+        {
+            var actorViewData = actorViewDatas.Find(data => data.ActorId == actorId);
+            return actorViewData.ActorComponent;
+        }
+
     #endregion
     }
 

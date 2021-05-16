@@ -4,6 +4,7 @@ using Main.Controller;
 using Main.EventHandler.View;
 using Main.Presenters;
 using Main.UseCases.Actor.Create;
+using Main.UseCases.Actor.Edit;
 using Main.UseCases.Repository;
 using Zenject;
 
@@ -28,6 +29,7 @@ namespace Main.Application
             Container.Bind<ActorRepository>().AsSingle();
             // UseCases
             Container.Bind<CreateActorUseCase>().AsSingle();
+            Container.Bind<ChangeDirectionUseCase>().AsSingle();
             // View
             Container.Bind<ActorMapper>().AsSingle();
         }
