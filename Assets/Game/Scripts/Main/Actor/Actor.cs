@@ -1,4 +1,5 @@
 using DDDCore.Model;
+using Main.Actor.Events;
 using Main.Entity.Model.Events;
 
 namespace Main.Entity.Model
@@ -29,6 +30,7 @@ namespace Main.Entity.Model
         public void ChangeDirection(int direction)
         {
             Direction = direction;
+            AddDomainEvent(new DirectionChanged(GetId() , Direction));
         }
 
     #endregion

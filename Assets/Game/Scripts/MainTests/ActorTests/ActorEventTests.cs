@@ -1,3 +1,4 @@
+using Main.Actor.Events;
 using Main.Entity.Model;
 using Main.Entity.Model.Events;
 using NUnit.Framework;
@@ -23,6 +24,22 @@ namespace MainTests.ActorTests
             Assert.AreEqual(actorId ,     actorCreated.ActorId);
             Assert.AreEqual(actorDataId , actorCreated.ActorDataId);
             Assert.AreEqual(1 ,           actorCreated.Direction);
+        }
+
+        [Test]
+        public void Should_Publish_Direction_Changed_When_Change_Direction()
+        {
+            var actorId   = "1234";
+            var direction = 123789127;
+            var actor = ActorBuilder.NewInstance()
+                                    .SetActorId(actorId)
+                                    .Build();
+            actor.ChangeDirection(direction);
+            var domainEvents = actor.GetDomainEvents();
+            Assert.AreEqual(2 , domainEvents.Count);
+            var directionChanged = domainEvents[1] as DirectionChanged;
+            Assert.AreEqual(actorId ,   directionChanged.ActorId);
+            Assert.AreEqual(direction , directionChanged.Direction);
         }
 
     #endregion
