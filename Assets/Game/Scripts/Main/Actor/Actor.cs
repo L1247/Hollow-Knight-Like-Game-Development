@@ -7,6 +7,8 @@ namespace Main.Entity.Model
     {
     #region Public Variables
 
+        public int Direction { get; }
+
         public string ActorDataId { get; }
 
     #endregion
@@ -16,6 +18,7 @@ namespace Main.Entity.Model
         public Actor(string actorId , string actorDataId) : base(actorId)
         {
             ActorDataId = actorDataId;
+            Direction   = 1;
             AddDomainEvent(new ActorCreated(GetId() , ActorDataId));
         }
 

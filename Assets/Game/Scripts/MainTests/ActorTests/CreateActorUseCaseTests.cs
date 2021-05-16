@@ -27,6 +27,8 @@ namespace MainTests.ActorTests
             Assert.AreEqual(actorId , actor.GetId());
             Assert.NotNull(actor.ActorDataId);
             Assert.AreEqual(actorDataId , actor.ActorDataId);
+            // 角色預設面右
+            Assert.AreEqual(1 , actor.Direction);
         }
 
     #endregion
