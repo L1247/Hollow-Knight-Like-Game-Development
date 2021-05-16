@@ -22,7 +22,7 @@ namespace Main.ViewComponent
 
     #region Public Methods
 
-        public void ChangeDirection(int directionValue)
+        public void SetDirection(int directionValue)
         {
             var x = 0;
 

@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text_IdAndDataId: {fileID: 7628362190142933651}
+  Rednerer: {fileID: 7537735179749738433}
   animator: {fileID: 7466056444511282173}
 --- !u!1 &3040444540712329801
 GameObject:
@@ -72,7 +73,7 @@ Transform:
   m_GameObject: {fileID: 3040444540712329801}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7405752818044217467}
   m_Father: {fileID: 2318797795964718038}

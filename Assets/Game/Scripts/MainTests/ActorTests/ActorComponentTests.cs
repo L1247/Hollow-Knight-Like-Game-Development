@@ -28,7 +28,7 @@ namespace MainTests.ActorTests
         [Test]
         [TestCase(1 , -1)]
         [TestCase(0 , 1)]
-        public void Should_Succeed_When_Call_ChangeDirection(int directionValue , int expectedScaleValue)
+        public void Should_Succeed_When_Call_SetDirection(int directionValue , int expectedScaleValue)
         {
             // arrange
             var gameObject        = new GameObject();
@@ -36,7 +36,7 @@ namespace MainTests.ActorTests
             var rendererTransform = new GameObject("Renderer").transform;
             actorComponent.Rednerer = rendererTransform;
             // act
-            actorComponent.ChangeDirection(directionValue);
+            actorComponent.SetDirection(directionValue);
             // assert
             Assert.AreEqual(expectedScaleValue , rendererTransform.localScale.x);
         }

@@ -27,6 +27,7 @@ namespace Main.Presenters
             var actorComponent = actorInstance.GetComponent<ActorComponent>();
             var text           = $"{actorDataId} - {actorId.Substring(actorId.Length - 2 , 2)}";
             actorComponent.SetText(text);
+            actorComponent.SetDirection(direction);
             var actorViewData = new ActorViewData(actorId , actorDataId , actorComponent);
             actorViewDatas.Add(actorViewData);
         }

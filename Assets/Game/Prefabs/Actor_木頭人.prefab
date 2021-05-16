@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text_IdAndDataId: {fileID: 7628362190142933651}
+  Rednerer: {fileID: 7537735179749738433}
   animator: {fileID: 3667970079280698107}
 --- !u!1 &3040444540712329801
 GameObject:
