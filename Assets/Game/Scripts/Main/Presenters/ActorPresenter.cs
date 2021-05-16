@@ -23,10 +23,13 @@ namespace Main.Presenters
         private List<ActorData> actorDatas;
 
         [SerializeField]
-        private Button button_CreateActor_A;
+        private Button button_CreateActor_Enemy1;
 
         [SerializeField]
-        private Button button_CreateActor_B;
+        private Button button_CreateActor_Player1;
+
+        [SerializeField]
+        private Button button_CreateActor_Player2;
 
     #endregion
 
@@ -34,8 +37,9 @@ namespace Main.Presenters
 
         private void Start()
         {
-            ButtonBinding(button_CreateActor_A , () => actorContoller.CreateActor(actorDatas[0].ActorDataId));
-            ButtonBinding(button_CreateActor_B , () => actorContoller.CreateActor(actorDatas[1].ActorDataId));
+            ButtonBinding(button_CreateActor_Player1 , () => actorContoller.CreateActor(actorDatas[0].ActorDataId));
+            ButtonBinding(button_CreateActor_Player2 , () => actorContoller.CreateActor(actorDatas[1].ActorDataId));
+            ButtonBinding(button_CreateActor_Enemy1 ,  () => actorContoller.CreateActor(actorDatas[2].ActorDataId));
         }
 
     #endregion
