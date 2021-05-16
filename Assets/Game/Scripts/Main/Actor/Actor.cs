@@ -7,7 +7,7 @@ namespace Main.Entity.Model
     {
     #region Public Variables
 
-        public int Direction { get; }
+        public int Direction { get; private set; }
 
         public string ActorDataId { get; }
 
@@ -20,6 +20,15 @@ namespace Main.Entity.Model
             ActorDataId = actorDataId;
             Direction   = 1;
             AddDomainEvent(new ActorCreated(GetId() , ActorDataId , Direction));
+        }
+
+    #endregion
+
+    #region Public Methods
+
+        public void ChangeDirection(int direction)
+        {
+            Direction = direction;
         }
 
     #endregion
