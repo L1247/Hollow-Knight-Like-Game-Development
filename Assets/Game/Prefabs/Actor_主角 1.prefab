@@ -767,7 +767,7 @@ GameObject:
   - component: {fileID: 2318797795964718038}
   - component: {fileID: 9219103183065918816}
   m_Layer: 0
-  m_Name: "Actor_\u4E3B\u89D2"
+  m_Name: "Actor_\u4E3B\u89D2 1"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -802,6 +802,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text_IdAndDataId: {fileID: 7628362190142933651}
+  Rednerer: {fileID: 7537735179749738433}
   animator: {fileID: 464117908254284363}
 --- !u!1 &2344091541683041008
 GameObject:

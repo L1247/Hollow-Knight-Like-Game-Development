@@ -1,4 +1,5 @@
 using DDDCore.Model;
+using Main.Actor.Events;
 using Main.Entity.Model.Events;
 
 namespace Main.Entity.Model
@@ -7,7 +8,7 @@ namespace Main.Entity.Model
     {
     #region Public Variables
 
-        public int Direction { get; }
+        public int Direction { get; private set; }
 
         public string ActorDataId { get; }
 
@@ -19,7 +20,17 @@ namespace Main.Entity.Model
         {
             ActorDataId = actorDataId;
             Direction   = 1;
-            AddDomainEvent(new ActorCreated(GetId() , ActorDataId));
+            AddDomainEvent(new ActorCreated(GetId() , ActorDataId , Direction));
+        }
+
+    #endregion
+
+    #region Public Methods
+
+        public void ChangeDirection(int direction)
+        {
+            Direction = direction;
+            AddDomainEvent(new DirectionChanged(GetId() , Direction));
         }
 
     #endregion

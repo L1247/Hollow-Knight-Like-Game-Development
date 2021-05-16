@@ -8,6 +8,8 @@ namespace Main.UseCases.Actor.Edit
     {
     #region Public Variables
 
+        public int Direction;
+
         public string ActorId;
 
     #endregion
@@ -24,7 +26,12 @@ namespace Main.UseCases.Actor.Edit
 
     #region Public Methods
 
-        public override void Execute(ChangeDirectionInput input) { }
+        public override void Execute(ChangeDirectionInput input)
+        {
+            var actor = repository.FindById(input.ActorId);
+            actor.ChangeDirection(input.Direction);
+            domainEventBus.PostAll(actor);
+        }
 
     #endregion
     }

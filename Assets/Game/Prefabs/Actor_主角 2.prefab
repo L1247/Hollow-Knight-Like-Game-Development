@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text_IdAndDataId: {fileID: 7628362190142933651}
+  Rednerer: {fileID: 7537735179749738433}
   animator: {fileID: 7466056444511282173}
 --- !u!1 &3040444540712329801
 GameObject:
@@ -326,6 +327,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4210157123753652, guid: 6877fb649746c674d8fbbcf60d41892b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 212874855828977060, guid: 6877fb649746c674d8fbbcf60d41892b, type: 3}
+      propertyPath: m_FlipX
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

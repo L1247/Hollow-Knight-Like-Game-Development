@@ -19,7 +19,7 @@ namespace Main.Presenters
 
     #region Public Methods
 
-        public void CreateActorViewData(string actorId , string actorDataId)
+        public void CreateActorViewData(string actorId , string actorDataId , int direction)
         {
             var actorData      = actorDataOverView.FindActorData(actorDataId);
             var actorPrefab    = actorData.ActorPrefab;
@@ -27,8 +27,15 @@ namespace Main.Presenters
             var actorComponent = actorInstance.GetComponent<ActorComponent>();
             var text           = $"{actorDataId} - {actorId.Substring(actorId.Length - 2 , 2)}";
             actorComponent.SetText(text);
+            actorComponent.SetDirection(direction);
             var actorViewData = new ActorViewData(actorId , actorDataId , actorComponent);
             actorViewDatas.Add(actorViewData);
+        }
+
+        public ActorComponent GetActorComponent(string actorId)
+        {
+            var actorViewData = actorViewDatas.Find(data => data.ActorId == actorId);
+            return actorViewData.ActorComponent;
         }
 
     #endregion
