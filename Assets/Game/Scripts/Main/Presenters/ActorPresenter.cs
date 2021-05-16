@@ -50,8 +50,9 @@ namespace Main.Presenters
         {
             var actorId     = actorCreated.ActorId;
             var actorDataId = actorCreated.ActorDataId;
+            var direction   = actorCreated.Direction;
             Debug.Log($"OnActorCreated {actorId} , {actorDataId}");
-            actorMapper.CreateActorViewData(actorId , actorDataId);
+            actorMapper.CreateActorViewData(actorId , actorDataId , direction);
         }
 
     #endregion

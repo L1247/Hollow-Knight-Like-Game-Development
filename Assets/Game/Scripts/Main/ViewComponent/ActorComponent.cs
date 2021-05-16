@@ -9,6 +9,8 @@ namespace Main.ViewComponent
 
         public Text text_IdAndDataId;
 
+        public Transform Rednerer;
+
     #endregion
 
     #region Private Variables
@@ -19,6 +21,15 @@ namespace Main.ViewComponent
     #endregion
 
     #region Public Methods
+
+        public void ChangeDirection(int directionValue)
+        {
+            var x = 0;
+
+            if (directionValue == 0) x = 1;
+            if (directionValue == 1) x = -1;
+            Rednerer.transform.localScale = new Vector3(x , 1 , 1);
+        }
 
         public void SetText(string displayText)
         {

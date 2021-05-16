@@ -25,6 +25,22 @@ namespace MainTests.ActorTests
             Assert.AreEqual(displayText , actorComponent.text_IdAndDataId.text);
         }
 
+        [Test]
+        [TestCase(1 , -1)]
+        [TestCase(0 , 1)]
+        public void Should_Succeed_When_Call_ChangeDirection(int directionValue , int expectedScaleValue)
+        {
+            // arrange
+            var gameObject        = new GameObject();
+            var actorComponent    = gameObject.AddComponent<ActorComponent>();
+            var rendererTransform = new GameObject("Renderer").transform;
+            actorComponent.Rednerer = rendererTransform;
+            // act
+            actorComponent.ChangeDirection(directionValue);
+            // assert
+            Assert.AreEqual(expectedScaleValue , rendererTransform.localScale.x);
+        }
+
     #endregion
 
         // [Test]

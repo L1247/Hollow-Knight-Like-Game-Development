@@ -19,7 +19,7 @@ namespace Main.Entity.Model
         {
             ActorDataId = actorDataId;
             Direction   = 1;
-            AddDomainEvent(new ActorCreated(GetId() , ActorDataId));
+            AddDomainEvent(new ActorCreated(GetId() , ActorDataId , Direction));
         }
 
     #endregion

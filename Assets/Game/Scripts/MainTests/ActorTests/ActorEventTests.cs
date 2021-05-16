@@ -22,6 +22,7 @@ namespace MainTests.ActorTests
             var actorCreated = domainEvents[0] as ActorCreated;
             Assert.AreEqual(actorId ,     actorCreated.ActorId);
             Assert.AreEqual(actorDataId , actorCreated.ActorDataId);
+            Assert.AreEqual(1 ,           actorCreated.Direction);
         }
 
     #endregion
