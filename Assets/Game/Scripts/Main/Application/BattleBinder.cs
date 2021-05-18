@@ -20,6 +20,7 @@ namespace Main.Application
             // Event
             SignalBusInstaller.Install(Container);
             Container.DeclareSignal<DomainEvent>();
+            Container.DeclareSignal<Input_Horizontal>();
             Container.Bind<EventStore>().AsSingle().NonLazy();
             Container.Bind<DomainEventBus>().AsSingle();
             // EventHandler

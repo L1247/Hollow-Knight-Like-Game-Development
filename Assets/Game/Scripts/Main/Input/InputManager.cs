@@ -7,9 +7,14 @@ namespace Main.Input
     {
     #region Private Variables
 
-        private          bool   initialized;
-        private readonly int    playerId = 0;
+        private bool initialized;
+
+        private          float  lastHorzonTalValue = -999;
+        private readonly int    playerId           = 0;
         private          Player player;
+
+        [Inject]
+        private SignalBus signalBus;
 
     #endregion
 
@@ -41,7 +46,29 @@ namespace Main.Input
             // Get the input from the Rewired Player. All controllers that the Player owns will contribute, so it doesn't matter
             // whether the input is coming from a joystick, the keyboard, mouse, or a custom controller.
             // get input by name or action id
+            // -1 : left , 0 : no press , 1 : right
             var horizontalValue = player.GetAxisRaw("Move Horizontal");
+            if (lastHorzonTalValue != horizontalValue)
+                signalBus.Fire(new Input_Horizontal(horizontalValue));
+            lastHorzonTalValue = horizontalValue;
+        }
+
+    #endregion
+    }
+
+    public class Input_Horizontal
+    {
+    #region Public Variables
+
+        public float HorizontalValue { get; }
+
+    #endregion
+
+    #region Constructor
+
+        public Input_Horizontal(float horizontalValue)
+        {
+            HorizontalValue = horizontalValue;
         }
 
     #endregion
