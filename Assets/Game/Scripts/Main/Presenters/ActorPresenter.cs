@@ -4,6 +4,7 @@ using Game.ScriptableObjects;
 using Main.Actor.Events;
 using Main.Controller;
 using Main.Entity.Model.Events;
+using Main.Input;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -75,6 +76,25 @@ namespace Main.Presenters
             var direction      = directionChanged.Direction;
             var actorComponent = actorMapper.GetActorComponent(actorId);
             actorComponent.SetDirection(direction);
+        }
+
+        public void OnHorizontalChanged(Input_Horizontal inputHorizontal)
+        {
+            // detect actor is exist
+            if (string.IsNullOrEmpty(CacheActorId) == false)
+            {
+                // -1 : left , 0 : no press , 1 : right
+                var horizontalValue = inputHorizontal.HorizontalValue;
+                var isMoving        = horizontalValue != 0;
+                var actorComponent  = actorMapper.GetActorComponent(CacheActorId);
+                actorComponent.SetIsMoving(isMoving);
+                if (isMoving)
+                {
+                    // mapping input value to domain direction value
+                    var dir = horizontalValue == 1 ? 1 : 0;
+                    actorContoller.ChangeDirection(CacheActorId , dir);
+                }
+            }
         }
 
     #endregion

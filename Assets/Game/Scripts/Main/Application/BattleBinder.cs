@@ -2,6 +2,7 @@ using DDDCore;
 using DDDCore.Model;
 using Main.Controller;
 using Main.EventHandler.View;
+using Main.Input;
 using Main.Presenters;
 using Main.UseCases.Actor.Create;
 using Main.UseCases.Actor.Edit;
@@ -19,6 +20,7 @@ namespace Main.Application
             // Event
             SignalBusInstaller.Install(Container);
             Container.DeclareSignal<DomainEvent>();
+            Container.DeclareSignal<Input_Horizontal>();
             Container.Bind<EventStore>().AsSingle().NonLazy();
             Container.Bind<DomainEventBus>().AsSingle();
             // EventHandler
@@ -32,6 +34,8 @@ namespace Main.Application
             Container.Bind<ChangeDirectionUseCase>().AsSingle();
             // View
             Container.Bind<ActorMapper>().AsSingle();
+            // Input
+            Container.BindInterfacesAndSelfTo<InputManager>().AsSingle();
         }
 
     #endregion

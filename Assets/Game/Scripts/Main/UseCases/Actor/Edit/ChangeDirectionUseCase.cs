@@ -4,7 +4,7 @@ using Main.UseCases.Repository;
 
 namespace Main.UseCases.Actor.Edit
 {
-    public class ChangeDirectionInput : Input
+    public class ChangeDirectionInput : DDDCore.Usecase.Input
     {
     #region Public Variables
 

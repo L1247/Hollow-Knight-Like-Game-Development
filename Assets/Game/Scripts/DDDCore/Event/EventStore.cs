@@ -7,9 +7,9 @@ namespace DDDCore
 {
     public class EventStore
     {
-    #region Protected Variables
+    #region Public Variables
 
-        protected readonly SignalBus _signalBus;
+        public readonly SignalBus signalBus;
 
     #endregion
 
@@ -25,8 +25,8 @@ namespace DDDCore
         [Inject]
         public EventStore(SignalBus signalBus)
         {
-            _signalBus = signalBus;
-            _signalBus.Subscribe<DomainEvent>(HandleEvent);
+            this.signalBus = signalBus;
+            this.signalBus.Subscribe<DomainEvent>(HandleEvent);
         }
 
     #endregion

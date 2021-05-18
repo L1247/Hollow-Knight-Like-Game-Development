@@ -7,6 +7,10 @@ namespace Main.ViewComponent
     {
     #region Public Variables
 
+        public bool isMoving;
+
+        public int currentDirectionValue;
+
         public Text text_IdAndDataId;
 
         public Transform Rednerer;
@@ -14,6 +18,10 @@ namespace Main.ViewComponent
     #endregion
 
     #region Private Variables
+
+        private readonly int moveSpeed = 5;
+
+        private Transform _transform;
 
         [SerializeField]
         private Animator animator;
@@ -24,6 +32,7 @@ namespace Main.ViewComponent
 
         public void SetDirection(int directionValue)
         {
+            currentDirectionValue = directionValue;
             var x = 0;
 
             if (directionValue == 0) x = 1;
@@ -31,9 +40,37 @@ namespace Main.ViewComponent
             Rednerer.transform.localScale = new Vector3(x , 1 , 1);
         }
 
+        public void SetIsMoving(bool isMoving)
+        {
+            this.isMoving = isMoving;
+            var animationName = isMoving ? "Run" : "Idle";
+            animator.Play(animationName);
+        }
+
         public void SetText(string displayText)
         {
             text_IdAndDataId.text = displayText;
+        }
+
+    #endregion
+
+    #region Private Methods
+
+        private void Awake()
+        {
+            _transform = transform;
+        }
+
+        private void MoveCharacter()
+        {
+            var directionValue = currentDirectionValue == 1 ? Vector3.right : Vector3.left;
+            var movement       = directionValue * moveSpeed * Time.deltaTime;
+            _transform.position += movement;
+        }
+
+        private void Update()
+        {
+            if (isMoving) MoveCharacter();
         }
 
     #endregion

@@ -5,7 +5,7 @@ using Main.UseCases.Repository;
 
 namespace Main.UseCases.Actor.Create
 {
-    public class CreateActorInput : Input
+    public class CreateActorInput : DDDCore.Usecase.Input
     {
     #region Public Variables
 

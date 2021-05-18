@@ -1,6 +1,7 @@
 using DDDCore;
 using Main.Actor.Events;
 using Main.Entity.Model.Events;
+using Main.Input;
 using Main.Presenters;
 
 namespace Main.EventHandler.View
@@ -11,8 +12,10 @@ namespace Main.EventHandler.View
 
         public ViewEventHandlerActor(EventStore eventStore , ActorPresenter actorPresenter) : base(eventStore)
         {
+            var signalBus = eventStore.signalBus;
             Register<ActorCreated>(actorPresenter.OnActorCreated);
             Register<DirectionChanged>(actorPresenter.OnDirectionChanged);
+            signalBus.Subscribe<Input_Horizontal>(actorPresenter.OnHorizontalChanged);
         }
 
     #endregion
