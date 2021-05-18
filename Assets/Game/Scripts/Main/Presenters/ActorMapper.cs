@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Game.ScriptableObjects;
 using Main.ViewComponent;
 using UnityEngine;
+using Utilities.Contract;
 using Zenject;
 
 namespace Main.Presenters
@@ -34,6 +35,7 @@ namespace Main.Presenters
 
         public ActorComponent GetActorComponent(string actorId)
         {
+            Contract.RequireString(actorId , "ActorId");
             var actorViewData = actorViewDatas.Find(data => data.ActorId == actorId);
             return actorViewData.ActorComponent;
         }

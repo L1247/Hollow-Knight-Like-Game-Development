@@ -7,6 +7,8 @@ namespace Main.ViewComponent
     {
     #region Public Variables
 
+        public bool isMoving;
+
         public int currentDirectionValue;
 
         public Text text_IdAndDataId;
@@ -38,6 +40,11 @@ namespace Main.ViewComponent
             Rednerer.transform.localScale = new Vector3(x , 1 , 1);
         }
 
+        public void SetIsMoving(bool isMoving)
+        {
+            this.isMoving = isMoving;
+        }
+
         public void SetText(string displayText)
         {
             text_IdAndDataId.text = displayText;
@@ -61,7 +68,7 @@ namespace Main.ViewComponent
 
         private void Update()
         {
-            MoveCharacter();
+            if (isMoving) MoveCharacter();
         }
 
     #endregion

@@ -49,7 +49,7 @@ namespace Main.Input
             // -1 : left , 0 : no press , 1 : right
             var horizontalValue = player.GetAxisRaw("Move Horizontal");
             if (lastHorzonTalValue != horizontalValue)
-                signalBus.Fire(new Input_Horizontal(horizontalValue));
+                signalBus.Fire(new Input_Horizontal((int)horizontalValue));
             lastHorzonTalValue = horizontalValue;
         }
 
@@ -60,13 +60,13 @@ namespace Main.Input
     {
     #region Public Variables
 
-        public float HorizontalValue { get; }
+        public int HorizontalValue { get; }
 
     #endregion
 
     #region Constructor
 
-        public Input_Horizontal(float horizontalValue)
+        public Input_Horizontal(int horizontalValue)
         {
             HorizontalValue = horizontalValue;
         }
