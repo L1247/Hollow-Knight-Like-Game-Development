@@ -43,6 +43,8 @@ namespace Main.ViewComponent
         public void SetIsMoving(bool isMoving)
         {
             this.isMoving = isMoving;
+            var animationName = isMoving ? "Run" : "Idle";
+            animator.Play(animationName);
         }
 
         public void SetText(string displayText)
