@@ -70,6 +70,12 @@ namespace Main.Presenters
             actorMapper.CreateActorViewData(actorId , actorDataId , direction);
         }
 
+        public void OnButtonDownJump(ButtonDownJump buttonDownJump)
+        {
+            var actorComponent = actorMapper.GetActorComponent(CacheActorId);
+            actorComponent.Jump();
+        }
+
         public void OnDirectionChanged(DirectionChanged directionChanged)
         {
             var actorId        = directionChanged.ActorId;

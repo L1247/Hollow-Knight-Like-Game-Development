@@ -21,6 +21,7 @@ namespace Main.Application
             SignalBusInstaller.Install(Container);
             Container.DeclareSignal<DomainEvent>();
             Container.DeclareSignal<Input_Horizontal>();
+            Container.DeclareSignal<ButtonDownJump>();
             Container.Bind<EventStore>().AsSingle().NonLazy();
             Container.Bind<DomainEventBus>().AsSingle();
             // EventHandler
