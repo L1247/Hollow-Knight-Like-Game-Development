@@ -70,10 +70,22 @@ namespace Main.Presenters
             actorMapper.CreateActorViewData(actorId , actorDataId , direction);
         }
 
+        public void OnButtonDownAttack(ButtonDownAttack buttonDownAttack)
+        {
+            if (string.IsNullOrEmpty(CacheActorId) == false)
+            {
+                var actorComponent = actorMapper.GetActorComponent(CacheActorId);
+                actorComponent.Attack();
+            }
+        }
+
         public void OnButtonDownJump(ButtonDownJump buttonDownJump)
         {
-            var actorComponent = actorMapper.GetActorComponent(CacheActorId);
-            actorComponent.Jump();
+            if (string.IsNullOrEmpty(CacheActorId) == false)
+            {
+                var actorComponent = actorMapper.GetActorComponent(CacheActorId);
+                actorComponent.Jump();
+            }
         }
 
         public void OnDirectionChanged(DirectionChanged directionChanged)

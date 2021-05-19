@@ -9,6 +9,8 @@ namespace Main.ViewComponent
 
         public bool isMoving;
 
+        public bool isOnGround;
+
         public int currentDirectionValue;
 
         public Text text_IdAndDataId;
@@ -35,9 +37,16 @@ namespace Main.ViewComponent
 
     #region Public Methods
 
+        public void Attack()
+        {
+            animator.Play("Attack");
+        }
+
         public void Jump()
         {
-            rigi2d.AddForce(Vector2.up * JumpForce , ForceMode2D.Impulse);
+            isOnGround = false;
+            animator?.Play("Jump");
+            rigi2d?.AddForce(Vector2.up * JumpForce , ForceMode2D.Impulse);
         }
 
         public void SetDirection(int directionValue)
