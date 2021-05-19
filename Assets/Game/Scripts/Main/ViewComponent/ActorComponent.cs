@@ -7,6 +7,8 @@ namespace Main.ViewComponent
     {
     #region Public Variables
 
+        public bool isAttacking;
+
         public bool isMoving;
 
         public bool isOnGround;
@@ -39,7 +41,8 @@ namespace Main.ViewComponent
 
         public void Attack()
         {
-            animator.Play("Attack");
+            isAttacking = true;
+            animator?.Play("Attack");
         }
 
         public void Jump()
@@ -79,6 +82,7 @@ namespace Main.ViewComponent
         {
             _transform = transform;
             rigi2d     = GetComponent<Rigidbody2D>();
+            isOnGround = true;
         }
 
         private void MoveCharacter()

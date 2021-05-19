@@ -55,6 +55,19 @@ namespace MainTests.ActorTests
             Assert.AreEqual(false , actorComponent.isOnGround);
         }
 
+        [Test]
+        public void Should_Is_Attacking_True_When_Call_Attack()
+        {
+            // arrange
+            var gameObject     = new GameObject();
+            var actorComponent = gameObject.AddComponent<ActorComponent>();
+            Assert.AreEqual(false , actorComponent.isAttacking);
+            // act
+            actorComponent.Attack();
+            // assert
+            Assert.AreEqual(true , actorComponent.isAttacking);
+        }
+
     #endregion
 
         // [Test]
