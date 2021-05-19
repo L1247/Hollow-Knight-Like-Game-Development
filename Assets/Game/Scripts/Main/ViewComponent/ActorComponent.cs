@@ -7,7 +7,11 @@ namespace Main.ViewComponent
     {
     #region Public Variables
 
+        public bool isAttacking;
+
         public bool isMoving;
+
+        public bool isOnGround;
 
         public int currentDirectionValue;
 
@@ -35,9 +39,17 @@ namespace Main.ViewComponent
 
     #region Public Methods
 
+        public void Attack()
+        {
+            isAttacking = true;
+            PlayAnimation("Attack");
+        }
+
         public void Jump()
         {
-            rigi2d.AddForce(Vector2.up * JumpForce , ForceMode2D.Impulse);
+            isOnGround = false;
+            PlayAnimation("Jump");
+            rigi2d?.AddForce(Vector2.up * JumpForce , ForceMode2D.Impulse);
         }
 
         public void SetDirection(int directionValue)
@@ -54,7 +66,8 @@ namespace Main.ViewComponent
         {
             this.isMoving = isMoving;
             var animationName = isMoving ? "Run" : "Idle";
-            animator.Play(animationName);
+            // 攻擊中不可以切換移動動畫
+            if (isAttacking == false) PlayAnimation(animationName);
         }
 
         public void SetText(string displayText)
@@ -70,6 +83,7 @@ namespace Main.ViewComponent
         {
             _transform = transform;
             rigi2d     = GetComponent<Rigidbody2D>();
+            isOnGround = true;
         }
 
         private void MoveCharacter()
@@ -79,9 +93,16 @@ namespace Main.ViewComponent
             _transform.position += movement;
         }
 
+        private void PlayAnimation(string animationName)
+        {
+            animator?.Play(animationName);
+        }
+
         private void Update()
         {
-            if (isMoving) MoveCharacter();
+            // 沒有攻擊時是可以移動的 , 空中可以左右移動
+            if ((isAttacking == false || isOnGround == false) && isMoving)
+                MoveCharacter();
         }
 
     #endregion

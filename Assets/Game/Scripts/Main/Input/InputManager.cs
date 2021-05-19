@@ -47,17 +47,20 @@ namespace Main.Input
             // whether the input is coming from a joystick, the keyboard, mouse, or a custom controller.
             // get input by name or action id
             // -1 : left , 0 : no press , 1 : right
-            var horizontalValue = player.GetAxisRaw("Move Horizontal");
+            var horizontalValue   = player.GetAxisRaw("Move Horizontal");
+            var buttonDown_Jump   = player.GetButtonDown("Jump");
+            var buttonDown_Attack = player.GetButtonDown("Attack");
             if (lastHorzonTalValue != horizontalValue)
                 signalBus.Fire(new Input_Horizontal((int)horizontalValue));
             lastHorzonTalValue = horizontalValue;
-            var buttonDown_Jump = player.GetButtonDown("Jump");
-            if (buttonDown_Jump)
-                signalBus.Fire(new ButtonDownJump());
+            if (buttonDown_Jump) signalBus.Fire(new ButtonDownJump());
+            if (buttonDown_Attack) signalBus.Fire(new ButtonDownAttack());
         }
 
     #endregion
     }
+
+    public class ButtonDownAttack { }
 
     public class ButtonDownJump { }
 

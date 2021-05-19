@@ -41,6 +41,33 @@ namespace MainTests.ActorTests
             Assert.AreEqual(expectedScaleValue , rendererTransform.localScale.x);
         }
 
+        [Test]
+        public void Should_Is_Jumping_True_When_Call_Jump()
+        {
+            // arrange
+            var gameObject     = new GameObject();
+            var actorComponent = gameObject.AddComponent<ActorComponent>();
+            actorComponent.isOnGround = true;
+            Assert.AreEqual(true , actorComponent.isOnGround);
+            // act
+            actorComponent.Jump();
+            // assert
+            Assert.AreEqual(false , actorComponent.isOnGround);
+        }
+
+        [Test]
+        public void Should_Is_Attacking_True_When_Call_Attack()
+        {
+            // arrange
+            var gameObject     = new GameObject();
+            var actorComponent = gameObject.AddComponent<ActorComponent>();
+            Assert.AreEqual(false , actorComponent.isAttacking);
+            // act
+            actorComponent.Attack();
+            // assert
+            Assert.AreEqual(true , actorComponent.isAttacking);
+        }
+
     #endregion
 
         // [Test]

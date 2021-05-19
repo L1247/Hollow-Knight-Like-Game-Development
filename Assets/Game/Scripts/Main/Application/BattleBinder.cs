@@ -22,6 +22,7 @@ namespace Main.Application
             Container.DeclareSignal<DomainEvent>();
             Container.DeclareSignal<Input_Horizontal>();
             Container.DeclareSignal<ButtonDownJump>();
+            Container.DeclareSignal<ButtonDownAttack>();
             Container.Bind<EventStore>().AsSingle().NonLazy();
             Container.Bind<DomainEventBus>().AsSingle();
             // EventHandler
