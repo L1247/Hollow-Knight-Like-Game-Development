@@ -21,14 +21,24 @@ namespace Main.ViewComponent
 
         private readonly int moveSpeed = 5;
 
+        private Rigidbody2D rigi2d;
+
         private Transform _transform;
 
         [SerializeField]
         private Animator animator;
 
+        [SerializeField]
+        private int JumpForce;
+
     #endregion
 
     #region Public Methods
+
+        public void Jump()
+        {
+            rigi2d.AddForce(Vector2.up * JumpForce , ForceMode2D.Impulse);
+        }
 
         public void SetDirection(int directionValue)
         {
@@ -59,6 +69,7 @@ namespace Main.ViewComponent
         private void Awake()
         {
             _transform = transform;
+            rigi2d     = GetComponent<Rigidbody2D>();
         }
 
         private void MoveCharacter()

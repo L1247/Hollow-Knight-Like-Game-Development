@@ -16,6 +16,7 @@ namespace Main.EventHandler.View
             Register<ActorCreated>(actorPresenter.OnActorCreated);
             Register<DirectionChanged>(actorPresenter.OnDirectionChanged);
             signalBus.Subscribe<Input_Horizontal>(actorPresenter.OnHorizontalChanged);
+            signalBus.Subscribe<ButtonDownJump>(actorPresenter.OnButtonDownJump);
         }
 
     #endregion

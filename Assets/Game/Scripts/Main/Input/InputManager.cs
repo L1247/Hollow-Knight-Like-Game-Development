@@ -51,10 +51,15 @@ namespace Main.Input
             if (lastHorzonTalValue != horizontalValue)
                 signalBus.Fire(new Input_Horizontal((int)horizontalValue));
             lastHorzonTalValue = horizontalValue;
+            var buttonDown_Jump = player.GetButtonDown("Jump");
+            if (buttonDown_Jump)
+                signalBus.Fire(new ButtonDownJump());
         }
 
     #endregion
     }
+
+    public class ButtonDownJump { }
 
     public class Input_Horizontal
     {
