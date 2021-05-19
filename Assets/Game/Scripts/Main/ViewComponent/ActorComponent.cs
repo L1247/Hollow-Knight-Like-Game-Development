@@ -42,13 +42,13 @@ namespace Main.ViewComponent
         public void Attack()
         {
             isAttacking = true;
-            animator?.Play("Attack");
+            PlayAnimation("Attack");
         }
 
         public void Jump()
         {
             isOnGround = false;
-            animator?.Play("Jump");
+            PlayAnimation("Jump");
             rigi2d?.AddForce(Vector2.up * JumpForce , ForceMode2D.Impulse);
         }
 
@@ -66,7 +66,7 @@ namespace Main.ViewComponent
         {
             this.isMoving = isMoving;
             var animationName = isMoving ? "Run" : "Idle";
-            animator.Play(animationName);
+            PlayAnimation(animationName);
         }
 
         public void SetText(string displayText)
@@ -90,6 +90,11 @@ namespace Main.ViewComponent
             var directionValue = currentDirectionValue == 1 ? Vector3.right : Vector3.left;
             var movement       = directionValue * moveSpeed * Time.deltaTime;
             _transform.position += movement;
+        }
+
+        private void PlayAnimation(string animationName)
+        {
+            animator?.Play(animationName);
         }
 
         private void Update()
