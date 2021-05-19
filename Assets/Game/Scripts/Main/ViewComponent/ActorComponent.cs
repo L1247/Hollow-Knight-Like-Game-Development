@@ -100,8 +100,8 @@ namespace Main.ViewComponent
 
         private void Update()
         {
-            // 沒有攻擊時是可以移動的
-            if (isAttacking == false && isMoving)
+            // 沒有攻擊時是可以移動的 , 空中可以左右移動
+            if ((isAttacking == false || isOnGround == false) && isMoving)
                 MoveCharacter();
         }
 
