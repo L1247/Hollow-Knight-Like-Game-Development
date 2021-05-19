@@ -66,7 +66,8 @@ namespace Main.ViewComponent
         {
             this.isMoving = isMoving;
             var animationName = isMoving ? "Run" : "Idle";
-            PlayAnimation(animationName);
+            // 攻擊中不可以切換移動動畫
+            if (isAttacking == false) PlayAnimation(animationName);
         }
 
         public void SetText(string displayText)
@@ -99,7 +100,9 @@ namespace Main.ViewComponent
 
         private void Update()
         {
-            if (isMoving) MoveCharacter();
+            // 沒有攻擊時是可以移動的
+            if (isAttacking == false && isMoving)
+                MoveCharacter();
         }
 
     #endregion
