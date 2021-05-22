@@ -3,22 +3,12 @@ using UnityEngine.UI;
 
 namespace Main.ViewComponent
 {
-    public interface IActorComponent
-    {
-    #region Public Methods
-
-        void Attack();
-        void Jump();
-        void PlayAnimation(string animationName);
-
-    #endregion
-    }
-
-    public class ActorComponent : MonoBehaviour , IActorComponent
+    public class ActorComponent : MonoBehaviour
     {
     #region Public Variables
 
-        public bool isAttacking;
+        public IUnityComponent UnityComponent;
+        public bool            isAttacking;
 
         public bool isMoving;
 
@@ -53,7 +43,7 @@ namespace Main.ViewComponent
         public void Attack()
         {
             isAttacking = true;
-            PlayAnimation("Attack");
+            UnityComponent.PlayAnimation("Attack");
         }
 
         public void Jump()
@@ -115,6 +105,15 @@ namespace Main.ViewComponent
             if ((isAttacking == false || isOnGround == false) && isMoving)
                 MoveCharacter();
         }
+
+    #endregion
+    }
+
+    public interface IUnityComponent
+    {
+    #region Public Methods
+
+        void PlayAnimation(string animationName);
 
     #endregion
     }

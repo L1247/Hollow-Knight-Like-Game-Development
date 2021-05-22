@@ -1,4 +1,5 @@
 using Main.ViewComponent;
+using NSubstitute;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.UI;
@@ -60,12 +61,30 @@ namespace MainTests.ActorTests
         {
             // arrange
             var gameObject     = new GameObject();
+            var unityComponent = Substitute.For<IUnityComponent>();
             var actorComponent = gameObject.AddComponent<ActorComponent>();
+            actorComponent.UnityComponent = unityComponent;
+            Assert.NotNull(actorComponent.UnityComponent);
             Assert.AreEqual(false , actorComponent.isAttacking);
             // act
             actorComponent.Attack();
             // assert
             Assert.AreEqual(true , actorComponent.isAttacking);
+        }
+
+        [Test]
+        public void Should_Call_PlayAnimation_Attack_When_Call_Attack()
+        {
+            // arrange
+            var gameObject     = new GameObject();
+            var unityComponent = Substitute.For<IUnityComponent>();
+            var actorComponent = gameObject.AddComponent<ActorComponent>();
+            actorComponent.UnityComponent = unityComponent;
+            Assert.NotNull(actorComponent.UnityComponent);
+            // act
+            actorComponent.Attack();
+            // assert
+            unityComponent.Received(1).PlayAnimation("Attack");
         }
 
     #endregion
