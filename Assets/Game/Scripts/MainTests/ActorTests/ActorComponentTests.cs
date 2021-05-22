@@ -1,4 +1,5 @@
 using Main.ViewComponent;
+using NSubstitute;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,17 +8,41 @@ namespace MainTests.ActorTests
 {
     public class ActorComponentTests
     {
+    #region Private Variables
+
+        private ActorComponent  actorComponent;
+        private GameObject      gameObject;
+        private IUnityComponent unityComponent;
+        private Text            textComponent;
+        private Transform       rendererTransform;
+
+    #endregion
+
+    #region Setup/Teardown Methods
+
+        [SetUp]
+        public void Setup()
+        {
+            gameObject                      = new GameObject();
+            actorComponent                  = gameObject.AddComponent<ActorComponent>();
+            textComponent                   = gameObject.AddComponent<Text>();
+            actorComponent.text_IdAndDataId = textComponent;
+            rendererTransform               = new GameObject("Renderer").transform;
+            actorComponent.Rednerer         = rendererTransform;
+            unityComponent                  = Substitute.For<IUnityComponent>();
+            actorComponent.UnityComponent   = unityComponent;
+            Assert.NotNull(actorComponent.UnityComponent);
+        }
+
+    #endregion
+
     #region Test Methods
 
         [Test]
         public void Should_Succeed_When_Call_SetText()
         {
             // arrange
-            var gameObject     = new GameObject();
-            var actorComponent = gameObject.AddComponent<ActorComponent>();
-            var textComponent  = gameObject.AddComponent<Text>();
-            var displayText    = "fdsjhjkfh";
-            actorComponent.text_IdAndDataId = textComponent;
+            var displayText = "fdsjhjkfh";
             // act
             actorComponent.SetText(displayText);
             // assert
@@ -30,11 +55,6 @@ namespace MainTests.ActorTests
         [TestCase(0 , 1)]
         public void Should_Succeed_When_Call_SetDirection(int directionValue , int expectedScaleValue)
         {
-            // arrange
-            var gameObject        = new GameObject();
-            var actorComponent    = gameObject.AddComponent<ActorComponent>();
-            var rendererTransform = new GameObject("Renderer").transform;
-            actorComponent.Rednerer = rendererTransform;
             // act
             actorComponent.SetDirection(directionValue);
             // assert
@@ -45,8 +65,6 @@ namespace MainTests.ActorTests
         public void Should_Is_Jumping_True_When_Call_Jump()
         {
             // arrange
-            var gameObject     = new GameObject();
-            var actorComponent = gameObject.AddComponent<ActorComponent>();
             actorComponent.isOnGround = true;
             Assert.AreEqual(true , actorComponent.isOnGround);
             // act
@@ -56,11 +74,30 @@ namespace MainTests.ActorTests
         }
 
         [Test]
+        public void Should_Call_PlayAnimation_Jump_When_Call_Jump()
+        {
+            // act
+            actorComponent.Jump();
+            // assert
+            unityComponent.Received(1).PlayAnimation("Jump");
+        }
+
+        [Test]
+        public void Should_Call_AddForce_When_Call_Jump()
+        {
+            // arrange
+            var jumpForce = 10;
+            actorComponent.JumpForce = jumpForce;
+            // act
+            actorComponent.Jump();
+            // assert
+            unityComponent.Received(1).AddForce(Vector2.up * jumpForce);
+        }
+
+        [Test]
         public void Should_Is_Attacking_True_When_Call_Attack()
         {
             // arrange
-            var gameObject     = new GameObject();
-            var actorComponent = gameObject.AddComponent<ActorComponent>();
             Assert.AreEqual(false , actorComponent.isAttacking);
             // act
             actorComponent.Attack();
@@ -68,24 +105,15 @@ namespace MainTests.ActorTests
             Assert.AreEqual(true , actorComponent.isAttacking);
         }
 
-    #endregion
+        [Test]
+        public void Should_Call_PlayAnimation_Attack_When_Call_Attack()
+        {
+            // act
+            actorComponent.Attack();
+            // assert
+            unityComponent.Received(1).PlayAnimation("Attack");
+        }
 
-        // [Test]
-        // public void Should_Succeed_When_Call_SetSprite()
-        // {
-        //     // arrange
-        //     var gameObject     = new GameObject();
-        //     var actorComponent = gameObject.AddComponent<ActorComponent>();
-        //     var spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
-        //     actorComponent.spriteRenderer = spriteRenderer;
-        //     var texture = new Texture2D(32 , 32);
-        //     var sprite = Sprite.Create(texture , new Rect(0 , 0 , 32 , 32)
-        //         , new Vector2(16 , 16));
-        //     // act
-        //     actorComponent.SetSprite(sprite);
-        //     // assert
-        //     Assert.NotNull(actorComponent.spriteRenderer);
-        //     Assert.AreEqual(sprite , actorComponent.spriteRenderer.sprite);
-        // }
+    #endregion
     }
 }

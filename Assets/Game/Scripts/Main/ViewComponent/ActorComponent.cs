@@ -7,13 +7,16 @@ namespace Main.ViewComponent
     {
     #region Public Variables
 
-        public bool isAttacking;
+        public IUnityComponent UnityComponent;
+        public bool            isAttacking;
 
         public bool isMoving;
 
         public bool isOnGround;
 
         public int currentDirectionValue;
+
+        public int JumpForce;
 
         public Text text_IdAndDataId;
 
@@ -25,15 +28,10 @@ namespace Main.ViewComponent
 
         private readonly int moveSpeed = 5;
 
-        private Rigidbody2D rigi2d;
-
         private Transform _transform;
 
         [SerializeField]
         private Animator animator;
-
-        [SerializeField]
-        private int JumpForce;
 
     #endregion
 
@@ -42,14 +40,19 @@ namespace Main.ViewComponent
         public void Attack()
         {
             isAttacking = true;
-            PlayAnimation("Attack");
+            UnityComponent.PlayAnimation("Attack");
         }
 
         public void Jump()
         {
             isOnGround = false;
-            PlayAnimation("Jump");
-            rigi2d?.AddForce(Vector2.up * JumpForce , ForceMode2D.Impulse);
+            UnityComponent.PlayAnimation("Jump");
+            UnityComponent.AddForce(Vector2.up * JumpForce);
+        }
+
+        public void PlayAnimation(string animationName)
+        {
+            animator?.Play(animationName);
         }
 
         public void SetDirection(int directionValue)
@@ -81,9 +84,10 @@ namespace Main.ViewComponent
 
         private void Awake()
         {
-            _transform = transform;
-            rigi2d     = GetComponent<Rigidbody2D>();
-            isOnGround = true;
+            var rigi2d = GetComponent<Rigidbody2D>();
+            _transform     = transform;
+            isOnGround     = true;
+            UnityComponent = new UnityComponent(animator , rigi2d);
         }
 
         private void MoveCharacter()
@@ -93,16 +97,56 @@ namespace Main.ViewComponent
             _transform.position += movement;
         }
 
-        private void PlayAnimation(string animationName)
-        {
-            animator?.Play(animationName);
-        }
-
         private void Update()
         {
             // 沒有攻擊時是可以移動的 , 空中可以左右移動
             if ((isAttacking == false || isOnGround == false) && isMoving)
                 MoveCharacter();
+        }
+
+    #endregion
+    }
+
+    public interface IUnityComponent
+    {
+    #region Public Methods
+
+        void AddForce(Vector2 force);
+
+        void PlayAnimation(string animationName);
+
+    #endregion
+    }
+
+    public class UnityComponent : IUnityComponent
+    {
+    #region Private Variables
+
+        private readonly Animator    animator;
+        private readonly Rigidbody2D rigi2d;
+
+    #endregion
+
+    #region Constructor
+
+        public UnityComponent(Animator animator , Rigidbody2D rigi2d)
+        {
+            this.animator = animator;
+            this.rigi2d   = rigi2d;
+        }
+
+    #endregion
+
+    #region Public Methods
+
+        public void AddForce(Vector2 force)
+        {
+            rigi2d?.AddForce(force , ForceMode2D.Impulse);
+        }
+
+        public void PlayAnimation(string animationName)
+        {
+            animator?.Play(animationName);
         }
 
     #endregion
