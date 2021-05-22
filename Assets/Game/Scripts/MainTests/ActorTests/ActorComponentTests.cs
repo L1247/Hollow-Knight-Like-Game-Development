@@ -74,6 +74,27 @@ namespace MainTests.ActorTests
         }
 
         [Test]
+        public void Should_Call_PlayAnimation_Jump_When_Call_Jump()
+        {
+            // act
+            actorComponent.Jump();
+            // assert
+            unityComponent.Received(1).PlayAnimation("Jump");
+        }
+
+        [Test]
+        public void Should_Call_AddForce_When_Call_Jump()
+        {
+            // arrange
+            var jumpForce = 10;
+            actorComponent.JumpForce = jumpForce;
+            // act
+            actorComponent.Jump();
+            // assert
+            unityComponent.Received(1).AddForce(Vector2.up * jumpForce);
+        }
+
+        [Test]
         public void Should_Is_Attacking_True_When_Call_Attack()
         {
             // arrange
@@ -91,15 +112,6 @@ namespace MainTests.ActorTests
             actorComponent.Attack();
             // assert
             unityComponent.Received(1).PlayAnimation("Attack");
-        }
-
-        [Test]
-        public void Should_Call_PlayAnimation_Jump_When_Call_Jump()
-        {
-            // act
-            actorComponent.Jump();
-            // assert
-            unityComponent.Received(1).PlayAnimation("Jump");
         }
 
     #endregion

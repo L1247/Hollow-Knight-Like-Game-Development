@@ -16,6 +16,8 @@ namespace Main.ViewComponent
 
         public int currentDirectionValue;
 
+        public int JumpForce;
+
         public Text text_IdAndDataId;
 
         public Transform Rednerer;
@@ -33,9 +35,6 @@ namespace Main.ViewComponent
         [SerializeField]
         private Animator animator;
 
-        [SerializeField]
-        private int JumpForce;
-
     #endregion
 
     #region Public Methods
@@ -50,7 +49,8 @@ namespace Main.ViewComponent
         {
             isOnGround = false;
             UnityComponent.PlayAnimation("Jump");
-            rigi2d?.AddForce(Vector2.up * JumpForce , ForceMode2D.Impulse);
+            UnityComponent.AddForce(Vector2.up * JumpForce);
+            // rigi2d?.AddForce(Vector2.up * JumpForce , ForceMode2D.Impulse);
         }
 
         public void PlayAnimation(string animationName)
@@ -114,6 +114,8 @@ namespace Main.ViewComponent
     {
     #region Public Methods
 
+        void AddForce(Vector2 force);
+
         void PlayAnimation(string animationName);
 
     #endregion
@@ -137,6 +139,8 @@ namespace Main.ViewComponent
     #endregion
 
     #region Public Methods
+
+        public void AddForce(Vector2 force) { }
 
         public void PlayAnimation(string animationName)
         {
