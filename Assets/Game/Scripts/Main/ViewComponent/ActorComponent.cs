@@ -28,8 +28,6 @@ namespace Main.ViewComponent
 
         private readonly int moveSpeed = 5;
 
-        private Rigidbody2D rigi2d;
-
         private Transform _transform;
 
         [SerializeField]
@@ -50,7 +48,6 @@ namespace Main.ViewComponent
             isOnGround = false;
             UnityComponent.PlayAnimation("Jump");
             UnityComponent.AddForce(Vector2.up * JumpForce);
-            // rigi2d?.AddForce(Vector2.up * JumpForce , ForceMode2D.Impulse);
         }
 
         public void PlayAnimation(string animationName)
@@ -87,10 +84,10 @@ namespace Main.ViewComponent
 
         private void Awake()
         {
+            var rigi2d = GetComponent<Rigidbody2D>();
             _transform     = transform;
-            rigi2d         = GetComponent<Rigidbody2D>();
             isOnGround     = true;
-            UnityComponent = new UnityComponent(animator);
+            UnityComponent = new UnityComponent(animator , rigi2d);
         }
 
         private void MoveCharacter()
@@ -125,22 +122,27 @@ namespace Main.ViewComponent
     {
     #region Private Variables
 
-        private readonly Animator animator;
+        private readonly Animator    animator;
+        private readonly Rigidbody2D rigi2d;
 
     #endregion
 
     #region Constructor
 
-        public UnityComponent(Animator animator)
+        public UnityComponent(Animator animator , Rigidbody2D rigi2d)
         {
             this.animator = animator;
+            this.rigi2d   = rigi2d;
         }
 
     #endregion
 
     #region Public Methods
 
-        public void AddForce(Vector2 force) { }
+        public void AddForce(Vector2 force)
+        {
+            rigi2d?.AddForce(force , ForceMode2D.Impulse);
+        }
 
         public void PlayAnimation(string animationName)
         {
