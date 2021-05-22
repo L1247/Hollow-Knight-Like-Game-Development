@@ -8,17 +8,41 @@ namespace MainTests.ActorTests
 {
     public class ActorComponentTests
     {
+    #region Private Variables
+
+        private ActorComponent  actorComponent;
+        private GameObject      gameObject;
+        private IUnityComponent unityComponent;
+        private Text            textComponent;
+        private Transform       rendererTransform;
+
+    #endregion
+
+    #region Setup/Teardown Methods
+
+        [SetUp]
+        public void Setup()
+        {
+            gameObject                      = new GameObject();
+            actorComponent                  = gameObject.AddComponent<ActorComponent>();
+            textComponent                   = gameObject.AddComponent<Text>();
+            actorComponent.text_IdAndDataId = textComponent;
+            rendererTransform               = new GameObject("Renderer").transform;
+            actorComponent.Rednerer         = rendererTransform;
+            unityComponent                  = Substitute.For<IUnityComponent>();
+            actorComponent.UnityComponent   = unityComponent;
+            Assert.NotNull(actorComponent.UnityComponent);
+        }
+
+    #endregion
+
     #region Test Methods
 
         [Test]
         public void Should_Succeed_When_Call_SetText()
         {
             // arrange
-            var gameObject     = new GameObject();
-            var actorComponent = gameObject.AddComponent<ActorComponent>();
-            var textComponent  = gameObject.AddComponent<Text>();
-            var displayText    = "fdsjhjkfh";
-            actorComponent.text_IdAndDataId = textComponent;
+            var displayText = "fdsjhjkfh";
             // act
             actorComponent.SetText(displayText);
             // assert
@@ -31,11 +55,6 @@ namespace MainTests.ActorTests
         [TestCase(0 , 1)]
         public void Should_Succeed_When_Call_SetDirection(int directionValue , int expectedScaleValue)
         {
-            // arrange
-            var gameObject        = new GameObject();
-            var actorComponent    = gameObject.AddComponent<ActorComponent>();
-            var rendererTransform = new GameObject("Renderer").transform;
-            actorComponent.Rednerer = rendererTransform;
             // act
             actorComponent.SetDirection(directionValue);
             // assert
@@ -46,11 +65,6 @@ namespace MainTests.ActorTests
         public void Should_Is_Jumping_True_When_Call_Jump()
         {
             // arrange
-            var gameObject     = new GameObject();
-            var actorComponent = gameObject.AddComponent<ActorComponent>();
-            var unityComponent = Substitute.For<IUnityComponent>();
-            actorComponent.UnityComponent = unityComponent;
-            Assert.NotNull(actorComponent.UnityComponent);
             actorComponent.isOnGround = true;
             Assert.AreEqual(true , actorComponent.isOnGround);
             // act
@@ -63,11 +77,6 @@ namespace MainTests.ActorTests
         public void Should_Is_Attacking_True_When_Call_Attack()
         {
             // arrange
-            var gameObject     = new GameObject();
-            var unityComponent = Substitute.For<IUnityComponent>();
-            var actorComponent = gameObject.AddComponent<ActorComponent>();
-            actorComponent.UnityComponent = unityComponent;
-            Assert.NotNull(actorComponent.UnityComponent);
             Assert.AreEqual(false , actorComponent.isAttacking);
             // act
             actorComponent.Attack();
@@ -78,12 +87,6 @@ namespace MainTests.ActorTests
         [Test]
         public void Should_Call_PlayAnimation_Attack_When_Call_Attack()
         {
-            // arrange
-            var gameObject     = new GameObject();
-            var unityComponent = Substitute.For<IUnityComponent>();
-            var actorComponent = gameObject.AddComponent<ActorComponent>();
-            actorComponent.UnityComponent = unityComponent;
-            Assert.NotNull(actorComponent.UnityComponent);
             // act
             actorComponent.Attack();
             // assert
@@ -93,12 +96,6 @@ namespace MainTests.ActorTests
         [Test]
         public void Should_Call_PlayAnimation_Jump_When_Call_Jump()
         {
-            // arrange
-            var gameObject     = new GameObject();
-            var unityComponent = Substitute.For<IUnityComponent>();
-            var actorComponent = gameObject.AddComponent<ActorComponent>();
-            actorComponent.UnityComponent = unityComponent;
-            Assert.NotNull(actorComponent.UnityComponent);
             // act
             actorComponent.Jump();
             // assert
