@@ -3,7 +3,18 @@ using UnityEngine.UI;
 
 namespace Main.ViewComponent
 {
-    public class ActorComponent : MonoBehaviour
+    public interface IActorComponent
+    {
+    #region Public Methods
+
+        void Attack();
+        void Jump();
+        void PlayAnimation(string animationName);
+
+    #endregion
+    }
+
+    public class ActorComponent : MonoBehaviour , IActorComponent
     {
     #region Public Variables
 
@@ -52,6 +63,11 @@ namespace Main.ViewComponent
             rigi2d?.AddForce(Vector2.up * JumpForce , ForceMode2D.Impulse);
         }
 
+        public void PlayAnimation(string animationName)
+        {
+            animator?.Play(animationName);
+        }
+
         public void SetDirection(int directionValue)
         {
             currentDirectionValue = directionValue;
@@ -91,11 +107,6 @@ namespace Main.ViewComponent
             var directionValue = currentDirectionValue == 1 ? Vector3.right : Vector3.left;
             var movement       = directionValue * moveSpeed * Time.deltaTime;
             _transform.position += movement;
-        }
-
-        private void PlayAnimation(string animationName)
-        {
-            animator?.Play(animationName);
         }
 
         private void Update()
