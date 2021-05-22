@@ -48,6 +48,9 @@ namespace MainTests.ActorTests
             // arrange
             var gameObject     = new GameObject();
             var actorComponent = gameObject.AddComponent<ActorComponent>();
+            var unityComponent = Substitute.For<IUnityComponent>();
+            actorComponent.UnityComponent = unityComponent;
+            Assert.NotNull(actorComponent.UnityComponent);
             actorComponent.isOnGround = true;
             Assert.AreEqual(true , actorComponent.isOnGround);
             // act
@@ -85,6 +88,21 @@ namespace MainTests.ActorTests
             actorComponent.Attack();
             // assert
             unityComponent.Received(1).PlayAnimation("Attack");
+        }
+
+        [Test]
+        public void Should_Call_PlayAnimation_Jump_When_Call_Jump()
+        {
+            // arrange
+            var gameObject     = new GameObject();
+            var unityComponent = Substitute.For<IUnityComponent>();
+            var actorComponent = gameObject.AddComponent<ActorComponent>();
+            actorComponent.UnityComponent = unityComponent;
+            Assert.NotNull(actorComponent.UnityComponent);
+            // act
+            actorComponent.Jump();
+            // assert
+            unityComponent.Received(1).PlayAnimation("Jump");
         }
 
     #endregion

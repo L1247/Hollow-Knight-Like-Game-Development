@@ -49,7 +49,7 @@ namespace Main.ViewComponent
         public void Jump()
         {
             isOnGround = false;
-            PlayAnimation("Jump");
+            UnityComponent.PlayAnimation("Jump");
             rigi2d?.AddForce(Vector2.up * JumpForce , ForceMode2D.Impulse);
         }
 
