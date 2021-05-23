@@ -2,11 +2,12 @@
     "name": "MainTests",
     "rootNamespace": "",
     "references": [
-        "UnityEngine.TestRunner",
-        "UnityEditor.TestRunner",
-        "Main",
-        "DDDCore",
-        "DDDTestFramework"
+      "UnityEngine.TestRunner",
+      "UnityEditor.TestRunner",
+      "Main",
+      "DDDCore",
+      "DDDTestFramework",
+      "EditorUtility"
     ],
     "includePlatforms": [
         "Editor"
