@@ -102,7 +102,7 @@ namespace Main.ViewComponent
         {
             var rigi2d = GetComponent<Rigidbody2D>();
             isOnGround     = true;
-            UnityComponent = new UnityComponent(animator , rigi2d);
+            UnityComponent = new UnityComponent(animator , rigi2d , transform);
         }
 
         private bool CanMoving()
