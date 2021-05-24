@@ -8,8 +8,8 @@ namespace Main.ViewComponent
     #region Public Variables
 
         public IUnityComponent UnityComponent;
-        public bool            isAttacking;
 
+        public bool isAttacking;
         public bool isMoving;
 
         public bool isOnGround;
@@ -39,6 +39,12 @@ namespace Main.ViewComponent
         {
             isAttacking = true;
             UnityComponent.PlayAnimation("Attack");
+        }
+
+        public bool CanMoving()
+        {
+            // 在地面，且攻擊時，不可移動 , 空中可以左右移動
+            return (isAttacking == false || isOnGround == false) && isMoving;
         }
 
         public Vector3 GetMovement()
@@ -103,12 +109,6 @@ namespace Main.ViewComponent
             var rigi2d = GetComponent<Rigidbody2D>();
             isOnGround     = true;
             UnityComponent = new UnityComponent(animator , rigi2d , transform);
-        }
-
-        private bool CanMoving()
-        {
-            // 在地面，且攻擊時，不可移動 , 空中可以左右移動
-            return (isAttacking == false || isOnGround == false) && isMoving;
         }
 
     #endregion

@@ -124,6 +124,17 @@ namespace MainTests.ActorTests
             unityComponent.Received(1).MoveCharacter(movement);
         }
 
+        [Test]
+        public void Should_Call_MoveCharacter_When_Call_Update_And_CanMoving()
+        {
+            // act
+            actorComponent.isMoving = true;
+            actorComponent.Update();
+            var movement = actorComponent.GetMovement();
+            // assert
+            unityComponent.Received(1).MoveCharacter(movement);
+        }
+
     #endregion
     }
 }
