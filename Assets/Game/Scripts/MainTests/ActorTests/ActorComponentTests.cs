@@ -114,6 +114,55 @@ namespace MainTests.ActorTests
             unityComponent.Received(1).PlayAnimation("Attack");
         }
 
+        [Test]
+        public void Should_Call_MoveCharacter_When_Call_MoveCharacter()
+        {
+            // act
+            actorComponent.MoveCharacter();
+            var movement = actorComponent.GetMovement();
+            // assert
+            unityComponent.Received(1).MoveCharacter(movement);
+        }
+
+        [Test]
+        public void Should_Call_MoveCharacter_When_Attacking_In_Air()
+        {
+            // act
+            actorComponent.isAttacking = true;
+            actorComponent.isOnGround  = false;
+            actorComponent.isMoving    = true;
+            actorComponent.Update();
+            var movement = actorComponent.GetMovement();
+            // assert
+            unityComponent.Received(1).MoveCharacter(movement);
+        }
+
+        [Test]
+        public void Should_Not_Call_MoveCharacter_When_Attacking_On_Ground()
+        {
+            // act
+            actorComponent.isMoving    = true;
+            actorComponent.isAttacking = true;
+            actorComponent.isOnGround  = true;
+            actorComponent.Update();
+            var movement = actorComponent.GetMovement();
+            // assert
+            unityComponent.DidNotReceive().MoveCharacter(movement);
+        }
+
+        [Test]
+        public void Should_Not_Call_MoveCharacter_When_Not_Attacking_On_Ground()
+        {
+            // act
+            actorComponent.isMoving    = true;
+            actorComponent.isAttacking = false;
+            actorComponent.isOnGround  = true;
+            actorComponent.Update();
+            var movement = actorComponent.GetMovement();
+            // assert
+            unityComponent.Received(1).MoveCharacter(movement);
+        }
+
     #endregion
     }
 }

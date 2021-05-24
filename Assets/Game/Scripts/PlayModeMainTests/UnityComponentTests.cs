@@ -16,13 +16,28 @@ public class UnityComponentTests
         // arrange
         var gameObject     = new GameObject();
         var rigidbody2D    = gameObject.AddComponent<Rigidbody2D>();
-        var unityComponent = new UnityComponent(null , rigidbody2D);
+        var unityComponent = new UnityComponent(rigidbody2D);
         // act
         var upForce = Vector2.up * 1234;
         Assert.AreEqual(Vector2.zero , rigidbody2D.velocity);
         unityComponent.AddForce(upForce);
         // Assert
         Assert.AreEqual(upForce , rigidbody2D.velocity);
+    }
+
+    [Test]
+    public void Should_Position_Is_Correct_When_Call_MoveCharacter()
+    {
+        // arrange
+        var gameObject     = new GameObject();
+        var transform      = gameObject.transform;
+        var unityComponent = new UnityComponent(transform);
+        // act
+        Assert.AreEqual(Vector3.zero , transform.position);
+        var movement = Vector3.right * 321;
+        unityComponent.MoveCharacter(movement);
+        // Assert
+        Assert.AreEqual(movement , transform.position);
     }
 
 #endregion
@@ -40,7 +55,7 @@ public class UnityComponentTests
         var gameObject         = new GameObject();
         var animator           = gameObject.AddComponent<Animator>();
         animator.runtimeAnimatorController = animatorController;
-        var unityComponent = new UnityComponent(animator , null);
+        var unityComponent = new UnityComponent(animator);
         var isJump         = animator.GetCurrentAnimatorStateInfo(0).IsName("Jump");
         Assert.AreEqual(false , isJump);
 
