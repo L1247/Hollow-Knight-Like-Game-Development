@@ -28,8 +28,6 @@ namespace Main.ViewComponent
 
         private readonly int moveSpeed = 5;
 
-        private Transform _transform;
-
         [SerializeField]
         private Animator animator;
 
@@ -43,11 +41,24 @@ namespace Main.ViewComponent
             UnityComponent.PlayAnimation("Attack");
         }
 
+        public Vector3 GetMovement()
+        {
+            var directionValue = currentDirectionValue == 1 ? Vector3.right : Vector3.left;
+            var movement       = directionValue * moveSpeed * Time.deltaTime;
+            return movement;
+        }
+
         public void Jump()
         {
             isOnGround = false;
             UnityComponent.PlayAnimation("Jump");
             UnityComponent.AddForce(Vector2.up * JumpForce);
+        }
+
+        public void MoveCharacter()
+        {
+            var movement = GetMovement();
+            UnityComponent.MoveCharacter(movement);
         }
 
         public void PlayAnimation(string animationName)
@@ -78,6 +89,11 @@ namespace Main.ViewComponent
             text_IdAndDataId.text = displayText;
         }
 
+        public void Update()
+        {
+            if (CanMoving()) MoveCharacter();
+        }
+
     #endregion
 
     #region Private Methods
@@ -85,23 +101,14 @@ namespace Main.ViewComponent
         private void Awake()
         {
             var rigi2d = GetComponent<Rigidbody2D>();
-            _transform     = transform;
             isOnGround     = true;
             UnityComponent = new UnityComponent(animator , rigi2d);
         }
 
-        private void MoveCharacter()
+        private bool CanMoving()
         {
-            var directionValue = currentDirectionValue == 1 ? Vector3.right : Vector3.left;
-            var movement       = directionValue * moveSpeed * Time.deltaTime;
-            _transform.position += movement;
-        }
-
-        private void Update()
-        {
-            // 沒有攻擊時是可以移動的 , 空中可以左右移動
-            if ((isAttacking == false || isOnGround == false) && isMoving)
-                MoveCharacter();
+            // 在地面，且攻擊時，不可移動 , 空中可以左右移動
+            return (isAttacking == false || isOnGround == false) && isMoving;
         }
 
     #endregion

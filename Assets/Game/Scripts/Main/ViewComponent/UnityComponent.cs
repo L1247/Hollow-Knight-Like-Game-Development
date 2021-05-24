@@ -9,6 +9,8 @@ namespace Main.ViewComponent
 
         void AddForce(Vector2 force);
 
+        void MoveCharacter(Vector3 movement);
+
         void PlayAnimation(string animationName);
 
     #endregion
@@ -39,6 +41,11 @@ namespace Main.ViewComponent
         {
             Contract.RequireNotNull(rigi2d , "Rigidbody2d");
             rigi2d.AddForce(force , ForceMode2D.Impulse);
+        }
+
+        public void MoveCharacter(Vector3 movement)
+        {
+            // _transform.position += movement;
         }
 
         public void PlayAnimation(string animationName)

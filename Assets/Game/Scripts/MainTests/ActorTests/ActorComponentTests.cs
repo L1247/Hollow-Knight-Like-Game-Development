@@ -114,6 +114,16 @@ namespace MainTests.ActorTests
             unityComponent.Received(1).PlayAnimation("Attack");
         }
 
+        [Test]
+        public void Should_Call_MoveCharacter_When_Call_MoveCharacter()
+        {
+            // act
+            actorComponent.MoveCharacter();
+            var movement = actorComponent.GetMovement();
+            // assert
+            unityComponent.Received(1).MoveCharacter(movement);
+        }
+
     #endregion
     }
 }
