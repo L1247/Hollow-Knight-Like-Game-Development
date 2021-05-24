@@ -44,7 +44,21 @@ namespace Main.ViewComponent
         public bool CanMoving()
         {
             // 在地面，且攻擊時，不可移動 , 空中可以左右移動
-            return (isAttacking == false || isOnGround == false) && isMoving;
+            if (isMoving)
+            {
+                if (isAttacking)
+                {
+                    // Ground
+                    if (isOnGround) return false;
+                    // Air
+                    return true;
+                }
+
+                // Not attacking
+                return true;
+            }
+
+            return false;
         }
 
         public Vector3 GetMovement()
