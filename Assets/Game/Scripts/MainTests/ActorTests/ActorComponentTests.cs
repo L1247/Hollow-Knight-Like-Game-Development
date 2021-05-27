@@ -119,9 +119,8 @@ namespace MainTests.ActorTests
         {
             // act
             actorComponent.MoveCharacter();
-            var movement = actorComponent.GetMovement();
             // assert
-            unityComponent.Received(1).MoveCharacter(movement);
+            ShouldCallMoveCharacter();
         }
 
         [Test]
@@ -132,9 +131,8 @@ namespace MainTests.ActorTests
             actorComponent.isOnGround  = false;
             actorComponent.isMoving    = true;
             actorComponent.Update();
-            var movement = actorComponent.GetMovement();
             // assert
-            unityComponent.Received(1).MoveCharacter(movement);
+            ShouldCallMoveCharacter();
         }
 
         [Test]
@@ -145,9 +143,8 @@ namespace MainTests.ActorTests
             actorComponent.isAttacking = true;
             actorComponent.isOnGround  = true;
             actorComponent.Update();
-            var movement = actorComponent.GetMovement();
             // assert
-            unityComponent.DidNotReceive().MoveCharacter(movement);
+            ShouldNotCallMoveCharacter();
         }
 
         [Test]
@@ -158,9 +155,24 @@ namespace MainTests.ActorTests
             actorComponent.isAttacking = false;
             actorComponent.isOnGround  = true;
             actorComponent.Update();
-            var movement = actorComponent.GetMovement();
             // assert
+            ShouldCallMoveCharacter();
+        }
+
+    #endregion
+
+    #region Private Methods
+
+        private void ShouldCallMoveCharacter()
+        {
+            var movement = actorComponent.GetMovement();
             unityComponent.Received(1).MoveCharacter(movement);
+        }
+
+        private void ShouldNotCallMoveCharacter()
+        {
+            var movement = actorComponent.GetMovement();
+            unityComponent.DidNotReceive().MoveCharacter(movement);
         }
 
     #endregion
