@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Utilities.Contract;
 
@@ -16,6 +17,7 @@ namespace Main.ViewComponent
     #endregion
     }
 
+    [Serializable]
     public class UnityComponent : IUnityComponent
     {
     #region Private Variables

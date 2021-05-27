@@ -1,3 +1,5 @@
+using System;
+
 namespace Main.ViewComponent
 {
     public interface ICharacterCondition
@@ -17,6 +19,7 @@ namespace Main.ViewComponent
     #endregion
     }
 
+    [Serializable]
     public class CharacterCondition : ICharacterCondition
     {
     #region Public Variables
