@@ -128,22 +128,16 @@ namespace MainTests.ActorTests
         }
 
         [Test]
-        public void Should_Call_MoveCharacter_When_CanMoving_Is_True()
+        [TestCase(true)]
+        [TestCase(false)]
+        public void Should_Call_MoveCharacter_When_CanMoving_Set_Value(bool canMoving)
         {
-            characterCondition.CanMoving().Returns(true);
+            characterCondition.CanMoving().Returns(canMoving);
             // act
             actorComponent.Update();
             // assert
-            ShouldCallMoveCharacter();
-        }
-
-        [Test]
-        public void Should_Not_Call_MoveCharacter_When_CanMoving_Is_False()
-        {
-            // act
-            actorComponent.Update();
-            // assert
-            ShouldNotCallMoveCharacter();
+            if (canMoving) ShouldCallMoveCharacter();
+            if (canMoving == false) ShouldNotCallMoveCharacter();
         }
 
     #endregion
