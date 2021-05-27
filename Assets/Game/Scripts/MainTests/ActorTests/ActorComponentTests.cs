@@ -10,11 +10,12 @@ namespace MainTests.ActorTests
     {
     #region Private Variables
 
-        private ActorComponent  actorComponent;
-        private GameObject      gameObject;
-        private IUnityComponent unityComponent;
-        private Text            textComponent;
-        private Transform       rendererTransform;
+        private ActorComponent      actorComponent;
+        private GameObject          gameObject;
+        private ICharacterCondition characterCondition;
+        private IUnityComponent     unityComponent;
+        private Text                textComponent;
+        private Transform           rendererTransform;
 
     #endregion
 
@@ -23,15 +24,18 @@ namespace MainTests.ActorTests
         [SetUp]
         public void Setup()
         {
-            gameObject                      = new GameObject();
-            actorComponent                  = gameObject.AddComponent<ActorComponent>();
-            textComponent                   = gameObject.AddComponent<Text>();
-            actorComponent.text_IdAndDataId = textComponent;
-            rendererTransform               = new GameObject("Renderer").transform;
-            actorComponent.Rednerer         = rendererTransform;
-            unityComponent                  = Substitute.For<IUnityComponent>();
-            actorComponent.UnityComponent   = unityComponent;
-            Assert.NotNull(actorComponent.UnityComponent);
+            gameObject                        = new GameObject();
+            actorComponent                    = gameObject.AddComponent<ActorComponent>();
+            textComponent                     = gameObject.AddComponent<Text>();
+            actorComponent.text_IdAndDataId   = textComponent;
+            rendererTransform                 = new GameObject("Renderer").transform;
+            actorComponent.Rednerer           = rendererTransform;
+            unityComponent                    = Substitute.For<IUnityComponent>();
+            actorComponent.unityComponent     = unityComponent;
+            characterCondition                = Substitute.For<ICharacterCondition>();
+            actorComponent.characterCondition = characterCondition;
+            Assert.NotNull(actorComponent.unityComponent);
+            Assert.NotNull(actorComponent.characterCondition);
         }
 
     #endregion
@@ -65,12 +69,12 @@ namespace MainTests.ActorTests
         public void Should_Is_Jumping_True_When_Call_Jump()
         {
             // arrange
-            actorComponent.isOnGround = true;
-            Assert.AreEqual(true , actorComponent.isOnGround);
+            characterCondition.IsOnGround = true;
+            Assert.AreEqual(true , characterCondition.IsOnGround);
             // act
             actorComponent.Jump();
             // assert
-            Assert.AreEqual(false , actorComponent.isOnGround);
+            Assert.AreEqual(false , characterCondition.IsOnGround);
         }
 
         [Test]
@@ -98,11 +102,11 @@ namespace MainTests.ActorTests
         public void Should_Is_Attacking_True_When_Call_Attack()
         {
             // arrange
-            Assert.AreEqual(false , actorComponent.isAttacking);
+            Assert.AreEqual(false , characterCondition.IsAttacking);
             // act
             actorComponent.Attack();
             // assert
-            Assert.AreEqual(true , actorComponent.isAttacking);
+            Assert.AreEqual(true , characterCondition.IsAttacking);
         }
 
         [Test]
@@ -119,48 +123,37 @@ namespace MainTests.ActorTests
         {
             // act
             actorComponent.MoveCharacter();
-            var movement = actorComponent.GetMovement();
             // assert
-            unityComponent.Received(1).MoveCharacter(movement);
+            ShouldCallMoveCharacter();
         }
 
         [Test]
-        public void Should_Call_MoveCharacter_When_Attacking_In_Air()
+        [TestCase(true)]
+        [TestCase(false)]
+        public void Should_Call_MoveCharacter_When_CanMoving_Set_Value(bool canMoving)
         {
+            characterCondition.CanMoving().Returns(canMoving);
             // act
-            actorComponent.isAttacking = true;
-            actorComponent.isOnGround  = false;
-            actorComponent.isMoving    = true;
             actorComponent.Update();
-            var movement = actorComponent.GetMovement();
             // assert
+            if (canMoving) ShouldCallMoveCharacter();
+            if (canMoving == false) ShouldNotCallMoveCharacter();
+        }
+
+    #endregion
+
+    #region Private Methods
+
+        private void ShouldCallMoveCharacter()
+        {
+            var movement = actorComponent.GetMovement();
             unityComponent.Received(1).MoveCharacter(movement);
         }
 
-        [Test]
-        public void Should_Not_Call_MoveCharacter_When_Attacking_On_Ground()
+        private void ShouldNotCallMoveCharacter()
         {
-            // act
-            actorComponent.isMoving    = true;
-            actorComponent.isAttacking = true;
-            actorComponent.isOnGround  = true;
-            actorComponent.Update();
             var movement = actorComponent.GetMovement();
-            // assert
             unityComponent.DidNotReceive().MoveCharacter(movement);
-        }
-
-        [Test]
-        public void Should_Not_Call_MoveCharacter_When_Not_Attacking_On_Ground()
-        {
-            // act
-            actorComponent.isMoving    = true;
-            actorComponent.isAttacking = false;
-            actorComponent.isOnGround  = true;
-            actorComponent.Update();
-            var movement = actorComponent.GetMovement();
-            // assert
-            unityComponent.Received(1).MoveCharacter(movement);
         }
 
     #endregion

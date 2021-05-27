@@ -1,5 +1,7 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
+using Utilities.Contract;
 
 namespace Main.ViewComponent
 {
@@ -7,20 +9,13 @@ namespace Main.ViewComponent
     {
     #region Public Variables
 
-        public IUnityComponent UnityComponent;
-
-        public bool isAttacking;
-        public bool isMoving;
-
-        public bool isOnGround;
-
-        public int currentDirectionValue;
-
-        public int JumpForce;
-
-        public Text text_IdAndDataId;
-
-        public Transform Rednerer;
+        [ShowInInspector]
+        public ICharacterCondition characterCondition;
+        public IUnityComponent     unityComponent;
+        public int                 currentDirectionValue;
+        public int                 JumpForce;
+        public Text                text_IdAndDataId;
+        public Transform           Rednerer;
 
     #endregion
 
@@ -37,28 +32,8 @@ namespace Main.ViewComponent
 
         public void Attack()
         {
-            isAttacking = true;
-            UnityComponent.PlayAnimation("Attack");
-        }
-
-        public bool CanMoving()
-        {
-            // 在地面，且攻擊時，不可移動 , 空中可以左右移動
-            if (isMoving)
-            {
-                if (isAttacking)
-                {
-                    // Ground
-                    if (isOnGround) return false;
-                    // Air
-                    return true;
-                }
-
-                // Not attacking
-                return true;
-            }
-
-            return false;
+            characterCondition.IsAttacking = true;
+            unityComponent.PlayAnimation("Attack");
         }
 
         public Vector3 GetMovement()
@@ -70,15 +45,15 @@ namespace Main.ViewComponent
 
         public void Jump()
         {
-            isOnGround = false;
-            UnityComponent.PlayAnimation("Jump");
-            UnityComponent.AddForce(Vector2.up * JumpForce);
+            characterCondition.IsOnGround = false;
+            unityComponent.PlayAnimation("Jump");
+            unityComponent.AddForce(Vector2.up * JumpForce);
         }
 
         public void MoveCharacter()
         {
             var movement = GetMovement();
-            UnityComponent.MoveCharacter(movement);
+            unityComponent.MoveCharacter(movement);
         }
 
         public void PlayAnimation(string animationName)
@@ -98,10 +73,10 @@ namespace Main.ViewComponent
 
         public void SetIsMoving(bool isMoving)
         {
-            this.isMoving = isMoving;
+            characterCondition.IsMoving = isMoving;
             var animationName = isMoving ? "Run" : "Idle";
             // 攻擊中不可以切換移動動畫
-            if (isAttacking == false) PlayAnimation(animationName);
+            if (characterCondition.IsMoving == false) PlayAnimation(animationName);
         }
 
         public void SetText(string displayText)
@@ -111,7 +86,8 @@ namespace Main.ViewComponent
 
         public void Update()
         {
-            if (CanMoving()) MoveCharacter();
+            Contract.RequireNotNull(characterCondition , "characterCondition");
+            if (characterCondition.CanMoving()) MoveCharacter();
         }
 
     #endregion
@@ -121,8 +97,9 @@ namespace Main.ViewComponent
         private void Awake()
         {
             var rigi2d = GetComponent<Rigidbody2D>();
-            isOnGround     = true;
-            UnityComponent = new UnityComponent(animator , rigi2d , transform);
+            unityComponent                = new UnityComponent(animator , rigi2d , transform);
+            characterCondition            = new CharacterCondition();
+            characterCondition.IsOnGround = true;
         }
 
     #endregion
