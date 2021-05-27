@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Utilities.Contract;
 
 namespace Main.ViewComponent
 {
@@ -7,7 +8,9 @@ namespace Main.ViewComponent
     {
     #region Public Variables
 
-        public IUnityComponent UnityComponent;
+        public ICharacterCondition characterCondition;
+
+        public IUnityComponent unityComponent;
 
         public bool isAttacking;
         public bool isMoving;
@@ -38,7 +41,7 @@ namespace Main.ViewComponent
         public void Attack()
         {
             isAttacking = true;
-            UnityComponent.PlayAnimation("Attack");
+            unityComponent.PlayAnimation("Attack");
         }
 
         public bool CanMoving()
@@ -71,14 +74,14 @@ namespace Main.ViewComponent
         public void Jump()
         {
             isOnGround = false;
-            UnityComponent.PlayAnimation("Jump");
-            UnityComponent.AddForce(Vector2.up * JumpForce);
+            unityComponent.PlayAnimation("Jump");
+            unityComponent.AddForce(Vector2.up * JumpForce);
         }
 
         public void MoveCharacter()
         {
             var movement = GetMovement();
-            UnityComponent.MoveCharacter(movement);
+            unityComponent.MoveCharacter(movement);
         }
 
         public void PlayAnimation(string animationName)
@@ -111,7 +114,8 @@ namespace Main.ViewComponent
 
         public void Update()
         {
-            if (CanMoving()) MoveCharacter();
+            Contract.RequireNotNull(characterCondition , "characterCondition");
+            if (characterCondition.CanMoving()) MoveCharacter();
         }
 
     #endregion
@@ -121,8 +125,9 @@ namespace Main.ViewComponent
         private void Awake()
         {
             var rigi2d = GetComponent<Rigidbody2D>();
-            isOnGround     = true;
-            UnityComponent = new UnityComponent(animator , rigi2d , transform);
+            isOnGround         = true;
+            unityComponent     = new UnityComponent(animator , rigi2d , transform);
+            characterCondition = new CharacterCondition();
         }
 
     #endregion

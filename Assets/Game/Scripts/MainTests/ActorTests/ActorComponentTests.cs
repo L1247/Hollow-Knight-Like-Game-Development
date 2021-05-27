@@ -10,11 +10,12 @@ namespace MainTests.ActorTests
     {
     #region Private Variables
 
-        private ActorComponent  actorComponent;
-        private GameObject      gameObject;
-        private IUnityComponent unityComponent;
-        private Text            textComponent;
-        private Transform       rendererTransform;
+        private ActorComponent      actorComponent;
+        private GameObject          gameObject;
+        private ICharacterCondition characterCondition;
+        private IUnityComponent     unityComponent;
+        private Text                textComponent;
+        private Transform           rendererTransform;
 
     #endregion
 
@@ -23,15 +24,18 @@ namespace MainTests.ActorTests
         [SetUp]
         public void Setup()
         {
-            gameObject                      = new GameObject();
-            actorComponent                  = gameObject.AddComponent<ActorComponent>();
-            textComponent                   = gameObject.AddComponent<Text>();
-            actorComponent.text_IdAndDataId = textComponent;
-            rendererTransform               = new GameObject("Renderer").transform;
-            actorComponent.Rednerer         = rendererTransform;
-            unityComponent                  = Substitute.For<IUnityComponent>();
-            actorComponent.UnityComponent   = unityComponent;
-            Assert.NotNull(actorComponent.UnityComponent);
+            gameObject                        = new GameObject();
+            actorComponent                    = gameObject.AddComponent<ActorComponent>();
+            textComponent                     = gameObject.AddComponent<Text>();
+            actorComponent.text_IdAndDataId   = textComponent;
+            rendererTransform                 = new GameObject("Renderer").transform;
+            actorComponent.Rednerer           = rendererTransform;
+            unityComponent                    = Substitute.For<IUnityComponent>();
+            actorComponent.unityComponent     = unityComponent;
+            characterCondition                = Substitute.For<ICharacterCondition>();
+            actorComponent.characterCondition = characterCondition;
+            Assert.NotNull(actorComponent.unityComponent);
+            Assert.NotNull(actorComponent.characterCondition);
         }
 
     #endregion
@@ -124,39 +128,22 @@ namespace MainTests.ActorTests
         }
 
         [Test]
-        public void Should_Call_MoveCharacter_When_Attacking_In_Air()
+        public void Should_Call_MoveCharacter_When_CanMoving_Is_True()
         {
+            characterCondition.CanMoving().Returns(true);
             // act
-            actorComponent.isAttacking = true;
-            actorComponent.isOnGround  = false;
-            actorComponent.isMoving    = true;
             actorComponent.Update();
             // assert
             ShouldCallMoveCharacter();
         }
 
         [Test]
-        public void Should_Not_Call_MoveCharacter_When_Attacking_On_Ground()
+        public void Should_Not_Call_MoveCharacter_When_CanMoving_Is_False()
         {
             // act
-            actorComponent.isMoving    = true;
-            actorComponent.isAttacking = true;
-            actorComponent.isOnGround  = true;
             actorComponent.Update();
             // assert
             ShouldNotCallMoveCharacter();
-        }
-
-        [Test]
-        public void Should_Not_Call_MoveCharacter_When_Not_Attacking_On_Ground()
-        {
-            // act
-            actorComponent.isMoving    = true;
-            actorComponent.isAttacking = false;
-            actorComponent.isOnGround  = true;
-            actorComponent.Update();
-            // assert
-            ShouldCallMoveCharacter();
         }
 
     #endregion
