@@ -9,20 +9,11 @@ namespace Main.ViewComponent
     #region Public Variables
 
         public ICharacterCondition characterCondition;
-
-        public IUnityComponent unityComponent;
-
-        public bool isAttacking;
-        public bool isMoving;
-        public bool isOnGround;
-
-        public int currentDirectionValue;
-
-        public int JumpForce;
-
-        public Text text_IdAndDataId;
-
-        public Transform Rednerer;
+        public IUnityComponent     unityComponent;
+        public int                 currentDirectionValue;
+        public int                 JumpForce;
+        public Text                text_IdAndDataId;
+        public Transform           Rednerer;
 
     #endregion
 
@@ -39,7 +30,7 @@ namespace Main.ViewComponent
 
         public void Attack()
         {
-            isAttacking = true;
+            characterCondition.IsAttacking = true;
             unityComponent.PlayAnimation("Attack");
         }
 
@@ -52,7 +43,7 @@ namespace Main.ViewComponent
 
         public void Jump()
         {
-            isOnGround = false;
+            characterCondition.IsOnGround = false;
             unityComponent.PlayAnimation("Jump");
             unityComponent.AddForce(Vector2.up * JumpForce);
         }
@@ -80,10 +71,10 @@ namespace Main.ViewComponent
 
         public void SetIsMoving(bool isMoving)
         {
-            this.isMoving = isMoving;
+            characterCondition.IsMoving = isMoving;
             var animationName = isMoving ? "Run" : "Idle";
             // 攻擊中不可以切換移動動畫
-            if (isAttacking == false) PlayAnimation(animationName);
+            if (characterCondition.IsMoving == false) PlayAnimation(animationName);
         }
 
         public void SetText(string displayText)
@@ -104,9 +95,9 @@ namespace Main.ViewComponent
         private void Awake()
         {
             var rigi2d = GetComponent<Rigidbody2D>();
-            isOnGround         = true;
-            unityComponent     = new UnityComponent(animator , rigi2d , transform);
-            characterCondition = new CharacterCondition();
+            unityComponent                = new UnityComponent(animator , rigi2d , transform);
+            characterCondition            = new CharacterCondition();
+            characterCondition.IsOnGround = true;
         }
 
     #endregion

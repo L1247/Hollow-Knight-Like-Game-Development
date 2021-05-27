@@ -69,12 +69,12 @@ namespace MainTests.ActorTests
         public void Should_Is_Jumping_True_When_Call_Jump()
         {
             // arrange
-            actorComponent.isOnGround = true;
-            Assert.AreEqual(true , actorComponent.isOnGround);
+            characterCondition.IsOnGround = true;
+            Assert.AreEqual(true , characterCondition.IsOnGround);
             // act
             actorComponent.Jump();
             // assert
-            Assert.AreEqual(false , actorComponent.isOnGround);
+            Assert.AreEqual(false , characterCondition.IsOnGround);
         }
 
         [Test]
@@ -102,11 +102,11 @@ namespace MainTests.ActorTests
         public void Should_Is_Attacking_True_When_Call_Attack()
         {
             // arrange
-            Assert.AreEqual(false , actorComponent.isAttacking);
+            Assert.AreEqual(false , characterCondition.IsAttacking);
             // act
             actorComponent.Attack();
             // assert
-            Assert.AreEqual(true , actorComponent.isAttacking);
+            Assert.AreEqual(true , characterCondition.IsAttacking);
         }
 
         [Test]

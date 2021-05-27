@@ -2,6 +2,14 @@ namespace Main.ViewComponent
 {
     public interface ICharacterCondition
     {
+    #region Public Variables
+
+        bool        IsAttacking { get; set; }
+        public bool IsMoving    { get; set; }
+        public bool IsOnGround  { get; set; }
+
+    #endregion
+
     #region Public Methods
 
         bool CanMoving();
@@ -13,9 +21,11 @@ namespace Main.ViewComponent
     {
     #region Public Variables
 
-        public bool isAttacking;
-        public bool isMoving;
-        public bool isOnGround;
+        public bool IsAttacking { get; set; }
+
+        public bool IsMoving { get; set; }
+
+        public bool IsOnGround { get; set; }
 
     #endregion
 
@@ -24,12 +34,12 @@ namespace Main.ViewComponent
         public bool CanMoving()
         {
             // 在地面，且攻擊時，不可移動 , 空中可以左右移動
-            if (isMoving)
+            if (IsMoving)
             {
-                if (isAttacking)
+                if (IsAttacking)
                 {
                     // Ground
-                    if (isOnGround) return false;
+                    if (IsOnGround) return false;
                     // Air
                     return true;
                 }

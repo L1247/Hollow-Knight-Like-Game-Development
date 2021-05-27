@@ -33,9 +33,9 @@ namespace MainTests.ActorTests
         public void Should_Return_True_When_Get_CanMoving_With_Arguments(
             bool isMoving , bool isAttacking , bool isOnGround)
         {
-            characterCondition.isMoving    = isMoving;
-            characterCondition.isAttacking = isAttacking;
-            characterCondition.isOnGround  = isOnGround;
+            characterCondition.IsMoving    = isMoving;
+            characterCondition.IsAttacking = isAttacking;
+            characterCondition.IsOnGround  = isOnGround;
             Should_CanMoving_Response(true);
         }
 
@@ -45,9 +45,9 @@ namespace MainTests.ActorTests
         public void Should_Return_False_When_Get_CanMoving_With_Arguments(
             bool isMoving , bool isAttacking , bool isOnGround)
         {
-            characterCondition.isMoving    = isMoving;
-            characterCondition.isAttacking = isAttacking;
-            characterCondition.isOnGround  = isOnGround;
+            characterCondition.IsMoving    = isMoving;
+            characterCondition.IsAttacking = isAttacking;
+            characterCondition.IsOnGround  = isOnGround;
             Should_CanMoving_Response(false);
         }
 
