@@ -84,3 +84,7 @@ ProjectSettings/ProjectVersion.txt
 Assets/Plugins/Zenject/OptionalExtras/Signals/Zenject-Signals.csproj.meta
 Assets/Plugins/Zenject/OptionalExtras/ReflectionBaking/Zenject-ReflectionBaking.csproj.meta
 Assets/StreamingAssets/build_info
+
+Assets/Plugins/Sirenix/
+
+Assets/Plugins/Sirenix.meta

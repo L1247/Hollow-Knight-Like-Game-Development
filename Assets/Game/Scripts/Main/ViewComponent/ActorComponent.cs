@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 using Utilities.Contract;
@@ -8,6 +9,7 @@ namespace Main.ViewComponent
     {
     #region Public Variables
 
+        [ShowInInspector]
         public ICharacterCondition characterCondition;
         public IUnityComponent     unityComponent;
         public int                 currentDirectionValue;

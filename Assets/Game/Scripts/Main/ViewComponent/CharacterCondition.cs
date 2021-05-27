@@ -1,4 +1,5 @@
 using System;
+using Sirenix.OdinInspector;
 
 namespace Main.ViewComponent
 {
@@ -24,10 +25,13 @@ namespace Main.ViewComponent
     {
     #region Public Variables
 
+        [ShowInInspector]
         public bool IsAttacking { get; set; }
 
+        [ShowInInspector]
         public bool IsMoving { get; set; }
 
+        [ShowInInspector]
         public bool IsOnGround { get; set; }
 
     #endregion
