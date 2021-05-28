@@ -71,10 +71,15 @@ namespace Main.ViewComponent
         public void PlayAnimation(string animationName , Action animationEndCallBack = null)
         {
             Contract.RequireNotNull(animator , "Animator");
+            var currentClip     = animator.GetCurrentAnimatorClipInfo(0)[0].clip;
+            var currentClipName = currentClip.name;
+            if (currentClipName == animationName)
+                return;
+
             animator.Play(animationName);
             if (animationEndCallBack != null)
             {
-                var attackClipLength = animator.GetCurrentAnimatorClipInfo(0)[0].clip.length
+                var attackClipLength = currentClip.length
                                        - Time.deltaTime * 2;
                 Observable.Timer(TimeSpan.FromSeconds(attackClipLength))
                           .Subscribe(_ => animationEndCallBack.Invoke());

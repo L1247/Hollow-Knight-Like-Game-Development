@@ -33,7 +33,6 @@ namespace Main.ViewComponent
 
         public void OnAttackEnd()
         {
-            Debug.Log("OnAttackEnd");
             characterCondition.IsAttacking = false;
         }
 
@@ -65,6 +64,7 @@ namespace Main.ViewComponent
         {
             var movement = GetMovement();
             unityComponent.MoveCharacter(movement);
+            unityComponent.PlayAnimation("Run");
         }
 
         public void SetDirection(int directionValue)
