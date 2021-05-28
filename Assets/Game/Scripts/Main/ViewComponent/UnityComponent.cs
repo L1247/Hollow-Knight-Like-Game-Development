@@ -1,4 +1,5 @@
 using System;
+using UniRx;
 using UnityEngine;
 using Utilities.Contract;
 
@@ -12,7 +13,7 @@ namespace Main.ViewComponent
 
         void MoveCharacter(Vector3 movement);
 
-        void PlayAnimation(string animationName);
+        void PlayAnimation(string animationName , Action animationEndCallBack = null);
 
     #endregion
     }
@@ -67,10 +68,17 @@ namespace Main.ViewComponent
             transform.position += movement;
         }
 
-        public void PlayAnimation(string animationName)
+        public void PlayAnimation(string animationName , Action animationEndCallBack = null)
         {
             Contract.RequireNotNull(animator , "Animator");
             animator.Play(animationName);
+            if (animationEndCallBack != null)
+            {
+                var attackClipLength = animator.GetCurrentAnimatorClipInfo(0)[0].clip.length
+                                       - Time.deltaTime * 2;
+                Observable.Timer(TimeSpan.FromSeconds(attackClipLength))
+                          .Subscribe(_ => animationEndCallBack.Invoke());
+            }
         }
 
     #endregion

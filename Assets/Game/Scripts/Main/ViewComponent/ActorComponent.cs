@@ -11,11 +11,12 @@ namespace Main.ViewComponent
 
         [ShowInInspector]
         public ICharacterCondition characterCondition;
-        public IUnityComponent     unityComponent;
-        public int                 currentDirectionValue;
-        public int                 JumpForce;
-        public Text                text_IdAndDataId;
-        public Transform           Rednerer;
+
+        public IUnityComponent unityComponent;
+        public int             currentDirectionValue;
+        public int             JumpForce;
+        public Text            text_IdAndDataId;
+        public Transform       Rednerer;
 
     #endregion
 
@@ -28,12 +29,22 @@ namespace Main.ViewComponent
 
     #endregion
 
+    #region Events
+
+        public void OnAttackEnd()
+        {
+            Debug.Log("OnAttackEnd");
+            characterCondition.IsAttacking = false;
+        }
+
+    #endregion
+
     #region Public Methods
 
         public void Attack()
         {
             characterCondition.IsAttacking = true;
-            unityComponent.PlayAnimation("Attack");
+            unityComponent.PlayAnimation("Attack" , OnAttackEnd);
         }
 
         public Vector3 GetMovement()
@@ -56,11 +67,6 @@ namespace Main.ViewComponent
             unityComponent.MoveCharacter(movement);
         }
 
-        public void PlayAnimation(string animationName)
-        {
-            animator?.Play(animationName);
-        }
-
         public void SetDirection(int directionValue)
         {
             currentDirectionValue = directionValue;
@@ -76,7 +82,8 @@ namespace Main.ViewComponent
             characterCondition.IsMoving = isMoving;
             var animationName = isMoving ? "Run" : "Idle";
             // 攻擊中不可以切換移動動畫
-            if (characterCondition.IsMoving == false) PlayAnimation(animationName);
+            if (characterCondition.IsMoving == false)
+                unityComponent.PlayAnimation(animationName);
         }
 
         public void SetText(string displayText)
