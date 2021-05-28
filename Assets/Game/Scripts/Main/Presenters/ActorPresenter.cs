@@ -31,14 +31,9 @@ namespace Main.Presenters
         [SerializeField]
         private Button button_ChangeDirection;
 
-        [SerializeField]
-        private Button button_CreateActor_Enemy1;
 
         [SerializeField]
-        private Button button_CreateActor_Player1;
-
-        [SerializeField]
-        private Button button_CreateActor_Player2;
+        private Button button_CreateActor_Player;
 
     #endregion
 
@@ -46,9 +41,7 @@ namespace Main.Presenters
 
         private void Start()
         {
-            ButtonBinding(button_CreateActor_Player1 , () => actorContoller.CreateActor(actorDatas[0].ActorDataId));
-            ButtonBinding(button_CreateActor_Player2 , () => actorContoller.CreateActor(actorDatas[1].ActorDataId));
-            ButtonBinding(button_CreateActor_Enemy1 ,  () => actorContoller.CreateActor(actorDatas[2].ActorDataId));
+            ButtonBinding(button_CreateActor_Player , () => actorContoller.CreateActor(actorDatas[3].ActorDataId));
             ButtonBinding(button_ChangeDirection , () =>
             {
                 direction = direction == 0 ? 1 : 0;
