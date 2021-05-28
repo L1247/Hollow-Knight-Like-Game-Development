@@ -26,6 +26,8 @@ namespace DDDCore.Adapter.Presenter.Unity
 
         protected void ButtonBinding(Button button , Action action)
         {
+            if (button == null)
+                return;
         #if UniRx
             button.OnClickAsObservable().Subscribe(_ => action()).AddTo(button.gameObject);
         #else

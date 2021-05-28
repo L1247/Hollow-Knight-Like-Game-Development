@@ -110,12 +110,24 @@ namespace MainTests.ActorTests
         }
 
         [Test]
+        public void Should_Is_Attacking_False_When_Call_OnAttackEnd()
+        {
+            // arrange
+            characterCondition.IsAttacking = true;
+            Assert.AreEqual(true , characterCondition.IsAttacking);
+            // act
+            actorComponent.OnAttackEnd();
+            // assert
+            Assert.AreEqual(false , characterCondition.IsAttacking);
+        }
+
+        [Test]
         public void Should_Call_PlayAnimation_Attack_When_Call_Attack()
         {
             // act
             actorComponent.Attack();
             // assert
-            unityComponent.Received(1).PlayAnimation("Attack");
+            unityComponent.Received(1).PlayAnimation("Attack" , actorComponent.OnAttackEnd);
         }
 
         [Test]
@@ -138,6 +150,17 @@ namespace MainTests.ActorTests
             // assert
             if (canMoving) ShouldCallMoveCharacter();
             if (canMoving == false) ShouldNotCallMoveCharacter();
+        }
+
+        [Test]
+        [TestCase(true)]
+        [TestCase(false)]
+        public void Should_Set_Condition_IsOnGround_When_Call_UnityComponent_IsGrounding(bool exceptIsOnGround)
+        {
+            characterCondition.IsOnGround = !exceptIsOnGround;
+            unityComponent.IsGrounding().Returns(exceptIsOnGround);
+            actorComponent.Update();
+            Assert.AreEqual(exceptIsOnGround , characterCondition.IsOnGround);
         }
 
     #endregion
