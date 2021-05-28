@@ -25,7 +25,9 @@ namespace Main.ViewComponent
     #region Private Variables
 
         private readonly Animator    animator;
+        private          int         groundLayer;
         private readonly Rigidbody2D rigi2d;
+        private          Transform   groundTransform;
         private readonly Transform   transform;
 
     #endregion
@@ -34,9 +36,18 @@ namespace Main.ViewComponent
 
         public UnityComponent(Animator animator , Rigidbody2D rigi2d , Transform transform)
         {
+            groundLayer    = 1 << LayerMask.NameToLayer("Ground");
             this.animator  = animator;
             this.rigi2d    = rigi2d;
             this.transform = transform;
+            var boxCollider2D = this.transform.GetComponent<BoxCollider2D>();
+            var height        = boxCollider2D.size.y / 2;
+            var offsetY       = boxCollider2D.offset.y;
+            var groundY       = 0 - height - offsetY;
+            var groundObject  = new GameObject("Actor Ground");
+            groundTransform                      = groundObject.transform;
+            groundObject.transform.parent        = transform;
+            groundObject.transform.localPosition = Vector3.up * groundY;
         }
 
         public UnityComponent(Animator animator)
@@ -66,7 +77,8 @@ namespace Main.ViewComponent
 
         public bool IsGrounding()
         {
-            return true;
+            // todo : gizmos
+            return Physics2D.OverlapCircle(groundTransform.position , 0.1f , groundLayer);
         }
 
         public void MoveCharacter(Vector3 movement)
