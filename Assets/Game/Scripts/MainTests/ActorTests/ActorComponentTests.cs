@@ -152,6 +152,17 @@ namespace MainTests.ActorTests
             if (canMoving == false) ShouldNotCallMoveCharacter();
         }
 
+        [Test]
+        [TestCase(true)]
+        [TestCase(false)]
+        public void Should_Set_Condition_IsOnGround_When_Call_UnityComponent_IsGrounding(bool exceptIsOnGround)
+        {
+            characterCondition.IsOnGround = !exceptIsOnGround;
+            unityComponent.IsGrounding().Returns(exceptIsOnGround);
+            actorComponent.Update();
+            Assert.AreEqual(exceptIsOnGround , characterCondition.IsOnGround);
+        }
+
     #endregion
 
     #region Private Methods

@@ -10,6 +10,7 @@ namespace Main.ViewComponent
     #region Public Methods
 
         void AddForce(Vector2 force);
+        bool IsGrounding();
 
         void MoveCharacter(Vector3 movement);
 
@@ -61,6 +62,11 @@ namespace Main.ViewComponent
         {
             Contract.RequireNotNull(rigi2d , "Rigidbody2d");
             rigi2d.AddForce(force , ForceMode2D.Impulse);
+        }
+
+        public bool IsGrounding()
+        {
+            return true;
         }
 
         public void MoveCharacter(Vector3 movement)

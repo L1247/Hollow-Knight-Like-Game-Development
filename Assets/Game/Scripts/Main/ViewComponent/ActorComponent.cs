@@ -94,6 +94,7 @@ namespace Main.ViewComponent
         public void Update()
         {
             Contract.RequireNotNull(characterCondition , "characterCondition");
+            characterCondition.IsOnGround = unityComponent.IsGrounding();
             if (characterCondition.CanMoving()) MoveCharacter();
         }
 

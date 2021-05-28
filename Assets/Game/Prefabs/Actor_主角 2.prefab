@@ -47,12 +47,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd8b1f8ea1942e089c12f002c6470b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isMoving: 0
   currentDirectionValue: 0
+  JumpForce: 10
   text_IdAndDataId: {fileID: 7628362190142933651}
   Rednerer: {fileID: 7537735179749738433}
   animator: {fileID: 7466056444511282173}
-  JumpForce: 10
 --- !u!50 &4364024921664457243
 Rigidbody2D:
   serializedVersion: 4
@@ -230,7 +229,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
 --- !u!1 &7694707419216940049
 GameObject:
   m_ObjectHideFlags: 0
