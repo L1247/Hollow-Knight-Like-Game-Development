@@ -38,10 +38,6 @@ namespace Main.Presenters
         [Required]
         private Button button_CreateActor_Player;
 
-        [SerializeField]
-        [Required]
-        private GameObject attackColliderPrefab;
-
     #endregion
 
     #region Unity events
