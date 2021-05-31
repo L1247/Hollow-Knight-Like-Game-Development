@@ -13,10 +13,18 @@ namespace Main.ViewComponent
         public ICharacterCondition characterCondition;
 
         public IUnityComponent unityComponent;
-        public int             currentDirectionValue;
-        public int             JumpForce;
-        public Text            text_IdAndDataId;
-        public Transform       Rednerer;
+
+        [Required]
+        public int currentDirectionValue;
+
+        [Required]
+        public int JumpForce;
+
+        [Required]
+        public Text text_IdAndDataId;
+
+        [Required]
+        public Transform Renderer;
 
     #endregion
 
@@ -25,9 +33,11 @@ namespace Main.ViewComponent
         private readonly int moveSpeed = 5;
 
         [SerializeField]
+        [Required]
         private Animator animator;
 
         [SerializeField]
+        [Required]
         private float radius = 0.1f;
 
     #endregion
@@ -84,7 +94,7 @@ namespace Main.ViewComponent
 
             if (directionValue == 0) x = 1;
             if (directionValue == 1) x = -1;
-            Rednerer.transform.localScale = new Vector3(x , 1 , 1);
+            Renderer.transform.localScale = new Vector3(x , 1 , 1);
         }
 
         public void SetIsMoving(bool isMoving)

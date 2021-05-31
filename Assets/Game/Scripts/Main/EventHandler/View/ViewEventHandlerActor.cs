@@ -3,6 +3,7 @@ using Main.Actor.Events;
 using Main.Entity.Model.Events;
 using Main.Input;
 using Main.Presenters;
+using Main.ViewComponent;
 
 namespace Main.EventHandler.View
 {
@@ -18,6 +19,7 @@ namespace Main.EventHandler.View
             signalBus.Subscribe<Input_Horizontal>(actorPresenter.OnHorizontalChanged);
             signalBus.Subscribe<ButtonDownJump>(actorPresenter.OnButtonDownJump);
             signalBus.Subscribe<ButtonDownAttack>(actorPresenter.OnButtonDownAttack);
+            signalBus.Subscribe<rAnimationEvent>(actorPresenter.OnAnimationTriggered);
         }
 
     #endregion

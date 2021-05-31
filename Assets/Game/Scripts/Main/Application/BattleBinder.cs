@@ -7,6 +7,7 @@ using Main.Presenters;
 using Main.UseCases.Actor.Create;
 using Main.UseCases.Actor.Edit;
 using Main.UseCases.Repository;
+using Main.ViewComponent;
 using Zenject;
 
 namespace Main.Application
@@ -23,6 +24,7 @@ namespace Main.Application
             Container.DeclareSignal<Input_Horizontal>();
             Container.DeclareSignal<ButtonDownJump>();
             Container.DeclareSignal<ButtonDownAttack>();
+            Container.DeclareSignal<rAnimationEvent>();
             Container.Bind<EventStore>().AsSingle().NonLazy();
             Container.Bind<DomainEventBus>().AsSingle();
             // EventHandler
