@@ -45,9 +45,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd8b1f8ea1942e089c12f002c6470b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentDirectionValue: 0
+  JumpForce: 0
   text_IdAndDataId: {fileID: 7628362190142933651}
-  Rednerer: {fileID: 7537735179749738433}
+  Renderer: {fileID: 7537735179749738433}
   animator: {fileID: 3667970079280698107}
+  radius: 0.1
 --- !u!1 &3040444540712329801
 GameObject:
   m_ObjectHideFlags: 0

@@ -29,7 +29,7 @@ namespace MainTests.ActorTests
             textComponent                     = gameObject.AddComponent<Text>();
             actorComponent.text_IdAndDataId   = textComponent;
             rendererTransform                 = new GameObject("Renderer").transform;
-            actorComponent.Rednerer           = rendererTransform;
+            actorComponent.Renderer           = rendererTransform;
             unityComponent                    = Substitute.For<IUnityComponent>();
             actorComponent.unityComponent     = unityComponent;
             characterCondition                = Substitute.For<ICharacterCondition>();

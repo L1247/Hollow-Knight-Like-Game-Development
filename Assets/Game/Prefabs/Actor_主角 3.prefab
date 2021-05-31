@@ -50,7 +50,7 @@ MonoBehaviour:
   currentDirectionValue: 0
   JumpForce: 10
   text_IdAndDataId: {fileID: 7628362190142933651}
-  Rednerer: {fileID: 7537735179749738433}
+  Renderer: {fileID: 7537735179749738433}
   animator: {fileID: 7466056444511282173}
   radius: 0.05
 --- !u!50 &4364024921664457243
@@ -242,6 +242,7 @@ GameObject:
   - component: {fileID: 7405752818044217467}
   - component: {fileID: 7466056444511282173}
   - component: {fileID: 1573603537518476653}
+  - component: {fileID: 7808988408841168121}
   m_Layer: 0
   m_Name: king
   m_TagString: Untagged
@@ -333,6 +334,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7808988408841168121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7407546213426717141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea993ed7a9094298ad41eda5888d2bc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7694707419216940049
 GameObject:
   m_ObjectHideFlags: 0
