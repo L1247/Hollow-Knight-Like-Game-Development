@@ -27,6 +27,9 @@ namespace Main.ViewComponent
         [SerializeField]
         private Animator animator;
 
+        [SerializeField]
+        private float radius = 0.1f;
+
     #endregion
 
     #region Events
@@ -34,6 +37,13 @@ namespace Main.ViewComponent
         public void OnAttackEnd()
         {
             characterCondition.IsAttacking = false;
+        }
+
+        private void OnDrawGizmos()
+        {
+            if (unityComponent == null) return;
+            Gizmos.color = Color.green;
+            Gizmos.DrawSphere(unityComponent.GetGroundCheckPosition() , radius);
         }
 
     #endregion
@@ -105,7 +115,7 @@ namespace Main.ViewComponent
         private void Awake()
         {
             var rigi2d = GetComponent<Rigidbody2D>();
-            unityComponent                = new UnityComponent(animator , rigi2d , transform);
+            unityComponent                = new UnityComponent(animator , rigi2d , transform , radius);
             characterCondition            = new CharacterCondition();
             characterCondition.IsOnGround = true;
         }

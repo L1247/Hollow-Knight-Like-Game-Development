@@ -10,7 +10,9 @@ namespace Main.ViewComponent
     #region Public Methods
 
         void AddForce(Vector2 force);
-        bool IsGrounding();
+
+        Vector3 GetGroundCheckPosition();
+        bool    IsGrounding();
 
         void MoveCharacter(Vector3 movement);
 
@@ -25,6 +27,7 @@ namespace Main.ViewComponent
     #region Private Variables
 
         private readonly Animator    animator;
+        private          float       radius;
         private          int         groundLayer;
         private readonly Rigidbody2D rigi2d;
         private          Transform   groundTransform;
@@ -34,8 +37,9 @@ namespace Main.ViewComponent
 
     #region Constructor
 
-        public UnityComponent(Animator animator , Rigidbody2D rigi2d , Transform transform)
+        public UnityComponent(Animator animator , Rigidbody2D rigi2d , Transform transform , float radius)
         {
+            this.radius    = radius;
             groundLayer    = 1 << LayerMask.NameToLayer("Ground");
             this.animator  = animator;
             this.rigi2d    = rigi2d;
@@ -49,6 +53,7 @@ namespace Main.ViewComponent
             groundObject.transform.parent        = transform;
             groundObject.transform.localPosition = Vector3.up * groundY;
         }
+
 
         public UnityComponent(Animator animator)
         {
@@ -75,10 +80,14 @@ namespace Main.ViewComponent
             rigi2d.AddForce(force , ForceMode2D.Impulse);
         }
 
+        public Vector3 GetGroundCheckPosition()
+        {
+            return groundTransform.position;
+        }
+
         public bool IsGrounding()
         {
-            // todo : gizmos
-            return Physics2D.OverlapCircle(groundTransform.position , 0.1f , groundLayer);
+            return Physics2D.OverlapCircle(groundTransform.position , radius , groundLayer);
         }
 
         public void MoveCharacter(Vector3 movement)
