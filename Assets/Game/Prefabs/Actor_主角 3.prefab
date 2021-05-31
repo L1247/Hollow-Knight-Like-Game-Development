@@ -52,6 +52,7 @@ MonoBehaviour:
   text_IdAndDataId: {fileID: 7628362190142933651}
   Rednerer: {fileID: 7537735179749738433}
   animator: {fileID: 7466056444511282173}
+  radius: 0.05
 --- !u!50 &4364024921664457243
 Rigidbody2D:
   serializedVersion: 4
