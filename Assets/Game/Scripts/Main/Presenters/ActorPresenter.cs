@@ -1,10 +1,8 @@
 using System.Collections.Generic;
 using DDDCore.Adapter.Presenter.Unity;
-using Game.ScriptableObjects;
-using Main.Actor.Events;
 using Main.Controller;
-using Main.Entity.Model.Events;
 using Main.Input;
+using Main.ScriptableObjects;
 using Main.ViewComponent;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -56,12 +54,8 @@ namespace Main.Presenters
 
     #region Events
 
-        public void OnActorCreated(ActorCreated actorCreated)
+        public void OnActorCreated(string actorId , string actorDataId , int direction)
         {
-            var actorId     = actorCreated.ActorId;
-            var actorDataId = actorCreated.ActorDataId;
-            var direction   = actorCreated.Direction;
-            // Debug.Log($"OnActorCreated {actorId} , {actorDataId}");
             CacheActorId = actorId;
             actorMapper.CreateActorViewData(actorId , actorDataId , direction);
         }
@@ -101,10 +95,8 @@ namespace Main.Presenters
             }
         }
 
-        public void OnDirectionChanged(DirectionChanged directionChanged)
+        public void OnDirectionChanged(string actorId , int direction)
         {
-            var actorId        = directionChanged.ActorId;
-            var direction      = directionChanged.Direction;
             var actorComponent = actorMapper.GetActorComponent(actorId);
             actorComponent.SetDirection(direction);
         }
