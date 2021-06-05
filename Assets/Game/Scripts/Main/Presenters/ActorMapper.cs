@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Game.ScriptableObjects;
+using Main.ScriptableObjects;
 using Main.ViewComponent;
 using UnityEngine;
 using Utilities.Contract;

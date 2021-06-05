@@ -1,11 +1,11 @@
 using DDDCore.Model;
 using DDDCore.Usecase;
-using Main.Entity.Model;
+using Entity.Builder;
 using Main.UseCases.Repository;
 
 namespace Main.UseCases.Actor.Create
 {
-    public class CreateActorInput : DDDCore.Usecase.Input
+    public class CreateActorInput : Input
     {
     #region Public Variables
 

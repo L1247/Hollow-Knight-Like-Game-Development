@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using DDDCore.Adapter.Presenter.Unity;
-using Game.ScriptableObjects;
-using Main.Actor.Events;
+using Entity.Events;
 using Main.Controller;
-using Main.Entity.Model.Events;
 using Main.Input;
+using Main.ScriptableObjects;
 using Main.ViewComponent;
 using Sirenix.OdinInspector;
 using UnityEngine;

@@ -28,7 +28,7 @@ namespace Main.Application
             Container.Bind<EventStore>().AsSingle().NonLazy();
             Container.Bind<DomainEventBus>().AsSingle();
             // EventHandler
-            Container.Bind<ViewEventHandlerActor>().AsSingle().NonLazy();
+            Container.Bind<ViewEventHandler>().AsSingle().NonLazy();
             // Controller
             Container.Bind<ActorContoller>().AsSingle();
             // Repository
