@@ -1,8 +1,8 @@
 using DDDCore;
 using Entity.Events;
 using Main.Input;
+using Main.Input.Event;
 using Main.Presenters;
-using Main.ViewComponent;
 
 namespace Main.EventHandler.View
 {
@@ -24,10 +24,9 @@ namespace Main.EventHandler.View
             });
 
             // some view event
-            signalBus.Subscribe<Input_Horizontal>(actorPresenter.OnHorizontalChanged);
+            signalBus.Subscribe<InputHorizontal>(actorPresenter.OnHorizontalChanged);
             signalBus.Subscribe<ButtonDownJump>(actorPresenter.OnButtonDownJump);
             signalBus.Subscribe<ButtonDownAttack>(actorPresenter.OnButtonDownAttack);
-            signalBus.Subscribe<rAnimationEvent>(actorPresenter.OnAnimationTriggered);
         }
 
     #endregion

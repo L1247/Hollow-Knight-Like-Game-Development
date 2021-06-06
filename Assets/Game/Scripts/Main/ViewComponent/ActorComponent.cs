@@ -1,4 +1,6 @@
 using Sirenix.OdinInspector;
+using UniRx;
+using UniRx.Triggers;
 using UnityEngine;
 using UnityEngine.UI;
 using Utilities.Contract;
@@ -38,6 +40,10 @@ namespace Main.ViewComponent
 
         [SerializeField]
         [Required]
+        private BoxCollider2D boxCollider_Hitbox;
+
+        [SerializeField]
+        [Required]
         private float radius = 0.1f;
 
     #endregion
@@ -54,6 +60,12 @@ namespace Main.ViewComponent
             if (unityComponent == null) return;
             Gizmos.color = Color.green;
             Gizmos.DrawSphere(unityComponent.GetGroundCheckPosition() , radius);
+        }
+
+        private void OnHitboxTriggered(Collider2D collider)
+        {
+            var colliderGameObject = collider.gameObject;
+            if (colliderGameObject != gameObject) Debug.Log($"collider {collider.name}");
         }
 
     #endregion
@@ -128,6 +140,10 @@ namespace Main.ViewComponent
             unityComponent                = new UnityComponent(animator , rigi2d , transform , radius);
             characterCondition            = new CharacterCondition();
             characterCondition.IsOnGround = true;
+            // Listen hit box trigger event
+            boxCollider_Hitbox.OnTriggerEnter2DAsObservable()
+                              .Subscribe(collider2D => OnHitboxTriggered(collider2D))
+                              .AddTo(gameObject);
         }
 
     #endregion

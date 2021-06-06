@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using DDDCore.Adapter.Presenter.Unity;
 using Main.Controller;
 using Main.Input;
+using Main.Input.Event;
 using Main.ScriptableObjects;
-using Main.ViewComponent;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
@@ -60,24 +60,6 @@ namespace Main.Presenters
             actorMapper.CreateActorViewData(actorId , actorDataId , direction);
         }
 
-        public void OnAnimationTriggered(rAnimationEvent rAnimationEvent)
-        {
-            var     actorComponent = actorMapper.GetActorComponent(CacheActorId);
-            var     direction      = actorComponent.currentDirectionValue == 0 ? Vector2.left : Vector2.right;
-            Vector2 origin         = actorComponent.Renderer.position;
-            var     raycastHit2Ds  = Physics2D.BoxCastAll(origin ,
-                new Vector2(2 , 1) , 0 , direction , 2);
-            if (raycastHit2Ds.Length > 0)
-                foreach (var raycastHit2D in raycastHit2Ds)
-                    // exclude self
-                    if (raycastHit2D.transform.gameObject != actorComponent.gameObject)
-                    {
-                        Debug.Log($"raycastHit2D {raycastHit2D.transform.gameObject.name}");
-                        var hitActorComponent = raycastHit2D.transform.GetComponent<ActorComponent>();
-                        hitActorComponent.unityComponent.PlayAnimation("Hit");
-                    }
-        }
-
         public void OnButtonDownAttack(ButtonDownAttack buttonDownAttack)
         {
             if (string.IsNullOrEmpty(CacheActorId) == false)
@@ -102,7 +84,7 @@ namespace Main.Presenters
             actorComponent.SetDirection(direction);
         }
 
-        public void OnHorizontalChanged(Input_Horizontal inputHorizontal)
+        public void OnHorizontalChanged(InputHorizontal inputHorizontal)
         {
             // detect actor is exist
             if (string.IsNullOrEmpty(CacheActorId) == false)
