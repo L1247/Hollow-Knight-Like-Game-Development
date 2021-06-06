@@ -3,11 +3,13 @@ using DDDCore.Model;
 using Main.Controller;
 using Main.EventHandler.View;
 using Main.Input;
+using Main.Input.Event;
+using Main.Input.Events;
 using Main.Presenters;
 using Main.UseCases.Actor.Create;
 using Main.UseCases.Actor.Edit;
 using Main.UseCases.Repository;
-using Main.ViewComponent;
+using Main.ViewComponent.Events;
 using Zenject;
 
 namespace Main.Application
@@ -21,10 +23,11 @@ namespace Main.Application
             // Event
             SignalBusInstaller.Install(Container);
             Container.DeclareSignal<DomainEvent>();
-            Container.DeclareSignal<Input_Horizontal>();
+            Container.DeclareSignal<InputHorizontal>();
             Container.DeclareSignal<ButtonDownJump>();
             Container.DeclareSignal<ButtonDownAttack>();
             Container.DeclareSignal<rAnimationEvent>();
+            Container.DeclareSignal<HitboxTriggered>();
             Container.Bind<EventStore>().AsSingle().NonLazy();
             Container.Bind<DomainEventBus>().AsSingle();
             // EventHandler

@@ -1,3 +1,4 @@
+using Main.ViewComponent.Events;
 using UnityEngine;
 using Zenject;
 
@@ -17,24 +18,6 @@ namespace Main.ViewComponent
         public void OnAnimationEvent(string eventId)
         {
             signalBus.Fire(new rAnimationEvent(eventId));
-        }
-
-    #endregion
-    }
-
-    public class rAnimationEvent
-    {
-    #region Public Variables
-
-        public string EventId { get; }
-
-    #endregion
-
-    #region Constructor
-
-        public rAnimationEvent(string eventId)
-        {
-            EventId = eventId;
         }
 
     #endregion

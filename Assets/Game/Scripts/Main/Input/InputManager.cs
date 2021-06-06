@@ -1,3 +1,5 @@
+using Main.Input.Event;
+using Main.Input.Events;
 using Rewired;
 using Zenject;
 
@@ -51,32 +53,10 @@ namespace Main.Input
             var buttonDown_Jump   = player.GetButtonDown("Jump");
             var buttonDown_Attack = player.GetButtonDown("Attack");
             if (lastHorzonTalValue != horizontalValue)
-                signalBus.Fire(new Input_Horizontal((int)horizontalValue));
+                signalBus.Fire(new InputHorizontal((int)horizontalValue));
             lastHorzonTalValue = horizontalValue;
             if (buttonDown_Jump) signalBus.Fire(new ButtonDownJump());
             if (buttonDown_Attack) signalBus.Fire(new ButtonDownAttack());
-        }
-
-    #endregion
-    }
-
-    public class ButtonDownAttack { }
-
-    public class ButtonDownJump { }
-
-    public class Input_Horizontal
-    {
-    #region Public Variables
-
-        public int HorizontalValue { get; }
-
-    #endregion
-
-    #region Constructor
-
-        public Input_Horizontal(int horizontalValue)
-        {
-            HorizontalValue = horizontalValue;
         }
 
     #endregion
