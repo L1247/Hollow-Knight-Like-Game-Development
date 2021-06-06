@@ -1,7 +1,7 @@
 using DDDCore;
 using Entity.Events;
-using Main.Input;
 using Main.Input.Event;
+using Main.Input.Events;
 using Main.Presenters;
 
 namespace Main.EventHandler.View

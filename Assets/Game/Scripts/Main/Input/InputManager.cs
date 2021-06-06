@@ -1,4 +1,5 @@
 using Main.Input.Event;
+using Main.Input.Events;
 using Rewired;
 using Zenject;
 
@@ -60,8 +61,4 @@ namespace Main.Input
 
     #endregion
     }
-
-    public class ButtonDownAttack { }
-
-    public class ButtonDownJump { }
 }

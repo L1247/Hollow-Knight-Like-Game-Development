@@ -4,11 +4,12 @@ using Main.Controller;
 using Main.EventHandler.View;
 using Main.Input;
 using Main.Input.Event;
+using Main.Input.Events;
 using Main.Presenters;
 using Main.UseCases.Actor.Create;
 using Main.UseCases.Actor.Edit;
 using Main.UseCases.Repository;
-using Main.ViewComponent;
+using Main.ViewComponent.Events;
 using Zenject;
 
 namespace Main.Application
