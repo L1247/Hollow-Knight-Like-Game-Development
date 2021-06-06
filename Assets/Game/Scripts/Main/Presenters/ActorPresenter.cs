@@ -65,7 +65,8 @@ namespace Main.Presenters
             var     actorComponent = actorMapper.GetActorComponent(CacheActorId);
             var     direction      = actorComponent.currentDirectionValue == 0 ? Vector2.left : Vector2.right;
             Vector2 origin         = actorComponent.Renderer.position;
-            var     raycastHit2Ds  = Physics2D.BoxCastAll(origin , new Vector2(2 , 1) , 0 , direction , 2);
+            var     raycastHit2Ds  = Physics2D.BoxCastAll(origin ,
+                new Vector2(2 , 1) , 0 , direction , 2);
             if (raycastHit2Ds.Length > 0)
                 foreach (var raycastHit2D in raycastHit2Ds)
                     // exclude self

@@ -154,6 +154,30 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 3}
   m_EdgeRadius: 0
+--- !u!4 &317854282 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2318797795964718038, guid: 5b84d3fc7b3fb884bb59a52aaf944207, type: 3}
+  m_PrefabInstance: {fileID: 1044239980}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &317854283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 317854279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faf1effc8c60aec4eb93328aed0d3b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  show: 1
+  volume: 1
+  Collider_Type: 0
+  static_color: {r: 0, g: 1, b: 0, a: 0.3}
+  color_in_collision: 1
+  collision_color: {r: 1, g: 0, b: 0, a: 0.3}
+  trans: {fileID: 317854282}
 --- !u!1 &489031530
 GameObject:
   m_ObjectHideFlags: 0
@@ -535,6 +559,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5291061075034434756, guid: 5b84d3fc7b3fb884bb59a52aaf944207, type: 3}
+      propertyPath: m_BlockingMask.m_Bits
+      value: 119
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b84d3fc7b3fb884bb59a52aaf944207, type: 3}
 --- !u!1 &1101573863
@@ -814,7 +842,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   button_ChangeDirection: {fileID: 0}
   button_CreateActor_Player: {fileID: 1429010698}
-  attackColliderPrefab: {fileID: 3199078993365444309, guid: 76abf257819e85f499ee1e41109927ca, type: 3}
 --- !u!114 &1938814966
 MonoBehaviour:
   m_ObjectHideFlags: 0
