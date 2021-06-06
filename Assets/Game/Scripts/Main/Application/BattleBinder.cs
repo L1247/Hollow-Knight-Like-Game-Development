@@ -27,6 +27,7 @@ namespace Main.Application
             Container.DeclareSignal<ButtonDownJump>();
             Container.DeclareSignal<ButtonDownAttack>();
             Container.DeclareSignal<rAnimationEvent>();
+            Container.DeclareSignal<HitboxTriggered>();
             Container.Bind<EventStore>().AsSingle().NonLazy();
             Container.Bind<DomainEventBus>().AsSingle();
             // EventHandler

@@ -3,6 +3,7 @@ using Entity.Events;
 using Main.Input.Event;
 using Main.Input.Events;
 using Main.Presenters;
+using Main.ViewComponent.Events;
 
 namespace Main.EventHandler.View
 {
@@ -27,6 +28,7 @@ namespace Main.EventHandler.View
             signalBus.Subscribe<InputHorizontal>(actorPresenter.OnHorizontalChanged);
             signalBus.Subscribe<ButtonDownJump>(actorPresenter.OnButtonDownJump);
             signalBus.Subscribe<ButtonDownAttack>(actorPresenter.OnButtonDownAttack);
+            signalBus.Subscribe<HitboxTriggered>(actorPresenter.OnHitboxTriggered);
         }
 
     #endregion

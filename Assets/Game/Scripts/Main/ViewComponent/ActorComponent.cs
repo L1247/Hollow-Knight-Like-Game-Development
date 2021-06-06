@@ -1,9 +1,11 @@
+using Main.ViewComponent.Events;
 using Sirenix.OdinInspector;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 using UnityEngine.UI;
 using Utilities.Contract;
+using Zenject;
 
 namespace Main.ViewComponent
 {
@@ -33,6 +35,9 @@ namespace Main.ViewComponent
     #region Private Variables
 
         private readonly int moveSpeed = 5;
+
+        [Inject]
+        private SignalBus signalBus;
 
         [SerializeField]
         [Required]
@@ -65,7 +70,11 @@ namespace Main.ViewComponent
         private void OnHitboxTriggered(Collider2D collider)
         {
             var colliderGameObject = collider.gameObject;
-            if (colliderGameObject != gameObject) Debug.Log($"collider {collider.name}");
+            if (colliderGameObject != gameObject)
+            {
+                var triggerActorComponent = colliderGameObject.GetComponent<ActorComponent>();
+                signalBus.Fire(new HitboxTriggered(triggerActorComponent));
+            }
         }
 
     #endregion

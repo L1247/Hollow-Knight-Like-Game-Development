@@ -4,6 +4,7 @@ using Main.Controller;
 using Main.Input.Event;
 using Main.Input.Events;
 using Main.ScriptableObjects;
+using Main.ViewComponent.Events;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
@@ -82,6 +83,12 @@ namespace Main.Presenters
         {
             var actorComponent = actorMapper.GetActorComponent(actorId);
             actorComponent.SetDirection(direction);
+        }
+
+        public void OnHitboxTriggered(HitboxTriggered hitboxTriggered)
+        {
+            var triggerActorComponent = hitboxTriggered.TriggerActorComponent;
+            triggerActorComponent.unityComponent.PlayAnimation("Hit");
         }
 
         public void OnHorizontalChanged(InputHorizontal inputHorizontal)
