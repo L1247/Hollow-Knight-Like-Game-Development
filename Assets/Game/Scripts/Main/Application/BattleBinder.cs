@@ -36,6 +36,7 @@ namespace Main.Application
             Container.Bind<ActorContoller>().AsSingle();
             // Repository
             Container.Bind<ActorRepository>().AsSingle();
+            Container.Bind<iSoRepository>().To<SoRepository>().AsSingle();
             // UseCases
             Container.Bind<CreateActorUseCase>().AsSingle();
             Container.Bind<ChangeDirectionUseCase>().AsSingle();

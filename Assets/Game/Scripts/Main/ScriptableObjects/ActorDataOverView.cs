@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Utilities.Contract;
 
 namespace Main.ScriptableObjects
 {
@@ -16,7 +17,10 @@ namespace Main.ScriptableObjects
 
         public ActorData FindActorData(string actorDataId)
         {
-            return ActorDatas.Find(data => data.ActorDataId == actorDataId);
+            var actorData = ActorDatas.Find(data => data.ActorDataId == actorDataId);
+            Contract.RequireNotNull(actorData , $"actorDataId is {actorDataId} , actorData");
+
+            return actorData;
         }
 
     #endregion
