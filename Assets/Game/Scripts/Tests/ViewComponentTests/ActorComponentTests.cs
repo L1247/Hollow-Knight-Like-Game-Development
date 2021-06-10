@@ -25,7 +25,6 @@ public class ActorComponentTests
         gameObject                        = new GameObject();
         actorComponent                    = gameObject.AddComponent<ActorComponent>();
         textComponent                     = gameObject.AddComponent<Text>();
-        actorComponent.text_IdAndDataId   = textComponent;
         rendererTransform                 = new GameObject("Renderer").transform;
         actorComponent.Renderer           = rendererTransform;
         unityComponent                    = Substitute.For<IUnityComponent>();
@@ -41,15 +40,30 @@ public class ActorComponentTests
 #region Test Methods
 
     [Test]
-    public void Should_Succeed_When_Call_SetText()
+    public void Should_Succeed_When_Call_SetText_ForIdAndDataId()
     {
         // arrange
         var displayText = "fdsjhjkfh";
+        actorComponent.text_IdAndDataId = textComponent;
         // act
         actorComponent.SetText(displayText);
         // assert
         Assert.NotNull(actorComponent.text_IdAndDataId);
         Assert.AreEqual(displayText , actorComponent.text_IdAndDataId.text);
+    }
+
+    [Test]
+    public void Should_Succeed_When_Call_SetText_ForHealth()
+    {
+        var health = 123;
+        actorComponent.text_Health = textComponent;
+        // arrange
+        var displayText = $"Health:{health}";
+        // act
+        actorComponent.SetHealth(displayText);
+        // assert
+        Assert.NotNull(actorComponent.text_Health);
+        Assert.AreEqual(displayText , actorComponent.text_Health.text);
     }
 
     [Test]

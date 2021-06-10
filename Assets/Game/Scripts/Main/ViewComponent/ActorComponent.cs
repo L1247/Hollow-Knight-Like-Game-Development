@@ -25,6 +25,9 @@ namespace Main.ViewComponent
         public int JumpForce;
 
         [Required]
+        public Text text_Health;
+
+        [Required]
         public Text text_IdAndDataId;
 
         [Required]
@@ -116,6 +119,11 @@ namespace Main.ViewComponent
             if (directionValue == 0) x = 1;
             if (directionValue == 1) x = -1;
             Renderer.transform.localScale = new Vector3(x , 1 , 1);
+        }
+
+        public void SetHealth(string displayText)
+        {
+            text_Health.text = displayText;
         }
 
         public void SetIsMoving(bool isMoving)
