@@ -14,6 +14,9 @@ namespace Main.Controller
         [Inject]
         private CreateActorUseCase createActorUseCase;
 
+        [Inject]
+        private DealDamageUseCase dealDamageUseCase;
+
     #endregion
 
     #region Public Methods
@@ -31,6 +34,14 @@ namespace Main.Controller
             var input = new CreateActorInput();
             input.ActorDataId = actorDataId;
             createActorUseCase.Execute(input);
+        }
+
+        public void DealDamage(string actorId , int damage)
+        {
+            var input = new DealDamageInput();
+            input.ActorId = actorId;
+            input.Damage  = damage;
+            dealDamageUseCase.Execute(input);
         }
 
     #endregion

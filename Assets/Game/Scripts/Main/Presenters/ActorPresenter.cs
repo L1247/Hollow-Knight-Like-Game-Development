@@ -30,12 +30,12 @@ namespace Main.Presenters
         private string CacheActorId;
 
         [SerializeField]
-        private Button button_ChangeDirection;
-
+        [Required]
+        private Button button_CreateActor_Player;
 
         [SerializeField]
         [Required]
-        private Button button_CreateActor_Player;
+        private Button button_DealDamage;
 
     #endregion
 
@@ -44,11 +44,7 @@ namespace Main.Presenters
         private void Start()
         {
             ButtonBinding(button_CreateActor_Player , () => actorContoller.CreateActor(actorDatas[3].ActorDataId));
-            ButtonBinding(button_ChangeDirection , () =>
-            {
-                direction = direction == 0 ? 1 : 0;
-                actorContoller.ChangeDirection(CacheActorId , direction);
-            });
+            ButtonBinding(button_DealDamage ,         () => actorContoller.DealDamage(CacheActorId , 10));
         }
 
     #endregion
@@ -77,6 +73,12 @@ namespace Main.Presenters
                 var actorComponent = actorMapper.GetActorComponent(CacheActorId);
                 actorComponent.Jump();
             }
+        }
+
+        public void OnDamageDealt(string actorId , int currentHealth)
+        {
+            var actorComponent = actorMapper.GetActorComponent(actorId);
+            actorComponent.SetHealthText(currentHealth);
         }
 
         public void OnDirectionChanged(string actorId , int direction)

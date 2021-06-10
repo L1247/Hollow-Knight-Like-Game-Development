@@ -121,8 +121,9 @@ namespace Main.ViewComponent
             Renderer.transform.localScale = new Vector3(x , 1 , 1);
         }
 
-        public void SetHealth(string displayText)
+        public void SetHealthText(int health)
         {
+            var displayText = $"Health:{health}";
             text_Health.text = displayText;
         }
 

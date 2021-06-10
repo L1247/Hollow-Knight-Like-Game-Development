@@ -60,7 +60,7 @@ public class ActorComponentTests
         // arrange
         var displayText = $"Health:{health}";
         // act
-        actorComponent.SetHealth(displayText);
+        actorComponent.SetHealthText(health);
         // assert
         Assert.NotNull(actorComponent.text_Health);
         Assert.AreEqual(displayText , actorComponent.text_Health.text);

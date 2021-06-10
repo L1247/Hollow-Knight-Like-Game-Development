@@ -32,10 +32,9 @@ namespace Main.Presenters
             var actorComponent   = actorInstance.GetComponent<ActorComponent>();
             var text_IdAndDataId = $"{actorDataId} - {actorId.Substring(actorId.Length - 2 , 2)}";
             var health           = actorData.Health;
-            var text_Health      = $"Health:{health}";
             actorComponent.SetText(text_IdAndDataId);
             actorComponent.SetDirection(direction);
-            actorComponent.SetHealth(text_Health);
+            actorComponent.SetHealthText(health);
             var actorViewData = new ActorViewData(actorId , actorDataId , actorComponent);
             actorViewDatas.Add(actorViewData);
         }

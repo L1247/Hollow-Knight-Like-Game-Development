@@ -40,6 +40,7 @@ namespace Main.Application
             // UseCases
             Container.Bind<CreateActorUseCase>().AsSingle();
             Container.Bind<ChangeDirectionUseCase>().AsSingle();
+            Container.Bind<DealDamageUseCase>().AsSingle();
             // View
             Container.Bind<ActorMapper>().AsSingle();
             // Input
