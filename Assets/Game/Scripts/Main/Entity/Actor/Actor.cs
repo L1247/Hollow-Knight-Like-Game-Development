@@ -36,6 +36,7 @@ namespace Entity
         public void DealDamage(int damage)
         {
             Health -= damage;
+            AddDomainEvent(new DamageDealt(GetId() , Health));
         }
 
     #endregion
