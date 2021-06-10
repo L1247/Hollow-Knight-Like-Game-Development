@@ -44,8 +44,7 @@ namespace Main.Presenters
         private void Start()
         {
             ButtonBinding(button_CreateActor_Player , () => actorContoller.CreateActor(actorDatas[3].ActorDataId));
-            ButtonBinding(button_DealDamage ,         () => actorContoller.DealDamage(CacheActorId , 10));
-        }
+            ButtonBinding(button_DealDamage ,         () => actorContoller.DealDamage(CacheActorId , 10)); }
 
     #endregion
 
