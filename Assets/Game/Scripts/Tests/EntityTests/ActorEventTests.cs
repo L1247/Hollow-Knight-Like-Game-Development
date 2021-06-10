@@ -2,7 +2,7 @@ using Entity.Builder;
 using Entity.Events;
 using NUnit.Framework;
 
-public class ActorTests
+public class ActorEventTests
 {
 #region Test Methods
 
@@ -37,6 +37,24 @@ public class ActorTests
         var directionChanged = domainEvents[1] as DirectionChanged;
         Assert.AreEqual(actorId ,   directionChanged.ActorId);
         Assert.AreEqual(direction , directionChanged.Direction);
+    }
+
+    [Test]
+    public void Should_Publish_Damage_Dealt_When_Deal_Damage()
+    {
+        var actorId = "1234";
+        var health  = 99;
+        var damage  = 87;
+        var actor = ActorBuilder.NewInstance()
+                                .SetActorId(actorId)
+                                .SetHealth(health)
+                                .Build();
+        actor.DealDamage(damage);
+        var domainEvents = actor.GetDomainEvents();
+        Assert.AreEqual(2 , domainEvents.Count);
+        var damageDealt = domainEvents[1] as DamageDealt;
+        Assert.AreEqual(actorId ,         damageDealt.ActorId);
+        Assert.AreEqual(health - damage , damageDealt.CurrentHealth);
     }
 
 #endregion

@@ -13,7 +13,7 @@ public class ChangeDirectionUseCaseTest : DDDUnitTestFixture
     public void Should_Succeed_When_ChangeDirection()
     {
         var actorRepository        = new ActorRepository();
-        var changeDirectionUseCase = new ChangeDirectionUseCase(_domainEventBus , actorRepository);
+        var changeDirectionUseCase = new ChangeDirectionUseCase(domainEventBus , actorRepository);
         var input                  = new ChangeDirectionInput();
 
         var actorId   = Guid.NewGuid().ToString();

@@ -7,6 +7,8 @@ namespace Entity.Builder
     {
     #region Private Variables
 
+        private int health;
+
         private string actorDataId;
         private string actorId;
 
@@ -17,7 +19,7 @@ namespace Entity.Builder
         public override Actor Build()
         {
             actorId = actorId == null ? Guid.NewGuid().ToString() : actorId;
-            var actor = new Actor(actorId , actorDataId);
+            var actor = new Actor(actorId , actorDataId , health);
             return actor;
         }
 
@@ -30,6 +32,12 @@ namespace Entity.Builder
         public ActorBuilder SetActorId(string actorId)
         {
             this.actorId = actorId;
+            return this;
+        }
+
+        public ActorBuilder SetHealth(int health)
+        {
+            this.health = health;
             return this;
         }
 

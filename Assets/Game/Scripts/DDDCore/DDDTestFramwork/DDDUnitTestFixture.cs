@@ -7,7 +7,7 @@ namespace MainTests.ExtenjectTestFramwork
     {
     #region Protected Variables
 
-        protected DomainEventBus _domainEventBus;
+        protected DomainEventBus domainEventBus;
 
     #endregion
 
@@ -19,7 +19,7 @@ namespace MainTests.ExtenjectTestFramwork
             SignalBusInstaller.Install(Container);
             Container.DeclareSignal<DomainEvent>();
             Container.Bind<DomainEventBus>().AsSingle();
-            _domainEventBus = Container.Resolve<DomainEventBus>();
+            domainEventBus = Container.Resolve<DomainEventBus>();
         }
 
     #endregion

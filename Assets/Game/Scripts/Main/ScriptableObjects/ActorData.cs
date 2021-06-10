@@ -8,8 +8,8 @@ namespace Main.ScriptableObjects
     #region Public Variables
 
         public GameObject ActorPrefab;
-
-        public string ActorDataId;
+        public int        Health = 100;
+        public string     ActorDataId;
 
     #endregion
     }

@@ -44,7 +44,7 @@ namespace Utilities.Contract
             Require(obj != null , $"{annotation} cannot be null");
         }
 
-        public static void RequireString(string str , string annotation)
+        public static void RequireString(string str , string annotation = "")
         {
             Require(string.IsNullOrEmpty(str) == false , $"{annotation} can not be empty");
         }
