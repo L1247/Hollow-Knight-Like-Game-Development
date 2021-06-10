@@ -29,10 +29,13 @@ namespace Main.Presenters
             var actorPrefab = actorData.ActorPrefab;
             var actorInstance =
                 container.InstantiatePrefab(actorPrefab , Random.insideUnitCircle * 5 , Quaternion.identity , null);
-            var actorComponent = actorInstance.GetComponent<ActorComponent>();
-            var text           = $"{actorDataId} - {actorId.Substring(actorId.Length - 2 , 2)}";
-            actorComponent.SetText(text);
+            var actorComponent   = actorInstance.GetComponent<ActorComponent>();
+            var text_IdAndDataId = $"{actorDataId} - {actorId.Substring(actorId.Length - 2 , 2)}";
+            var health           = actorData.Health;
+            var text_Health      = $"Health:{health}";
+            actorComponent.SetText(text_IdAndDataId);
             actorComponent.SetDirection(direction);
+            actorComponent.SetHealth(text_Health);
             var actorViewData = new ActorViewData(actorId , actorDataId , actorComponent);
             actorViewDatas.Add(actorViewData);
         }
