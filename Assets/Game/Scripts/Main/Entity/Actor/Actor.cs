@@ -7,9 +7,8 @@ namespace Entity
     {
     #region Public Variables
 
-        public int Direction { get; private set; }
-        public int Health    { get; }
-
+        public int    Direction   { get; private set; }
+        public int    Health      { get; private set; }
         public string ActorDataId { get; }
 
     #endregion
@@ -32,6 +31,11 @@ namespace Entity
         {
             Direction = direction;
             AddDomainEvent(new DirectionChanged(GetId() , Direction));
+        }
+
+        public void DealDamage(int damage)
+        {
+            Health -= damage;
         }
 
     #endregion

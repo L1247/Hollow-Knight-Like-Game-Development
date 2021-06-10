@@ -8,6 +8,8 @@ namespace Main.UseCases.Actor.Edit
     {
     #region Public Variables
 
+        public int Damage;
+
         public string ActorId;
 
     #endregion
@@ -24,7 +26,12 @@ namespace Main.UseCases.Actor.Edit
 
     #region Public Methods
 
-        public override void Execute(DealDamageInput input) { }
+        public override void Execute(DealDamageInput input)
+        {
+            var actor = repository.FindById(input.ActorId);
+            actor.DealDamage(input.Damage);
+            domainEventBus.PostAll(actor);
+        }
 
     #endregion
     }
