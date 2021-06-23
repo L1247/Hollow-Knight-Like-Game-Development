@@ -104,6 +104,11 @@ namespace Main.ViewComponent
             unityComponent.AddForce(Vector2.up * JumpForce);
         }
 
+        public void MakeDie()
+        {
+            Debug.Log("makeDie");
+        }
+
         public void MoveCharacter()
         {
             var movement = GetMovement();

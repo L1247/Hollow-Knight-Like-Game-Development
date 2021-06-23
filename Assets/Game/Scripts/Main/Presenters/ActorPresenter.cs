@@ -37,6 +37,10 @@ namespace Main.Presenters
         [Required]
         private Button button_DealDamage;
 
+        [SerializeField]
+        [Required]
+        private Button button_MakeActorDie;
+
     #endregion
 
     #region Unity events
@@ -44,7 +48,9 @@ namespace Main.Presenters
         private void Start()
         {
             ButtonBinding(button_CreateActor_Player , () => actorContoller.CreateActor(actorDatas[3].ActorDataId));
-            ButtonBinding(button_DealDamage ,         () => actorContoller.DealDamage(CacheActorId , 10)); }
+            ButtonBinding(button_DealDamage ,         () => actorContoller.DealDamage(CacheActorId , 10));
+            ButtonBinding(button_MakeActorDie ,       () => actorContoller.MakeActorDie(CacheActorId));
+        }
 
     #endregion
 
@@ -54,6 +60,12 @@ namespace Main.Presenters
         {
             CacheActorId = actorId;
             actorMapper.CreateActorViewData(actorId , actorDataId , direction);
+        }
+
+        public void OnActorDead(string actorId)
+        {
+            var actorComponent = actorMapper.GetActorComponent(actorId);
+            actorComponent.MakeDie();
         }
 
         public void OnButtonDownAttack(ButtonDownAttack buttonDownAttack)
