@@ -44,6 +44,7 @@ namespace Entity
         public void MakeDie()
         {
             IsDead = true;
+            AddDomainEvent(new ActorDead(GetId()));
         }
 
     #endregion
