@@ -7,7 +7,7 @@ namespace Entity
     {
     #region Public Variables
 
-        public bool IsDead { get; }
+        public bool IsDead { get; private set; }
 
         public int    Direction   { get; private set; }
         public int    Health      { get; private set; }
@@ -39,6 +39,11 @@ namespace Entity
         {
             Health -= damage;
             AddDomainEvent(new DamageDealt(GetId() , Health));
+        }
+
+        public void MakeDie()
+        {
+            IsDead = true;
         }
 
     #endregion
