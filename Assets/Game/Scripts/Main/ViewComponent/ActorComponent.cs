@@ -104,6 +104,13 @@ namespace Main.ViewComponent
             unityComponent.AddForce(Vector2.up * JumpForce);
         }
 
+        public void MakeDie()
+        {
+            unityComponent.PlayAnimation("Die");
+            if (text_Health != null) text_Health.enabled           = false;
+            if (text_IdAndDataId != null) text_IdAndDataId.enabled = false;
+        }
+
         public void MoveCharacter()
         {
             var movement = GetMovement();

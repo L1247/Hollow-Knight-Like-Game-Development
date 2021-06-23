@@ -15,10 +15,19 @@ namespace Main.EventHandler.View
         {
             var signalBus = eventStore.signalBus;
             // domain event
-            Register<ActorCreated>(created => { actorPresenter.OnActorCreated(created.ActorId , created.ActorDataId , created.Direction); });
-            Register<DirectionChanged>(changed => { actorPresenter.OnDirectionChanged(changed.ActorId , changed.Direction); });
-            Register<DamageDealt>(damageDealt => { actorPresenter.OnDamageDealt(damageDealt.ActorId , damageDealt.CurrentHealth); });
-
+            Register<ActorCreated>(created =>
+            {
+                actorPresenter.OnActorCreated(created.ActorId , created.ActorDataId , created.Direction);
+            });
+            Register<DirectionChanged>(changed =>
+            {
+                actorPresenter.OnDirectionChanged(changed.ActorId , changed.Direction);
+            });
+            Register<DamageDealt>(damageDealt =>
+            {
+                actorPresenter.OnDamageDealt(damageDealt.ActorId , damageDealt.CurrentHealth);
+            });
+            Register<ActorDead>(dead => { actorPresenter.OnActorDead(dead.ActorId); });
 
             // some view event
             signalBus.Subscribe<InputHorizontal>(actorPresenter.OnHorizontalChanged);

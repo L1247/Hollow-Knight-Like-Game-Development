@@ -143,6 +143,35 @@ public class ActorComponentTests
     }
 
     [Test]
+    public void Should_Call_PlayAnimation_Die_When_Call_MakeDie()
+    {
+        // act
+        actorComponent.MakeDie();
+        // assert
+        unityComponent.Received(1).PlayAnimation("Die");
+    }
+
+    [Test]
+    public void Should_Hide_Id_Health_Text_When_Call_MakeDie()
+    {
+        // arrange
+        var textComponentForHealth = new GameObject().AddComponent<Text>();
+        Assert.NotNull(textComponentForHealth);
+        actorComponent.text_IdAndDataId = textComponent;
+        actorComponent.text_Health      = textComponentForHealth;
+        Assert.NotNull(actorComponent.text_Health);
+        Assert.NotNull(actorComponent.text_IdAndDataId);
+        Assert.AreEqual(true , textComponent.enabled);
+        Assert.AreEqual(true , textComponentForHealth.enabled);
+        // act
+        actorComponent.MakeDie();
+        // assert
+        Assert.AreEqual(false , textComponent.enabled);
+        Assert.AreEqual(false , textComponentForHealth.enabled);
+    }
+
+
+    [Test]
     public void Should_Call_MoveCharacter_When_Call_MoveCharacter()
     {
         // act

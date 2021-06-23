@@ -57,5 +57,19 @@ public class ActorEventTests
         Assert.AreEqual(health - damage , damageDealt.CurrentHealth);
     }
 
+    [Test]
+    public void Should_Publish_Actor_Dead_When_Make_Die()
+    {
+        var actorId = "1234";
+        var actor = ActorBuilder.NewInstance()
+                                .SetActorId(actorId)
+                                .Build();
+        actor.MakeDie();
+        var domainEvents = actor.GetDomainEvents();
+        Assert.AreEqual(2 , domainEvents.Count);
+        var actorDead = domainEvents[1] as ActorDead;
+        Assert.AreEqual(actorId , actorDead.ActorId);
+    }
+
 #endregion
 }
