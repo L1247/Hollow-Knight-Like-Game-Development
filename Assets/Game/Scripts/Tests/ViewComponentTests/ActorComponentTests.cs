@@ -143,6 +143,16 @@ public class ActorComponentTests
     }
 
     [Test]
+    public void Should_Call_PlayAnimation_Die_When_Call_MakeDie()
+    {
+        // act
+        actorComponent.MakeDie();
+        // assert
+        unityComponent.Received(1).PlayAnimation("Die");
+    }
+
+
+    [Test]
     public void Should_Call_MoveCharacter_When_Call_MoveCharacter()
     {
         // act

@@ -106,7 +106,7 @@ namespace Main.ViewComponent
 
         public void MakeDie()
         {
-            Debug.Log("makeDie");
+            unityComponent.PlayAnimation("Die");
         }
 
         public void MoveCharacter()
