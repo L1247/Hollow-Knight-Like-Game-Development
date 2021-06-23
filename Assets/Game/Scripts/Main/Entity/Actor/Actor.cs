@@ -7,6 +7,8 @@ namespace Entity
     {
     #region Public Variables
 
+        public bool IsDead { get; }
+
         public int    Direction   { get; private set; }
         public int    Health      { get; private set; }
         public string ActorDataId { get; }

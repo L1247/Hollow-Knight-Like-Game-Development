@@ -36,6 +36,7 @@ public class CreateActorUseCaseTests : DDDUnitTestFixture
         // 角色預設面右
         Assert.AreEqual(1 ,      actor.Direction);
         Assert.AreEqual(health , actor.Health);
+        Assert.AreEqual(false ,  actor.IsDead);
     }
 
 #endregion
