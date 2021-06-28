@@ -33,6 +33,30 @@ namespace Main.Decoupling
     #endregion
     }
 
+    public class FakeDataBaseService : IDataBaseService
+    {
+    #region Public Methods
+
+        public ActorData GetActorData(int actorDataId)
+        {
+            if (actorDataId == 1)
+            {
+                var actorData = new ActorData(100 , 10);
+                return actorData;
+            }
+
+            if (actorDataId == 2)
+            {
+                var actorData = new ActorData(200 , 50);
+                return actorData;
+            }
+
+            return null;
+        }
+
+    #endregion
+    }
+
     public class DataBaseServer
     {
     #region Public Methods
