@@ -1,4 +1,5 @@
 using UnityEngine.Assertions;
+using Zenject;
 
 namespace Main.Decoupling
 {
@@ -12,6 +13,7 @@ namespace Main.Decoupling
 
     #region Constructor
 
+        [Inject]
         public ActorSpawner(IDataBaseService dataBaseService)
         {
             this.dataBaseService = dataBaseService;

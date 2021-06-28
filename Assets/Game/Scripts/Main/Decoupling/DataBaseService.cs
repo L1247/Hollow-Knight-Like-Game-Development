@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 namespace Main.Decoupling
 {
@@ -92,6 +93,7 @@ namespace Main.Decoupling
 
     #region Constructor
 
+        [Inject]
         public DataBaseService(DataBaseServer dataBaseServer)
         {
             this.dataBaseServer = dataBaseServer;
@@ -104,7 +106,17 @@ namespace Main.Decoupling
         public ActorData GetActorData(int actorDataId)
         {
             var jsonString = dataBaseServer.GetActorData(actorDataId);
-            var actorData  = JsonUtility.FromJson<ActorData>(jsonString);
+            var actorData  = GetActorData(jsonString);
+            return actorData;
+        }
+
+    #endregion
+
+    #region Private Methods
+
+        private ActorData GetActorData(string jsonString)
+        {
+            var actorData = JsonUtility.FromJson<ActorData>(jsonString);
             return actorData;
         }
 
