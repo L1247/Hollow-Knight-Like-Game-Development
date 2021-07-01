@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Main.ScriptableObjects;
+using Main.System;
 using Main.ViewComponent;
 using UnityEngine;
 using Utilities.Contract;
@@ -15,9 +16,10 @@ namespace Main.Presenters
         private ActorDataOverView actorDataOverView;
 
         [Inject]
-        private DiContainer container;
-
         private readonly List<ActorViewData> actorViewDatas = new List<ActorViewData>();
+
+        [Inject]
+        private IActorSpawner actorSpawner;
 
     #endregion
 
@@ -28,7 +30,7 @@ namespace Main.Presenters
             var actorData   = actorDataOverView.FindActorData(actorDataId);
             var actorPrefab = actorData.ActorPrefab;
             var actorInstance =
-                container.InstantiatePrefab(actorPrefab , Random.insideUnitCircle * 5 , Quaternion.identity , null);
+                actorSpawner.Spawn(actorPrefab , Random.insideUnitCircle * 5 , Quaternion.identity , null);
             var actorComponent   = actorInstance.GetComponent<ActorComponent>();
             var text_IdAndDataId = $"{actorDataId} - {actorId.Substring(actorId.Length - 2 , 2)}";
             var health           = actorData.Health;
