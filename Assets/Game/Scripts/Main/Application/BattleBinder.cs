@@ -49,8 +49,6 @@ namespace Main.Application
             Container.Bind<ActorMapper>().AsSingle();
             // Input
             Container.BindInterfacesAndSelfTo<InputManager>().AsSingle();
-            // Flow
-            Container.BindInterfacesAndSelfTo<BattleFlow>().AsSingle();
             // NetworkManager
             Container.InstantiateComponentOnNewGameObject<NetworkingManager>();
         }
@@ -92,13 +90,6 @@ namespace Main.Application
         {
             // joined a room successfully, JoinOrCreateRoom leads here on success
             Debug.Log($"OnJoinedRoom");
-        }
-    }
-
-    public class BattleFlow : IInitializable
-    {
-        public void Initialize()
-        {
         }
     }
 }
