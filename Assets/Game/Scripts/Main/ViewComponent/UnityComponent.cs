@@ -16,6 +16,7 @@ namespace Main.ViewComponent
         private readonly Rigidbody2D rigi2d;
         private          Transform   groundTransform;
         private readonly Transform   transform;
+        private          string      currentAnimationName;
 
     #endregion
 
@@ -84,10 +85,11 @@ namespace Main.ViewComponent
             Contract.RequireNotNull(animator , "Animator");
             var currentClip     = animator.GetCurrentAnimatorClipInfo(0)[0].clip;
             var currentClipName = currentClip.name;
+            currentAnimationName = animationName;
             if (currentClipName == animationName)
                 return;
 
-            animator.Play(animationName);
+            animator.Play(currentAnimationName);
             if (animationEndCallBack != null)
             {
                 var attackClipLength = currentClip.length
@@ -95,6 +97,12 @@ namespace Main.ViewComponent
                 Observable.Timer(TimeSpan.FromSeconds(attackClipLength))
                           .Subscribe(_ => animationEndCallBack.Invoke());
             }
+        }
+
+
+        public string GetCurrentAnimation()
+        {
+            return currentAnimationName;
         }
 
     #endregion

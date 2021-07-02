@@ -37,6 +37,7 @@ namespace Main.Presenters
             actorComponent.SetText(text_IdAndDataId);
             actorComponent.SetDirection(direction);
             actorComponent.SetHealthText(health);
+            actorComponent.SetRigid2DSimulator(true);
             var actorViewData = new ActorViewData(actorId , actorDataId , actorComponent);
             actorViewDatas.Add(actorViewData);
         }

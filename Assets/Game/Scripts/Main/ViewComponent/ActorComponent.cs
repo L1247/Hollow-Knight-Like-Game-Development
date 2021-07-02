@@ -54,6 +54,8 @@ namespace Main.ViewComponent
         [Required]
         private float radius = 0.1f;
 
+        private Rigidbody2D rigi2d;
+
     #endregion
 
     #region Events
@@ -118,6 +120,11 @@ namespace Main.ViewComponent
             unityComponent.PlayAnimation("Run");
         }
 
+        public string GetCurrentAnimation()
+        {
+            return unityComponent.GetCurrentAnimation();
+        }
+
         public void SetDirection(int directionValue)
         {
             currentDirectionValue = directionValue;
@@ -161,7 +168,7 @@ namespace Main.ViewComponent
 
         private void Awake()
         {
-            var rigi2d = GetComponent<Rigidbody2D>();
+            rigi2d                        = GetComponent<Rigidbody2D>();
             unityComponent                = new UnityComponent(animator , rigi2d , transform , radius);
             characterCondition            = new CharacterCondition();
             characterCondition.IsOnGround = true;
@@ -172,5 +179,15 @@ namespace Main.ViewComponent
         }
 
     #endregion
+
+        public void PlayAnimation(string animationName)
+        {
+            unityComponent.PlayAnimation(animationName);
+        }
+
+        public void SetRigid2DSimulator(bool simulator)
+        {
+            rigi2d.simulated = true;
+        }
     }
 }

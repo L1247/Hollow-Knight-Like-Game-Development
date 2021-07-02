@@ -38,7 +38,6 @@ namespace Main.Systems
         {
             // joined a room successfully, JoinOrCreateRoom leads here on success
             Debug.Log($"OnJoinedRoom");
-            // PhotonNetwork.Instantiate("ActorPrefab" , Vector3.zero , Quaternion.identity);
         }
     }
 }

@@ -17,5 +17,7 @@ namespace Main.ViewComponent
         void PlayAnimation(string animationName , Action animationEndCallBack = null);
 
     #endregion
+
+        string GetCurrentAnimation();
     }
 }
