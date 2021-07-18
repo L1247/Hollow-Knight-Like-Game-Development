@@ -3,7 +3,7 @@ using DDDCore.Adapter.Presenter.Unity;
 using Main.Controller;
 using Main.Input.Event;
 using Main.Input.Events;
-using Main.ScriptableObjects;
+using Main.GameDataStructure;
 using Main.ViewComponent.Events;
 using Sirenix.OdinInspector;
 using UnityEngine;

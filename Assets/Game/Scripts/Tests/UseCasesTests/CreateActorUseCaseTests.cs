@@ -1,4 +1,4 @@
-using Main.ScriptableObjects;
+using Main.GameDataStructure;
 using Main.UseCases.Actor.Create;
 using Main.UseCases.Repository;
 using MainTests.ExtenjectTestFramwork;
@@ -14,11 +14,10 @@ public class CreateActorUseCaseTests : DDDUnitTestFixture
     {
         var actorId       = "1234";
         var actorDataId   = "Pokemon";
-        var iSoRepository = Substitute.For<iSoRepository>();
-        // ReSharper disable once Unity.IncorrectScriptableObjectInstantiation
+        var iSoRepository = Substitute.For<iDataRepository>();
         var health    = 123;
-        var actorData = new ActorData { Health = health };
-        iSoRepository.GetActorData(actorDataId).Returns(actorData);
+        var actorDomainData = new ActorDomainData(){Health =  health};
+        iSoRepository.GetActorDomainData(actorDataId).Returns(actorDomainData);
 
         var actorRepository    = new ActorRepository();
         var createActorUseCase = new CreateActorUseCase(domainEventBus , actorRepository , iSoRepository);

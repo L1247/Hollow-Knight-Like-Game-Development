@@ -1,5 +1,6 @@
 using DDDCore;
 using DDDCore.Model;
+using Main.GameDataStructure;
 using Main.Controller;
 using Main.EventHandler.View;
 using Main.Input;
@@ -36,7 +37,7 @@ namespace Main.Application
             Container.Bind<ActorContoller>().AsSingle();
             // Repository
             Container.Bind<ActorRepository>().AsSingle();
-            Container.Bind<iSoRepository>().To<SoRepository>().AsSingle();
+            Container.Bind<iDataRepository>().To<DataRepository>().AsSingle();
             // UseCases
             Container.Bind<CreateActorUseCase>().AsSingle();
             Container.Bind<ChangeDirectionUseCase>().AsSingle();

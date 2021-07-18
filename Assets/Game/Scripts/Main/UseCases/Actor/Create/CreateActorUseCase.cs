@@ -22,16 +22,16 @@ namespace Main.UseCases.Actor.Create
     {
     #region Private Variables
 
-        private readonly iSoRepository iSoRepository;
+        private readonly iDataRepository iDataRepository;
 
     #endregion
 
     #region Constructor
 
-        public CreateActorUseCase(DomainEventBus domainEventBus , ActorRepository repository , iSoRepository iSoRepository) : base(
+        public CreateActorUseCase(DomainEventBus domainEventBus , ActorRepository repository , iDataRepository iDataRepository) : base(
             domainEventBus , repository)
         {
-            this.iSoRepository = iSoRepository;
+            this.iDataRepository = iDataRepository;
         }
 
     #endregion
@@ -42,10 +42,10 @@ namespace Main.UseCases.Actor.Create
         {
             var actorDataId = input.ActorDataId;
             Contract.RequireString(actorDataId , "actorDataId");
-            var actorData = iSoRepository.GetActorData(actorDataId);
-            Contract.RequireNotNull(actorData , "actorData");
+            var actorDomainData = iDataRepository.GetActorDomainData(actorDataId);
+            Contract.RequireNotNull(actorDomainData , "actorDomainData");
 
-            var health = actorData.Health;
+            var health = actorDomainData.Health;
             var actor = ActorBuilder.NewInstance()
                                     .SetActorId(input.ActorId)
                                     .SetActorDataId(actorDataId)
