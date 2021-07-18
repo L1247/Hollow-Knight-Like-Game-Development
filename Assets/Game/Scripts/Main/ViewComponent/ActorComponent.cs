@@ -86,6 +86,7 @@ namespace Main.ViewComponent
 
         public void Attack()
         {
+            if (characterCondition.IsDead) return;
             characterCondition.IsAttacking = true;
             unityComponent.PlayAnimation("Attack" , OnAttackEnd);
         }
@@ -106,6 +107,7 @@ namespace Main.ViewComponent
 
         public void MakeDie()
         {
+            characterCondition.IsDead = true;
             unityComponent.PlayAnimation("Die");
             if (text_Health != null) text_Health.enabled           = false;
             if (text_IdAndDataId != null) text_IdAndDataId.enabled = false;
@@ -136,6 +138,7 @@ namespace Main.ViewComponent
 
         public void SetIsMoving(bool isMoving)
         {
+            if (characterCondition.IsDead) return;
             characterCondition.IsMoving = isMoving;
             var animationName = isMoving ? "Run" : "Idle";
             // 攻擊中不可以切換移動動畫

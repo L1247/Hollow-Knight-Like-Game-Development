@@ -4,9 +4,10 @@ namespace Main.ViewComponent
     {
     #region Public Variables
 
-        bool        IsAttacking { get; set; }
-        public bool IsMoving    { get; set; }
-        public bool IsOnGround  { get; set; }
+        bool IsAttacking { get; set; }
+        bool IsMoving    { get; set; }
+        bool IsOnGround  { get; set; }
+        bool IsDead      { get; set; }
 
     #endregion
 
