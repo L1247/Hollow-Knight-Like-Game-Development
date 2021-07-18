@@ -86,6 +86,7 @@ namespace Main.ViewComponent
 
         public void Attack()
         {
+            if (characterCondition.IsDead) return;
             characterCondition.IsAttacking = true;
             unityComponent.PlayAnimation("Attack" , OnAttackEnd);
         }

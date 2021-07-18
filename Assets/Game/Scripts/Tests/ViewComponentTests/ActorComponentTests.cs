@@ -212,11 +212,19 @@ public class ActorComponentTests
     }
 
     [Test]
-    public void Should_Not_Call_Play_Animation_When_Actor_IsDead()
+    public void Should_Not_Call_Play_Animation_When_Call_SetIsMoving_With_Actor_IsDead()
     {
         characterCondition.IsDead = true;
         actorComponent.SetIsMoving(false);
-        unityComponent.DidNotReceiveWithAnyArgs().PlayAnimation("Idle");
+        unityComponent.DidNotReceiveWithAnyArgs().PlayAnimation("");
+    }
+
+    [Test]
+    public void Should_Not_Call_Play_Animation_When_Call_Attack_With_Actor_IsDead()
+    {
+        characterCondition.IsDead = true;
+        actorComponent.Attack();
+        unityComponent.DidNotReceiveWithAnyArgs().PlayAnimation("");
     }
 
 #endregion
