@@ -137,6 +137,7 @@ namespace Main.ViewComponent
 
         public void SetIsMoving(bool isMoving)
         {
+            if (characterCondition.IsDead) return;
             characterCondition.IsMoving = isMoving;
             var animationName = isMoving ? "Run" : "Idle";
             // 攻擊中不可以切換移動動畫

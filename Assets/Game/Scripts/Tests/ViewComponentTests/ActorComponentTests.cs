@@ -208,7 +208,15 @@ public class ActorComponentTests
     public void Should_Set_Condition_IsDead_When_Call_MakeDie()
     {
         actorComponent.MakeDie();
-        Assert.AreEqual( true , characterCondition.IsDead );
+        Assert.AreEqual(true , characterCondition.IsDead);
+    }
+
+    [Test]
+    public void Should_Not_Call_Play_Animation_When_Actor_IsDead()
+    {
+        characterCondition.IsDead = true;
+        actorComponent.SetIsMoving(false);
+        unityComponent.DidNotReceiveWithAnyArgs().PlayAnimation("Idle");
     }
 
 #endregion
