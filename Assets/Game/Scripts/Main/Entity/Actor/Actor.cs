@@ -7,8 +7,7 @@ namespace Entity
     {
     #region Public Variables
 
-        public bool IsDead { get; private set; }
-
+        public bool   IsDead      { get; private set; }
         public int    Direction   { get; private set; }
         public int    Health      { get; private set; }
         public string ActorDataId { get; }
@@ -31,6 +30,7 @@ namespace Entity
 
         public void ChangeDirection(int direction)
         {
+            if (IsDead) return;
             Direction = direction;
             AddDomainEvent(new DirectionChanged(GetId() , Direction));
         }

@@ -40,6 +40,22 @@ public class ActorEventTests
     }
 
     [Test]
+    public void Should_Not_Publish_Direction_Changed_When_Change_Direction_With_IsDead_True()
+    {
+        var actorId   = "1234";
+        var direction = 123789127;
+        var actor = ActorBuilder.NewInstance()
+                                .SetActorId(actorId)
+                                .Build();
+        actor.MakeDie();
+        actor.ChangeDirection(direction);
+        Assert.AreEqual( true , actor.IsDead );
+        var domainEvents = actor.GetDomainEvents();
+        Assert.AreEqual(2 , domainEvents.Count);
+    }
+
+
+    [Test]
     public void Should_Publish_Damage_Dealt_When_Deal_Damage()
     {
         var actorId = "1234";
