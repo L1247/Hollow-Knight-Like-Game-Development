@@ -1,5 +1,6 @@
 using DDDCore;
 using DDDCore.Model;
+using Main.GameDataStructure;
 using Main.Controller;
 using Main.EventHandler.View;
 using Main.Input;

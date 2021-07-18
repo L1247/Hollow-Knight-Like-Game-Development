@@ -1,5 +1,3 @@
-using System;
-
 namespace Main.UseCases.Repository
 {
     public interface iDataRepository
@@ -8,11 +6,5 @@ namespace Main.UseCases.Repository
 
     #endregion
         ActorDomainData GetActorDomainData(string actorDataId);
-    }
-
-    [Serializable]
-    public class ActorDomainData
-    {
-        public int Health;
     }
 }

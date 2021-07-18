@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Utilities.Contract;
 
-namespace Main.ScriptableObjects
+namespace Main.GameDataStructure
 {
     [CreateAssetMenu(fileName = "ActorDataOverView" , menuName = "HK/CreateActorDataOverView" , order = 0)]
     public class ActorDataOverView : ScriptableObject
@@ -17,8 +17,9 @@ namespace Main.ScriptableObjects
 
         public ActorData FindActorData(string actorDataId)
         {
+            Contract.RequireString(actorDataId , "actorDataId");
             var actorData = ActorDatas.Find(data => data.ActorDataId == actorDataId);
-            Contract.RequireNotNull(actorData , $"actorDataId is {actorDataId} , actorData");
+            Contract.EnsureNotNull(actorData , $"actorDataId is {actorDataId} , actorData");
 
             return actorData;
         }

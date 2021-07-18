@@ -1,12 +1,16 @@
 {
-    "name": "UseCases",
+    "name": "RepositoryTests",
     "rootNamespace": "",
     "references": [
-        "GUID:b18a16a3dcf3d01428b99057a0d9b91e",
-        "GUID:503115bc6a4017d42bbbebc149159003",
-        "GUID:f22f718b9b174a74d89f976a69f9dd2a"
+        "UseCases",
+        "GameDataStructure",
+        "Utilities",
+        "Zenject-TestFramework",
+        "Zenject"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

@@ -1,4 +1,4 @@
-using Main.ScriptableObjects;
+using Main.GameDataStructure;
 using Main.UseCases.Actor.Create;
 using Main.UseCases.Repository;
 using MainTests.ExtenjectTestFramwork;

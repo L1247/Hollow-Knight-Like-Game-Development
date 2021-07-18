@@ -1,16 +1,17 @@
 {
-  "name": "GameDataStructure",
-  "rootNamespace": "",
-  "references": [
-    "GUID:f22f718b9b174a74d89f976a69f9dd2a"
-  ],
-  "includePlatforms": [],
-  "excludePlatforms": [],
-  "allowUnsafeCode": false,
-  "overrideReferences": false,
-  "precompiledReferences": [],
-  "autoReferenced": false,
-  "defineConstraints": [],
-  "versionDefines": [],
-  "noEngineReferences": false
+    "name": "GameDataStructure",
+    "rootNamespace": "",
+    "references": [
+        "GUID:f22f718b9b174a74d89f976a69f9dd2a",
+        "GUID:c60536e7e3547fd4daba9fab91875c0a"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
