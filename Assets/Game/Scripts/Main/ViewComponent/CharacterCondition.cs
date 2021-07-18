@@ -17,12 +17,16 @@ namespace Main.ViewComponent
         [ShowInInspector]
         public bool IsOnGround { get; set; }
 
+        [ShowInInspector]
+        public bool IsDead { get; set; }
+
     #endregion
 
     #region Public Methods
 
         public bool CanMoving()
         {
+            if (IsDead) return false;
             // 在地面，且攻擊時，不可移動 , 空中可以左右移動
             if (IsMoving)
             {

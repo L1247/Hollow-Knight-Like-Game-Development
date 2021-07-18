@@ -49,6 +49,16 @@ public class CharacterConditionTests
         Should_CanMoving_Response(false);
     }
 
+    [Test]
+    [TestCase(true,false)]
+    [TestCase(false , true)]
+    public void Should_Return_False_With_IsDead(bool isDead , bool exceptedCanMoving)
+    {
+        characterCondition.IsDead   = isDead;
+        characterCondition.IsMoving = true;
+        Should_CanMoving_Response(exceptedCanMoving);
+    }
+
 #endregion
 
 #region Private Methods
