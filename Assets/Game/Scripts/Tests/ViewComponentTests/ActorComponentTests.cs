@@ -204,6 +204,13 @@ public class ActorComponentTests
         Assert.AreEqual(exceptIsOnGround , characterCondition.IsOnGround);
     }
 
+    [Test]
+    public void Should_Set_Condition_IsDead_When_Call_MakeDie()
+    {
+        actorComponent.MakeDie();
+        Assert.AreEqual( true , characterCondition.IsDead );
+    }
+
 #endregion
 
 #region Private Methods

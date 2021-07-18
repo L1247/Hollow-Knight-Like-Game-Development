@@ -106,6 +106,7 @@ namespace Main.ViewComponent
 
         public void MakeDie()
         {
+            characterCondition.IsDead = true;
             unityComponent.PlayAnimation("Die");
             if (text_Health != null) text_Health.enabled           = false;
             if (text_IdAndDataId != null) text_IdAndDataId.enabled = false;
