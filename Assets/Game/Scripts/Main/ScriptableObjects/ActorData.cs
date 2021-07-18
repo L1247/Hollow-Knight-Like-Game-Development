@@ -7,7 +7,9 @@ namespace Main.ScriptableObjects
     {
     #region Public Variables
 
+        // view
         public GameObject ActorPrefab;
+        // domain
         public int        Health = 100;
         public string     ActorDataId;
 

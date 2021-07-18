@@ -3,7 +3,7 @@ using Zenject;
 
 namespace Main.UseCases.Repository
 {
-    public class SoRepository : iSoRepository
+    public class DataRepository : iDataRepository
     {
     #region Private Variables
 
@@ -14,9 +14,9 @@ namespace Main.UseCases.Repository
 
     #region Public Methods
 
-        public ActorData GetActorData(string actorDataId)
+        public ActorDomainData GetActorDomainData(string actorDataId)
         {
-            return actorDataOverView.FindActorData(actorDataId);
+            return null;
         }
 
     #endregion
