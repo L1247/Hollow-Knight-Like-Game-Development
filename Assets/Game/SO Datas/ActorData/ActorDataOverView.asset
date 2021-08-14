@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d970222e716b4c03989b553f0e6b0681, type: 3}
   m_Name: ActorDataOverView
   m_EditorClassIdentifier: 
-  ActorDatas:
+  actorDatas:
   - {fileID: 11400000, guid: 76ad1ec6de15fec43b880e91fd4117db, type: 2}
   - {fileID: 11400000, guid: c599dc05e6703884e9a5ea13d44798f6, type: 2}
   - {fileID: 11400000, guid: 845b74f9cfe36584686e18d18a887385, type: 2}
