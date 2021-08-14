@@ -13,6 +13,8 @@ namespace Main.EventHandler.View
 
         public ViewEventHandler(EventStore eventStore , ActorPresenter actorPresenter) : base(eventStore)
         {
+            handlerType = HandlerType.View;
+
             var signalBus = eventStore.signalBus;
             // domain event
             Register<ActorCreated>(created =>

@@ -10,7 +10,7 @@ namespace DDDCore
 
         private readonly EventStore _eventStore;
 
-        protected HandlerType _handlerType = HandlerType.Domain;
+        protected HandlerType handlerType = HandlerType.Domain;
 
         protected enum HandlerType
         {
@@ -24,7 +24,7 @@ namespace DDDCore
 
         protected void Register<T>(Action<T> callBackAction) where T : DomainEvent
         {
-            var isEarly = _handlerType == HandlerType.View;
+            var isEarly = handlerType == HandlerType.View;
             _eventStore.Register(callBackAction , isEarly);
         }
 
