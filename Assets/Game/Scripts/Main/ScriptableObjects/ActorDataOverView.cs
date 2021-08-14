@@ -1,6 +1,7 @@
 #region
 
 using System.Collections.Generic;
+using Main.DomainData;
 using UnityEngine;
 using Utilities.Contract;
 
@@ -8,8 +9,18 @@ using Utilities.Contract;
 
 namespace Main.GameDataStructure
 {
+    public interface IActorDataOverView
+    {
+    #region Public Methods
+
+        IActorData      FindActorData(string actorDataId);
+        List<ActorData> FindAll();
+
+    #endregion
+    }
+
     [CreateAssetMenu(fileName = "ActorDataOverView" , menuName = "HK/CreateActorDataOverView" , order = 0)]
-    public class ActorDataOverView : ScriptableObject
+    public class ActorDataOverView : ScriptableObject , IActorDataOverView
     {
     #region Private Variables
 
@@ -20,7 +31,7 @@ namespace Main.GameDataStructure
 
     #region Public Methods
 
-        public ActorData FindActorData(string actorDataId)
+        public IActorData FindActorData(string actorDataId)
         {
             Contract.RequireString(actorDataId , "actorDataId");
             var actorData = actorDatas.Find(data => data.ActorDataId == actorDataId);

@@ -14,7 +14,7 @@ namespace Main.GameDataStructure
     #region Private Variables
 
         [Inject]
-        private ActorDataOverView actorDataOverView;
+        private IActorDataOverView actorDataOverView;
 
     #endregion
 

@@ -1,6 +1,10 @@
+#region
+
 using Main.GameDataStructure;
 using UnityEngine;
 using Zenject;
+
+#endregion
 
 namespace Main.Application
 {
@@ -17,7 +21,7 @@ namespace Main.Application
 
         public override void InstallBindings()
         {
-            Container.BindInstance(ActorDataOverView);
+            Container.BindInstance(ActorDataOverView as IActorDataOverView);
         }
 
     #endregion

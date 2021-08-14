@@ -23,10 +23,10 @@ namespace Main.Presenters
         private ActorContoller actorContoller;
 
         [Inject]
-        private ActorDataOverView actorDataOverView;
+        private ActorMapper actorMapper;
 
         [Inject]
-        private ActorMapper actorMapper;
+        private IActorDataOverView actorDataOverView;
 
         private int direction;
 
