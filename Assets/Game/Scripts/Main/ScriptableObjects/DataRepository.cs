@@ -1,7 +1,11 @@
+#region
+
+using Main.DomainData;
 using Main.UseCases.Repository;
-using NSubstitute;
 using Utilities.Contract;
 using Zenject;
+
+#endregion
 
 namespace Main.GameDataStructure
 {
@@ -15,6 +19,11 @@ namespace Main.GameDataStructure
     #endregion
 
     #region Public Methods
+
+        public IActorData GetActorData(string actorDataId)
+        {
+            return null;
+        }
 
         public ActorDomainData GetActorDomainData(string actorDataId)
         {
