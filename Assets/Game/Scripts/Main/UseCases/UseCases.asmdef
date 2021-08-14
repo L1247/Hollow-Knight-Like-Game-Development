@@ -2,9 +2,10 @@
     "name": "UseCases",
     "rootNamespace": "",
     "references": [
-        "GUID:b18a16a3dcf3d01428b99057a0d9b91e",
-        "GUID:503115bc6a4017d42bbbebc149159003",
-        "GUID:f22f718b9b174a74d89f976a69f9dd2a"
+      "GUID:b18a16a3dcf3d01428b99057a0d9b91e",
+      "GUID:503115bc6a4017d42bbbebc149159003",
+      "GUID:f22f718b9b174a74d89f976a69f9dd2a",
+      "GUID:5a27b0673e2c14e49b7fd88f81155d68"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

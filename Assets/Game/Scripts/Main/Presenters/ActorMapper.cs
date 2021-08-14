@@ -1,9 +1,13 @@
+#region
+
 using System.Collections.Generic;
 using Main.GameDataStructure;
 using Main.ViewComponent;
 using UnityEngine;
 using Utilities.Contract;
 using Zenject;
+
+#endregion
 
 namespace Main.Presenters
 {
@@ -12,10 +16,10 @@ namespace Main.Presenters
     #region Private Variables
 
         [Inject]
-        private ActorDataOverView actorDataOverView;
+        private DiContainer container;
 
         [Inject]
-        private DiContainer container;
+        private IActorDataOverView actorDataOverView;
 
         private readonly List<ActorViewData> actorViewDatas = new List<ActorViewData>();
 
@@ -25,13 +29,13 @@ namespace Main.Presenters
 
         public void CreateActorViewData(string actorId , string actorDataId , int direction)
         {
-            var actorData   = actorDataOverView.FindActorData(actorDataId);
+            var actorData   = actorDataOverView.FindActorData(actorDataId) as ActorData;
             var actorPrefab = actorData.ActorPrefab;
             var actorInstance =
                 container.InstantiatePrefab(actorPrefab , Random.insideUnitCircle * 5 , Quaternion.identity , null);
             var actorComponent   = actorInstance.GetComponent<ActorComponent>();
             var text_IdAndDataId = $"{actorDataId} - {actorId.Substring(actorId.Length - 2 , 2)}";
-            var health           = actorData.ActorDomainData.Health;
+            var health           = actorData.Health;
             actorComponent.SetText(text_IdAndDataId);
             actorComponent.SetDirection(direction);
             actorComponent.SetHealthText(health);

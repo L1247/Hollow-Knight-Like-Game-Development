@@ -2,11 +2,12 @@
     "name": "RepositoryTests",
     "rootNamespace": "",
     "references": [
-        "UseCases",
-        "GameDataStructure",
-        "Utilities",
-        "Zenject-TestFramework",
-        "Zenject"
+      "UseCases",
+      "GameDataStructure",
+      "Utilities",
+      "Zenject-TestFramework",
+      "Zenject",
+      "DomainData"
     ],
     "includePlatforms": [
         "Editor"

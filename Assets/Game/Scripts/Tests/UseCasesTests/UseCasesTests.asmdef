@@ -8,7 +8,7 @@
     "DDDTestFramework",
     "Entity",
     "DDDCore",
-    "GameDataStructure"
+    "DomainData"
   ],
   "includePlatforms": [
     "Editor"

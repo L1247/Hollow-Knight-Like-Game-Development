@@ -1,7 +1,11 @@
+#region
+
+using Main.DomainData;
 using Main.UseCases.Repository;
-using NSubstitute;
 using Utilities.Contract;
 using Zenject;
+
+#endregion
 
 namespace Main.GameDataStructure
 {
@@ -10,18 +14,18 @@ namespace Main.GameDataStructure
     #region Private Variables
 
         [Inject]
-        private ActorDataOverView actorDataOverView;
+        private IActorDataOverView actorDataOverView;
 
     #endregion
 
     #region Public Methods
 
-        public ActorDomainData GetActorDomainData(string actorDataId)
+        public IActorData GetActorData(string actorDataId)
         {
-            var actorData       = actorDataOverView.FindActorData(actorDataId);
-            var actorDomainData = actorData.ActorDomainData;
-            Contract.EnsureNotNull(actorDomainData , $"actorDataId {actorDataId} , ActorDomainData");
-            return actorDomainData;
+            Contract.RequireString(actorDataId , "actorDataId");
+            var actorData = actorDataOverView.FindActorData(actorDataId);
+            Contract.EnsureNotNull(actorData , $"actorDataId:{actorDataId} , actorData");
+            return actorData;
         }
 
     #endregion

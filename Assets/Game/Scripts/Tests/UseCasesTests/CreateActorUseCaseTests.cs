@@ -1,9 +1,13 @@
-using Main.GameDataStructure;
+#region
+
+using Main.DomainData;
 using Main.UseCases.Actor.Create;
 using Main.UseCases.Repository;
 using MainTests.ExtenjectTestFramwork;
 using NSubstitute;
 using NUnit.Framework;
+
+#endregion
 
 public class CreateActorUseCaseTests : DDDUnitTestFixture
 {
@@ -12,15 +16,16 @@ public class CreateActorUseCaseTests : DDDUnitTestFixture
     [Test]
     public void Should_Succeed_When_Create_Actor()
     {
-        var actorId       = "1234";
-        var actorDataId   = "Pokemon";
-        var iSoRepository = Substitute.For<iDataRepository>();
-        var health    = 123;
-        var actorDomainData = new ActorDomainData(){Health =  health};
-        iSoRepository.GetActorDomainData(actorDataId).Returns(actorDomainData);
+        var actorId        = "1234";
+        var actorDataId    = "Pokemon";
+        var dataRepository = Substitute.For<iDataRepository>();
+        var health         = 123;
+        var actorData      = Substitute.For<IActorData>();
+        actorData.Health.Returns(health);
+        dataRepository.GetActorData(actorDataId).Returns(actorData);
 
         var actorRepository    = new ActorRepository();
-        var createActorUseCase = new CreateActorUseCase(domainEventBus , actorRepository , iSoRepository);
+        var createActorUseCase = new CreateActorUseCase(domainEventBus , actorRepository , dataRepository);
         var input              = new CreateActorInput();
         input.ActorId     = actorId;
         input.ActorDataId = actorDataId;

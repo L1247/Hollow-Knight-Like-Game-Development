@@ -1,8 +1,12 @@
+#region
+
 using DDDCore.Model;
 using DDDCore.Usecase;
 using Entity.Builder;
 using Main.UseCases.Repository;
 using Utilities.Contract;
+
+#endregion
 
 namespace Main.UseCases.Actor.Create
 {
@@ -28,7 +32,8 @@ namespace Main.UseCases.Actor.Create
 
     #region Constructor
 
-        public CreateActorUseCase(DomainEventBus domainEventBus , ActorRepository repository , iDataRepository iDataRepository) : base(
+        public CreateActorUseCase(DomainEventBus  domainEventBus , ActorRepository repository ,
+                                  iDataRepository iDataRepository) : base(
             domainEventBus , repository)
         {
             this.iDataRepository = iDataRepository;
@@ -42,10 +47,10 @@ namespace Main.UseCases.Actor.Create
         {
             var actorDataId = input.ActorDataId;
             Contract.RequireString(actorDataId , "actorDataId");
-            var actorDomainData = iDataRepository.GetActorDomainData(actorDataId);
-            Contract.RequireNotNull(actorDomainData , "actorDomainData");
+            var actorData = iDataRepository.GetActorData(actorDataId);
+            Contract.RequireNotNull(actorData , "actorDomainData");
 
-            var health = actorDomainData.Health;
+            var health = actorData.Health;
             var actor = ActorBuilder.NewInstance()
                                     .SetActorId(input.ActorId)
                                     .SetActorDataId(actorDataId)
