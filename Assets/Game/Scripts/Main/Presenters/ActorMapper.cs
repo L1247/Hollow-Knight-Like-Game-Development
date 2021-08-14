@@ -1,9 +1,13 @@
+#region
+
 using System.Collections.Generic;
 using Main.GameDataStructure;
 using Main.ViewComponent;
 using UnityEngine;
 using Utilities.Contract;
 using Zenject;
+
+#endregion
 
 namespace Main.Presenters
 {
@@ -31,7 +35,7 @@ namespace Main.Presenters
                 container.InstantiatePrefab(actorPrefab , Random.insideUnitCircle * 5 , Quaternion.identity , null);
             var actorComponent   = actorInstance.GetComponent<ActorComponent>();
             var text_IdAndDataId = $"{actorDataId} - {actorId.Substring(actorId.Length - 2 , 2)}";
-            var health           = actorData.ActorDomainData.Health;
+            var health           = actorData.Health;
             actorComponent.SetText(text_IdAndDataId);
             actorComponent.SetDirection(direction);
             actorComponent.SetHealthText(health);

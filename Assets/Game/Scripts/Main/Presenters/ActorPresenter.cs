@@ -1,14 +1,17 @@
-using System.Collections.Generic;
+#region
+
 using DDDCore.Adapter.Presenter.Unity;
 using Main.Controller;
+using Main.GameDataStructure;
 using Main.Input.Event;
 using Main.Input.Events;
-using Main.GameDataStructure;
 using Main.ViewComponent.Events;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
+
+#endregion
 
 namespace Main.Presenters
 {
@@ -20,12 +23,12 @@ namespace Main.Presenters
         private ActorContoller actorContoller;
 
         [Inject]
+        private ActorDataOverView actorDataOverView;
+
+        [Inject]
         private ActorMapper actorMapper;
 
         private int direction;
-
-        [Inject]
-        private List<ActorData> actorDatas;
 
         private string CacheActorId;
 
@@ -47,14 +50,18 @@ namespace Main.Presenters
 
         private void Start()
         {
-            ButtonBinding(button_CreateActor_Player , () => actorContoller.CreateActor(actorDatas[3].ActorDataId));
-            ButtonBinding(button_DealDamage ,         () => actorContoller.DealDamage(CacheActorId , 10));
-            ButtonBinding(button_MakeActorDie ,       () => actorContoller.MakeActorDie(CacheActorId));
+            ButtonBinding(button_CreateActor_Player , () =>
+            {
+                var actorDataId = actorDataOverView.FindAll()[3].ActorDataId;
+                actorContoller.CreateActor(actorDataId);
+            });
+            ButtonBinding(button_DealDamage ,   () => actorContoller.DealDamage(CacheActorId , 10));
+            ButtonBinding(button_MakeActorDie , () => actorContoller.MakeActorDie(CacheActorId));
         }
 
     #endregion
 
-    #region Events
+    #region Public Methods
 
         public void OnActorCreated(string actorId , string actorDataId , int direction)
         {

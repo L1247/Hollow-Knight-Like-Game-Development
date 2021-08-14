@@ -17,7 +17,6 @@ namespace Main.Application
 
         public override void InstallBindings()
         {
-            Container.BindInstance(ActorDataOverView.ActorDatas);
             Container.BindInstance(ActorDataOverView);
         }
 

@@ -22,15 +22,10 @@ namespace Main.GameDataStructure
 
         public IActorData GetActorData(string actorDataId)
         {
-            return null;
-        }
-
-        public ActorDomainData GetActorDomainData(string actorDataId)
-        {
-            var actorData       = actorDataOverView.FindActorData(actorDataId);
-            var actorDomainData = actorData.ActorDomainData;
-            Contract.EnsureNotNull(actorDomainData , $"actorDataId {actorDataId} , ActorDomainData");
-            return actorDomainData;
+            Contract.RequireString(actorDataId , "actorDataId");
+            var actorData = actorDataOverView.FindActorData(actorDataId);
+            Contract.EnsureNotNull(actorData , $"actorDataId:{actorDataId} , actorData");
+            return actorData;
         }
 
     #endregion

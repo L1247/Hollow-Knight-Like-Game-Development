@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a16c51e2cdfc467abeaca5436c929db0, type: 3}
   m_Name: "ActorData_\u4E3B\u89D2 1"
   m_EditorClassIdentifier: 
-  ActorDataId: Player 1
   ActorPrefab: {fileID: 2318797795964718036, guid: 518c5c54d61193b40aa57c8e39a35b8f, type: 3}
-  ActorDomainData:
-    Health: 100
+  actorDataId: ActorDataId1
+  health: 123
+  atk: 5

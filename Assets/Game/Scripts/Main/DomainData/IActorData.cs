@@ -7,6 +7,8 @@ namespace Main.DomainData
         int Atk    { get; }
         int Health { get; }
 
+        string ActorDataId { get; }
+
     #endregion
     }
 }

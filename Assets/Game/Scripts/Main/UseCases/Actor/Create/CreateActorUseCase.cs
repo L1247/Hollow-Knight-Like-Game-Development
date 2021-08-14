@@ -51,7 +51,6 @@ namespace Main.UseCases.Actor.Create
             Contract.RequireNotNull(actorData , "actorDomainData");
 
             var health = actorData.Health;
-            var atk    = actorData.Atk;
             var actor = ActorBuilder.NewInstance()
                                     .SetActorId(input.ActorId)
                                     .SetActorDataId(actorDataId)
