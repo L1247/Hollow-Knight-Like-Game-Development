@@ -1,5 +1,8 @@
-using DDDCore.Model;
+#region
+
 using Zenject;
+
+#endregion
 
 namespace DDDCore.Usecase
 {
@@ -7,13 +10,24 @@ namespace DDDCore.Usecase
     /// </summary>
     /// <typeparam name="I">Input</typeparam>
     /// <typeparam name="R">Repository</typeparam>
-    public abstract class UseCase<I ,  R> where I : Input
+    public abstract class UseCase<I , R>
     {
     #region Protected Variables
 
-        protected readonly DomainEventBus domainEventBus;
+        protected readonly IDomainEventBus domainEventBus;
 
         protected R repository;
+
+    #endregion
+
+    #region Constructor
+
+        [Inject]
+        public UseCase(IDomainEventBus domainEventBus , R repository)
+        {
+            this.domainEventBus = domainEventBus;
+            this.repository     = repository;
+        }
 
     #endregion
 
@@ -22,12 +36,5 @@ namespace DDDCore.Usecase
         public abstract void Execute(I input);
 
     #endregion
-
-        [Inject]
-        public UseCase(DomainEventBus domainEventBus , R repository)
-        {
-            this.domainEventBus = domainEventBus;
-            this.repository     = repository;
-        }
     }
 }

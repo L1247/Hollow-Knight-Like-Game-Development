@@ -1,3 +1,5 @@
+#region
+
 using DDDCore;
 using Entity.Events;
 using Main.Input.Event;
@@ -5,21 +7,23 @@ using Main.Input.Events;
 using Main.Presenters;
 using Main.ViewComponent.Events;
 
+#endregion
+
 namespace Main.EventHandler.View
 {
     public class ViewEventHandler : DDDCore.EventHandler
     {
     #region Constructor
 
-        public ViewEventHandler(EventStore eventStore , ActorPresenter actorPresenter) : base(eventStore)
+        public ViewEventHandler(IDomainEventBus domainEventBus , ActorPresenter actorPresenter) : base(domainEventBus)
         {
             handlerType = HandlerType.View;
 
-            var signalBus = eventStore.signalBus;
             // domain event
             Register<ActorCreated>(created =>
             {
-                actorPresenter.OnActorCreated(created.ActorId , created.ActorDataId , created.Direction);
+                actorPresenter.OnActorCreated(created.ActorId , created.ActorDataId ,
+                                              created.Direction);
             });
             Register<DirectionChanged>(changed =>
             {
@@ -31,6 +35,7 @@ namespace Main.EventHandler.View
             });
             Register<ActorDead>(dead => { actorPresenter.OnActorDead(dead.ActorId); });
 
+            var signalBus = domainEventBus.SignalBus;
             // some view event
             signalBus.Subscribe<InputHorizontal>(actorPresenter.OnHorizontalChanged);
             signalBus.Subscribe<ButtonDownJump>(actorPresenter.OnButtonDownJump);

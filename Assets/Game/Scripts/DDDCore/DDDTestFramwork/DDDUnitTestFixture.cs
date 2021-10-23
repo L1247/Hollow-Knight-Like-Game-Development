@@ -1,5 +1,11 @@
+#region
+
+using DDDCore;
 using DDDCore.Model;
+using NSubstitute;
 using Zenject;
+
+#endregion
 
 namespace MainTests.ExtenjectTestFramwork
 {
@@ -7,7 +13,7 @@ namespace MainTests.ExtenjectTestFramwork
     {
     #region Protected Variables
 
-        protected DomainEventBus domainEventBus;
+        protected IDomainEventBus domainEventBus;
 
     #endregion
 
@@ -18,8 +24,7 @@ namespace MainTests.ExtenjectTestFramwork
             base.Setup();
             SignalBusInstaller.Install(Container);
             Container.DeclareSignal<DomainEvent>();
-            Container.Bind<DomainEventBus>().AsSingle();
-            domainEventBus = Container.Resolve<DomainEventBus>();
+            domainEventBus = Substitute.For<IDomainEventBus>();
         }
 
     #endregion

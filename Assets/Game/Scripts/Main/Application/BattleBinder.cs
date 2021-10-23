@@ -1,8 +1,10 @@
+#region
+
 using DDDCore;
 using DDDCore.Model;
-using Main.GameDataStructure;
 using Main.Controller;
 using Main.EventHandler.View;
+using Main.GameDataStructure;
 using Main.Input;
 using Main.Input.Event;
 using Main.Input.Events;
@@ -12,6 +14,8 @@ using Main.UseCases.Actor.Edit;
 using Main.UseCases.Repository;
 using Main.ViewComponent.Events;
 using Zenject;
+
+#endregion
 
 namespace Main.Application
 {
@@ -30,7 +34,7 @@ namespace Main.Application
             Container.DeclareSignal<rAnimationEvent>();
             Container.DeclareSignal<HitboxTriggered>();
             Container.Bind<EventStore>().AsSingle().NonLazy();
-            Container.Bind<DomainEventBus>().AsSingle();
+            Container.Bind<IDomainEventBus>().To<DomainEventBus>().AsSingle();
             // EventHandler
             Container.Bind<ViewEventHandler>().AsSingle().NonLazy();
             // Controller
