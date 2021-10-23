@@ -4,7 +4,7 @@ using DDDCore.Model;
 
 #endregion
 
-namespace Main.Entity.Stat
+namespace Main.Entity
 {
     public class Stat : AggregateRoot
     {

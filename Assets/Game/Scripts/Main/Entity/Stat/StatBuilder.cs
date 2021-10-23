@@ -5,7 +5,7 @@ using DDDCore.Model;
 
 #endregion
 
-namespace Main.Entity.Stat
+namespace Main.Entity
 {
     public class StatBuilder : AbstractBuilder<StatBuilder , Stat>
     {
@@ -22,6 +22,12 @@ namespace Main.Entity.Stat
             statId = statId == null ? Guid.NewGuid().ToString() : statId;
             var stat = new Stat(statId);
             return stat;
+        }
+
+        public StatBuilder SetStatId(string id)
+        {
+            statId = id;
+            return this;
         }
 
     #endregion
