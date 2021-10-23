@@ -27,6 +27,7 @@ namespace Main.Entity
             stat.SetActorId(actorId);
             stat.SetName(statName);
             stat.SetAmount(amount);
+            stat.Create();
             return stat;
         }
 

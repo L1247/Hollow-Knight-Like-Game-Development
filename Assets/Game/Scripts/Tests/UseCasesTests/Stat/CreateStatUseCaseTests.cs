@@ -2,6 +2,7 @@
 
 using DDDCore;
 using DDDCore.Usecase;
+using Main.Entity.Event;
 using Main.UseCases.Stat;
 using MainTests.ExtenjectTestFramework;
 using NSubstitute;
@@ -41,6 +42,12 @@ namespace UseCasesTests.Stat
             Assert.AreEqual(amount ,   stat.Amount ,  "Amount is not equal");
             Assert.AreEqual(actorId ,  stat.ActorId , "ActorId is not equal");
             // assert events
+            var statCreated = stat.FindDomainEvent<StatCreated>();
+            Assert.NotNull(statCreated , "statCreated is null");
+            Assert.AreEqual(actorId ,  statCreated.ActorId ,  "actorId is not equal");
+            Assert.AreEqual(statName , statCreated.StatName , "StatName is not equal");
+            Assert.AreEqual(amount ,   statCreated.Amount ,   "Amount is not equal");
+
             domainEventBus.Received(1).PostAll(stat);
         }
 

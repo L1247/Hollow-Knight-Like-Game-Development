@@ -1,6 +1,7 @@
 #region
 
 using DDDCore.Model;
+using Main.Entity.Event;
 
 #endregion
 
@@ -24,6 +25,11 @@ namespace Main.Entity
     #endregion
 
     #region Public Methods
+
+        public void Create()
+        {
+            AddDomainEvent(new StatCreated(ActorId , Name , Amount));
+        }
 
         public void SetActorId(string actorId)
         {
