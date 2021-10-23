@@ -2,6 +2,7 @@
 
 using DDDCore;
 using DDDCore.Usecase;
+using Main.Entity;
 using Utilities.Contract;
 
 #endregion
@@ -12,7 +13,11 @@ namespace Main.UseCases.Stat
     {
     #region Public Variables
 
+        public int    Amount;
+        public string ActorId;
+
         public string StatId;
+        public string StatName;
 
     #endregion
     }
@@ -30,11 +35,20 @@ namespace Main.UseCases.Stat
 
         public override void Execute(CreateStatInput input)
         {
-            var statId = input.StatId;
-            Contract.RequireString(statId , "statId");
-            var stat = repository.FindById(statId);
-            Contract.RequireNotNull(stat , $"statId : {statId} , stat");
-
+            var statId   = input.StatId;
+            var statName = input.StatName;
+            Contract.RequireString(statName , "statName");
+            var actorId = input.ActorId;
+            Contract.RequireString(actorId , "actorId");
+            var amount = input.Amount;
+            var stat = StatBuilder
+                       .NewInstance()
+                       .SetStatId(statId)
+                       .SetActorId(actorId)
+                       .SetStatName(statName)
+                       .SetAmount(amount)
+                       .Build();
+            repository.Save(stat);
             domainEventBus.PostAll(stat);
         }
 

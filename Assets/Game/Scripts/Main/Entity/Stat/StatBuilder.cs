@@ -12,6 +12,9 @@ namespace Main.Entity
     #region Private Variables
 
         private string statId;
+        private string actorId;
+        private string statName;
+        private int    amount;
 
     #endregion
 
@@ -21,12 +24,33 @@ namespace Main.Entity
         {
             statId = statId == null ? Guid.NewGuid().ToString() : statId;
             var stat = new Stat(statId);
+            stat.SetActorId(actorId);
+            stat.SetName(statName);
+            stat.SetAmount(amount);
             return stat;
+        }
+
+        public StatBuilder SetActorId(string actorId)
+        {
+            this.actorId = actorId;
+            return this;
+        }
+
+        public StatBuilder SetAmount(int amount)
+        {
+            this.amount = amount;
+            return this;
         }
 
         public StatBuilder SetStatId(string id)
         {
             statId = id;
+            return this;
+        }
+
+        public StatBuilder SetStatName(string statName)
+        {
+            this.statName = statName;
             return this;
         }
 
