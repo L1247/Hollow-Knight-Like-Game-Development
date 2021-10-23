@@ -1,6 +1,6 @@
 #region
 
-using DDDCore.Model;
+using DDDCore;
 using DDDCore.Usecase;
 using Entity.Builder;
 using Main.UseCases.Repository;
@@ -32,7 +32,7 @@ namespace Main.UseCases.Actor.Create
 
     #region Constructor
 
-        public CreateActorUseCase(DomainEventBus  domainEventBus , ActorRepository repository ,
+        public CreateActorUseCase(IDomainEventBus domainEventBus , ActorRepository repository ,
                                   iDataRepository iDataRepository) : base(
             domainEventBus , repository)
         {

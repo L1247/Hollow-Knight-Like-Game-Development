@@ -1,5 +1,8 @@
+#region
+
 using System.Collections.Generic;
-using DDDCore.Model;
+
+#endregion
 
 namespace DDDCore.Usecase
 {
@@ -7,6 +10,9 @@ namespace DDDCore.Usecase
     {
     #region Public Methods
 
+        bool ContainsId(string id);
+
+        void    DeleteById(string id);
         List<T> FindAll();
         T       FindById(string id);
         void    Save(T          entity);

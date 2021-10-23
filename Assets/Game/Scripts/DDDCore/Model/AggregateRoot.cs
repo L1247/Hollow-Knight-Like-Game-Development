@@ -1,12 +1,31 @@
+#region
+
 using System.Collections.Generic;
+
+#endregion
 
 namespace DDDCore.Model
 {
-    public abstract class AggregateRoot : Entity<string>
+    public abstract class AggregateRoot : IAggregateRoot
     {
+    #region Protected Variables
+
+        protected readonly string id;
+
+    #endregion
+
     #region Private Variables
 
-        private readonly List<DomainEvent> _domainEvents = new List<DomainEvent>();
+        private readonly List<DomainEvent> domainEvents = new List<DomainEvent>();
+
+    #endregion
+
+    #region Constructor
+
+        protected AggregateRoot(string id)
+        {
+            this.id = id;
+        }
 
     #endregion
 
@@ -14,21 +33,30 @@ namespace DDDCore.Model
 
         public void AddDomainEvent(DomainEvent domainEvent)
         {
-            _domainEvents.Add(domainEvent);
+            domainEvents.Add(domainEvent);
         }
 
         public void ClearDomainEvents()
         {
-            _domainEvents.Clear();
+            domainEvents.Clear();
+        }
+
+        public T FindDomainEvent<T>() where T : DomainEvent
+        {
+            var tEvent = domainEvents.Find(domainEvent => domainEvent is T);
+            return tEvent as T;
         }
 
         public List<DomainEvent> GetDomainEvents()
         {
-            return _domainEvents;
+            return domainEvents;
+        }
+
+        public string GetId()
+        {
+            return id;
         }
 
     #endregion
-
-        protected AggregateRoot(string id) : base(id) { }
     }
 }

@@ -4,13 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 #if UniRx
 using UniRx;
+
 #endif
 
 namespace DDDCore.Adapter.Presenter.Unity
 {
     public class UnityPresenter : MonoBehaviour
     {
-    #region Private Variables
+    #region Protected Variables
 
         protected List<ButtonBinding> buttonBindings = new List<ButtonBinding>();
 
@@ -26,8 +27,6 @@ namespace DDDCore.Adapter.Presenter.Unity
 
         protected void ButtonBinding(Button button , Action action)
         {
-            if (button == null)
-                return;
         #if UniRx
             button.OnClickAsObservable().Subscribe(_ => action()).AddTo(button.gameObject);
         #else
@@ -55,6 +54,16 @@ namespace DDDCore.Adapter.Presenter.Unity
 
     #endregion
 
+    #region Constructor
+
+        public ButtonBinding(Button button , Action action)
+        {
+            Button = button;
+            Action = action;
+        }
+
+    #endregion
+
     #region Public Methods
 
         public void RemoveOnClickListener()
@@ -63,11 +72,5 @@ namespace DDDCore.Adapter.Presenter.Unity
         }
 
     #endregion
-
-        public ButtonBinding(Button button , Action action)
-        {
-            Button = button;
-            Action = action;
-        }
     }
 }

@@ -1,6 +1,10 @@
-using DDDCore.Model;
+#region
+
+using DDDCore;
 using DDDCore.Usecase;
 using Main.UseCases.Repository;
+
+#endregion
 
 namespace Main.UseCases.Actor.Edit
 {
@@ -19,7 +23,7 @@ namespace Main.UseCases.Actor.Edit
     {
     #region Constructor
 
-        public DealDamageUseCase(DomainEventBus domainEventBus , ActorRepository repository) : base(
+        public DealDamageUseCase(IDomainEventBus domainEventBus , ActorRepository repository) : base(
             domainEventBus , repository) { }
 
     #endregion

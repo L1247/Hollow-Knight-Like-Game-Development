@@ -1,9 +1,13 @@
+#region
+
 using System.Collections.Generic;
 using DDDCore.Model;
 
+#endregion
+
 namespace DDDCore.Usecase
 {
-    public abstract class AbstractRepository<T> : IRepository<T> where T : AggregateRoot
+    public abstract class AbstractRepository<T> : IRepository<T> where T : IAggregateRoot
     {
     #region Protected Variables
 
@@ -12,6 +16,11 @@ namespace DDDCore.Usecase
     #endregion
 
     #region Public Methods
+
+        public bool ContainsId(string id)
+        {
+            return entities.Contains(FindById(id));
+        }
 
         public virtual void DeleteById(string id)
         {

@@ -1,6 +1,6 @@
 namespace DDDCore.Model
 {
-    public abstract class Entity<T>
+    public abstract class Entity<T> : IEntity<T>
     {
     #region Protected Variables
 
