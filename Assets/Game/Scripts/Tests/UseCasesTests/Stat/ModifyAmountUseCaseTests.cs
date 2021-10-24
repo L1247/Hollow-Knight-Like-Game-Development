@@ -2,6 +2,7 @@
 
 using DDDCore;
 using Main.Entity;
+using Main.Entity.Event;
 using Main.UseCases.Stat;
 using MainTests.ExtenjectTestFramework;
 using NSubstitute;
@@ -56,9 +57,15 @@ namespace UseCasesTests.Stat
 
             // assertion
             // 100 + -15 = 85
-            AssetStatAmount(85);
+            var expectedAmount = 85;
+            AssetStatAmount(expectedAmount);
 
             AssetEventPostAll();
+            var amountModified = stat.FindDomainEvent<AmountModified>();
+            Assert.NotNull(amountModified , "amountModified is null");
+            Assert.AreEqual(actorId ,        amountModified.ActorId ,  "ActorId is not equal");
+            Assert.AreEqual(statName ,       amountModified.StatName , "StatName is not equal");
+            Assert.AreEqual(expectedAmount , amountModified.Amount ,   "Amount is not equal");
         }
 
         [Test]
@@ -73,9 +80,15 @@ namespace UseCasesTests.Stat
 
             // assertion
             // 100 + -150 = 0
-            AssetStatAmount(0);
+            var expectedAmount = 0;
+            AssetStatAmount(expectedAmount);
 
             AssetEventPostAll();
+            var amountModified = stat.FindDomainEvent<AmountModified>();
+            Assert.NotNull(amountModified , "amountModified is null");
+            Assert.AreEqual(actorId ,        amountModified.ActorId ,  "ActorId is not equal");
+            Assert.AreEqual(statName ,       amountModified.StatName , "StatName is not equal");
+            Assert.AreEqual(expectedAmount , amountModified.Amount ,   "Amount is not equal");
         }
 
     #endregion

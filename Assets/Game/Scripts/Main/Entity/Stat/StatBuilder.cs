@@ -23,10 +23,10 @@ namespace Main.Entity
         public override Stat Build()
         {
             statId = statId == null ? Guid.NewGuid().ToString() : statId;
-            var stat = new Stat(statId);
-            stat.SetActorId(actorId);
-            stat.SetName(statName);
-            stat.SetAmount(amount);
+            var stat = new Stat(statId , actorId , statName , amount);
+            // stat.SetActorId(actorId);
+            // stat.SetName(statName);
+            // stat.SetAmount(amount);
             stat.Create();
             return stat;
         }
