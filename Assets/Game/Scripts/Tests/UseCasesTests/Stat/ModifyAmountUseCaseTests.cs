@@ -2,7 +2,6 @@
 
 using DDDCore;
 using Main.Entity;
-using Main.Entity.Event;
 using Main.UseCases.Stat;
 using MainTests.ExtenjectTestFramework;
 using NSubstitute;
@@ -20,9 +19,9 @@ namespace UseCasesTests.Stat
         private string              statName;
         private IStatRepository     repository;
         private IDomainEventBus     domainEventBus;
+        private IStat               stat;
         private ModifyAmountUseCase modifyAmountUseCase;
         private ModifyAmountInput   input;
-        private Main.Entity.Stat    stat;
         private int                 amount;
         private int                 statAmount;
 
@@ -59,9 +58,7 @@ namespace UseCasesTests.Stat
             // 100 + -15 = 85
             var expectedAmount = 85;
             AssetStatAmount(expectedAmount);
-
             AssetEventPostAll();
-            AssetEventArg(expectedAmount);
         }
 
         [Test]
@@ -78,23 +75,12 @@ namespace UseCasesTests.Stat
             // 100 + -150 = 0
             var expectedAmount = 0;
             AssetStatAmount(expectedAmount);
-
             AssetEventPostAll();
-            AssetEventArg(expectedAmount);
         }
 
     #endregion
 
     #region Private Methods
-
-        private void AssetEventArg(int expectedAmount)
-        {
-            var amountModified = stat.FindDomainEvent<AmountModified>();
-            Assert.NotNull(amountModified , "amountModified is null");
-            Assert.AreEqual(actorId ,        amountModified.ActorId ,  "ActorId is not equal");
-            Assert.AreEqual(statName ,       amountModified.StatName , "StatName is not equal");
-            Assert.AreEqual(expectedAmount , amountModified.Amount ,   "Amount is not equal");
-        }
 
         private void AssetEventPostAll()
         {
@@ -103,7 +89,7 @@ namespace UseCasesTests.Stat
 
         private void AssetStatAmount(int expectedAmount)
         {
-            Assert.AreEqual(expectedAmount , stat.Amount , "stat amount is not equal");
+            stat.Received(1).SetAmount(expectedAmount);
         }
 
         private void CreateInput()
@@ -115,12 +101,8 @@ namespace UseCasesTests.Stat
 
         private void CreateStat()
         {
-            stat = StatBuilder
-                   .NewInstance()
-                   .SetActorId(actorId)
-                   .SetStatName(statName)
-                   .SetAmount(statAmount)
-                   .Build();
+            stat = Substitute.For<IStat>();
+            stat.Amount.Returns(statAmount);
 
             repository.FindStat(actorId , statName).Returns(stat);
         }
