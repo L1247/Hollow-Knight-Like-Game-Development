@@ -24,9 +24,6 @@ namespace Main.Entity
         {
             statId = statId == null ? Guid.NewGuid().ToString() : statId;
             var stat = new Stat(statId , actorId , statName , amount);
-            // stat.SetActorId(actorId);
-            // stat.SetName(statName);
-            // stat.SetAmount(amount);
             stat.Create();
             return stat;
         }

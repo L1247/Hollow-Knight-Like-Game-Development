@@ -33,6 +33,21 @@ namespace Tests.EntityTests
             Assert.AreEqual(newAmount , amountModified.Amount ,   "Amount is not equal");
         }
 
+        [Test]
+        public void Publish_StatCreated()
+        {
+            var actorId  = GetGuid();
+            var statName = GetGuid();
+            var amount   = 999;
+            var stat     = new Stat(null , actorId , statName , amount);
+            stat.Create();
+            var statCreated = stat.FindDomainEvent<StatCreated>();
+            Assert.NotNull(statCreated , "statCreated is null");
+            Assert.AreEqual(actorId ,  statCreated.ActorId ,  "actorId is not equal");
+            Assert.AreEqual(statName , statCreated.StatName , "StatName is not equal");
+            Assert.AreEqual(amount ,   statCreated.Amount ,   "Amount is not equal");
+        }
+
     #endregion
     }
 }
