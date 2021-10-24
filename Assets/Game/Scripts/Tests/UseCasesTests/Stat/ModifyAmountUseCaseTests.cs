@@ -13,70 +13,102 @@ namespace UseCasesTests.Stat
 {
     public class ModifyAmountUseCaseTest : SimpleTest
     {
+    #region Private Variables
+
+        private string              actorId;
+        private string              statName;
+        private IStatRepository     repository;
+        private IDomainEventBus     domainEventBus;
+        private ModifyAmountUseCase modifyAmountUseCase;
+        private ModifyAmountInput   input;
+        private Main.Entity.Stat    stat;
+        private int                 amount;
+        private int                 statAmount;
+
+    #endregion
+
+    #region Setup/Teardown Methods
+
+        [SetUp]
+        public void SetUp()
+        {
+            actorId             = GetGuid();
+            statName            = GetGuid();
+            repository          = Substitute.For<IStatRepository>();
+            domainEventBus      = Substitute.For<IDomainEventBus>();
+            modifyAmountUseCase = new ModifyAmountUseCase(domainEventBus , repository);
+            input               = new ModifyAmountInput();
+        }
+
+    #endregion
+
     #region Test Methods
 
         [Test]
         public void ModifyAmount()
         {
-            var actorId             = GetGuid();
-            var statName            = GetGuid();
-            var statAmount          = 100;
-            var amount              = -15;
-            var repository          = Substitute.For<IStatRepository>();
-            var domainEventBus      = Substitute.For<IDomainEventBus>();
-            var modifyAmountUseCase = new ModifyAmountUseCase(domainEventBus , repository);
-            var input               = new ModifyAmountInput();
-            var stat = StatBuilder
-                       .NewInstance()
-                       .SetActorId(actorId)
-                       .SetStatName(statName)
-                       .SetAmount(statAmount)
-                       .Build();
+            amount     = -15;
+            statAmount = 100;
+            CreateStat();
+            CreateInput();
 
-            repository.FindStat(actorId , statName).Returns(stat);
-
-            input.ActorId  = actorId;
-            input.StatName = statName;
-            input.Amount   = amount;
             modifyAmountUseCase.Execute(input);
 
             // assertion
             // 100 + -15 = 85
-            Assert.AreEqual(statAmount + amount , stat.Amount , "stat amount is not equal");
+            AssetStatAmount(85);
 
-            domainEventBus.Received(1).PostAll(stat);
+            AssetEventPostAll();
         }
 
         [Test]
         public void ModifyAmount_When_Amount_Is_Greater_Than_Stat_Amount()
         {
-            var actorId             = GetGuid();
-            var statName            = GetGuid();
-            var statAmount          = 100;
-            var amount              = -150;
-            var repository          = Substitute.For<IStatRepository>();
-            var domainEventBus      = Substitute.For<IDomainEventBus>();
-            var modifyAmountUseCase = new ModifyAmountUseCase(domainEventBus , repository);
-            var input               = new ModifyAmountInput();
-            var stat = StatBuilder
-                       .NewInstance()
-                       .SetActorId(actorId)
-                       .SetStatName(statName)
-                       .SetAmount(statAmount)
-                       .Build();
+            amount     = -150;
+            statAmount = 100;
+            CreateStat();
+            CreateInput();
 
-            repository.FindStat(actorId , statName).Returns(stat);
-
-            input.ActorId  = actorId;
-            input.StatName = statName;
-            input.Amount   = amount;
             modifyAmountUseCase.Execute(input);
 
             // assertion
             // 100 + -150 = 0
-            Assert.AreEqual(0 , stat.Amount , "stat amount is not equal");
+            AssetStatAmount(0);
 
+            AssetEventPostAll();
+        }
+
+    #endregion
+
+    #region Private Methods
+
+        private void AssetEventPostAll()
+        {
             domainEventBus.Received(1).PostAll(stat);
+        }
+
+        private void AssetStatAmount(int expectedAmount)
+        {
+            Assert.AreEqual(expectedAmount , stat.Amount , "stat amount is not equal");
+        }
+
+        private void CreateInput()
+        {
+            input.ActorId  = actorId;
+            input.StatName = statName;
+            input.Amount   = amount;
+        }
+
+        private void CreateStat()
+        {
+            stat = StatBuilder
+                   .NewInstance()
+                   .SetActorId(actorId)
+                   .SetStatName(statName)
+                   .SetAmount(statAmount)
+                   .Build();
+
+            repository.FindStat(actorId , statName).Returns(stat);
         }
 
     #endregion
