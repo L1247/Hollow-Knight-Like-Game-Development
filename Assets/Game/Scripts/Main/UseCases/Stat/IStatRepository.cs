@@ -1,16 +1,17 @@
 #region
 
 using DDDCore.Usecase;
+using Main.Entity;
 
 #endregion
 
 namespace Main.UseCases.Stat
 {
-    public interface IStatRepository : IRepository<Entity.Stat>
+    public interface IStatRepository : IRepository<IStat>
     {
     #region Public Methods
 
-        Entity.Stat FindStat(string actorId , string statName);
+        IStat FindStat(string actorId , string statName);
 
     #endregion
     }

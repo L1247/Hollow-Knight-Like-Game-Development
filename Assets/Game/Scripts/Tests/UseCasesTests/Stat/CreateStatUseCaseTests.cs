@@ -2,6 +2,7 @@
 
 using DDDCore;
 using DDDCore.Usecase;
+using Main.Entity;
 using Main.Entity.Event;
 using Main.UseCases.Stat;
 using MainTests.ExtenjectTestFramework;
@@ -23,10 +24,10 @@ namespace UseCasesTests.Stat
             var amount   = 999;
             var actorId  = GetGuid();
 
-            var                           domainEventBus    = Substitute.For<IDomainEventBus>();
-            IRepository<Main.Entity.Stat> repository        = new StatRepository();
-            var                           createStatUseCase = new CreateStatUseCase(domainEventBus , repository);
-            var                           input             = new CreateStatInput();
+            var                domainEventBus    = Substitute.For<IDomainEventBus>();
+            IRepository<IStat> repository        = new StatRepository();
+            var                createStatUseCase = new CreateStatUseCase(domainEventBus , repository);
+            var                input             = new CreateStatInput();
 
             input.ActorId  = actorId;
             input.StatName = statName;

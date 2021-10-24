@@ -7,7 +7,7 @@ using Main.Entity.Event;
 
 namespace Main.Entity
 {
-    public class Stat : AggregateRoot
+    public class Stat : AggregateRoot , IStat
     {
     #region Public Variables
 
@@ -19,8 +19,6 @@ namespace Main.Entity
     #endregion
 
     #region Constructor
-
-        public Stat(string id) : base(id) { }
 
         public Stat(string statId , string actorId , string statName , int amount) : base(statId)
         {
