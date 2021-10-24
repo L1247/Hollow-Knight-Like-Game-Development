@@ -7,7 +7,7 @@ using Main.Entity.Event;
 
 namespace Main.Entity
 {
-    public class Stat : AggregateRoot
+    public class Stat : AggregateRoot , IStat
     {
     #region Public Variables
 
@@ -20,7 +20,12 @@ namespace Main.Entity
 
     #region Constructor
 
-        public Stat(string id) : base(id) { }
+        public Stat(string statId , string actorId , string statName , int amount) : base(statId)
+        {
+            ActorId = actorId;
+            Name    = statName;
+            Amount  = amount;
+        }
 
     #endregion
 
@@ -39,6 +44,7 @@ namespace Main.Entity
         public void SetAmount(int amount)
         {
             Amount = amount;
+            AddDomainEvent(new AmountModified(ActorId , Name , Amount));
         }
 
         public void SetName(string statName)

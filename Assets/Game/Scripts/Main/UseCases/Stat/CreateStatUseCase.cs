@@ -22,11 +22,11 @@ namespace Main.UseCases.Stat
     #endregion
     }
 
-    public class CreateStatUseCase : UseCase<CreateStatInput , IRepository<Entity.Stat>>
+    public class CreateStatUseCase : UseCase<CreateStatInput , IRepository<IStat>>
     {
     #region Constructor
 
-        public CreateStatUseCase(IDomainEventBus domainEventBus , IRepository<Entity.Stat> repository) : base(
+        public CreateStatUseCase(IDomainEventBus domainEventBus , IRepository<IStat> repository) : base(
             domainEventBus , repository) { }
 
     #endregion
