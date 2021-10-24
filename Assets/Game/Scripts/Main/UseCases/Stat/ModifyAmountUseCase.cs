@@ -38,9 +38,10 @@ namespace Main.UseCases.Stat
             Contract.RequireString(statName , "statName");
             var stat = repository.FindStat(actorId , statName);
             if (stat == null) return;
-            var amount           = input.Amount;
-            var statAmount       = stat.Amount;
-            var calculatedAmount = statAmount + amount;
+            var amount                                 = input.Amount;
+            var statAmount                             = stat.Amount;
+            var calculatedAmount                       = statAmount + amount;
+            if (calculatedAmount < 0) calculatedAmount = 0;
             stat.SetAmount(calculatedAmount);
 
             domainEventBus.PostAll(stat);
