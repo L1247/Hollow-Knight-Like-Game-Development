@@ -61,11 +61,7 @@ namespace UseCasesTests.Stat
             AssetStatAmount(expectedAmount);
 
             AssetEventPostAll();
-            var amountModified = stat.FindDomainEvent<AmountModified>();
-            Assert.NotNull(amountModified , "amountModified is null");
-            Assert.AreEqual(actorId ,        amountModified.ActorId ,  "ActorId is not equal");
-            Assert.AreEqual(statName ,       amountModified.StatName , "StatName is not equal");
-            Assert.AreEqual(expectedAmount , amountModified.Amount ,   "Amount is not equal");
+            AssetEventArg(expectedAmount);
         }
 
         [Test]
@@ -84,16 +80,21 @@ namespace UseCasesTests.Stat
             AssetStatAmount(expectedAmount);
 
             AssetEventPostAll();
+            AssetEventArg(expectedAmount);
+        }
+
+    #endregion
+
+    #region Private Methods
+
+        private void AssetEventArg(int expectedAmount)
+        {
             var amountModified = stat.FindDomainEvent<AmountModified>();
             Assert.NotNull(amountModified , "amountModified is null");
             Assert.AreEqual(actorId ,        amountModified.ActorId ,  "ActorId is not equal");
             Assert.AreEqual(statName ,       amountModified.StatName , "StatName is not equal");
             Assert.AreEqual(expectedAmount , amountModified.Amount ,   "Amount is not equal");
         }
-
-    #endregion
-
-    #region Private Methods
 
         private void AssetEventPostAll()
         {
