@@ -38,8 +38,12 @@ namespace Main.DomainEventHandler
             var actorId     = created.ActorId;
             var actorDataId = created.ActorDataId;
             var actorData   = dataRepository.GetActorData(actorDataId);
-            // var health = actorData.Health;
-            // statController.CreateStat(actorId,);
+            foreach (var statData in actorData.StatDatas)
+            {
+                var statName = statData.StatName;
+                var amount   = statData.Amount;
+                statController.CreateStat(actorId , statName , amount);
+            }
         }
 
     #endregion
