@@ -24,11 +24,20 @@ namespace Main.EventHandler.View
         {
             handlerType = HandlerType.View;
             Register<StatCreated>(OnStatCreated);
+            Register<AmountModified>(OnAmountModified);
         }
 
     #endregion
 
     #region Private Methods
+
+        private void OnAmountModified(AmountModified amountModified)
+        {
+            var actorId  = amountModified.ActorId;
+            var statName = amountModified.StatName;
+            var amount   = amountModified.Amount;
+            statPresenter.ModifyAmountText(actorId , statName , amount);
+        }
 
         private void OnStatCreated(StatCreated created)
         {

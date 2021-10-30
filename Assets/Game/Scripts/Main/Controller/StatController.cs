@@ -14,6 +14,9 @@ namespace Main.Controller
         [Inject]
         private CreateStatUseCase createStatUseCase;
 
+        [Inject]
+        private ModifyAmountUseCase modifyAmountUseCase;
+
     #endregion
 
     #region Public Methods
@@ -25,6 +28,15 @@ namespace Main.Controller
             input.StatName = statName;
             input.Amount   = amount;
             createStatUseCase.Execute(input);
+        }
+
+        public void ModifyStatAmount(string actorId , string statName , int amount)
+        {
+            var input = new ModifyAmountInput();
+            input.ActorId  = actorId;
+            input.StatName = statName;
+            input.Amount   = amount;
+            modifyAmountUseCase.Execute(input);
         }
 
     #endregion

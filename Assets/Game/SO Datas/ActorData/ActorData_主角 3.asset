@@ -16,6 +16,8 @@ MonoBehaviour:
   actorDataId: ActorDataId3
   statDatas:
   - statName: Hp
-    amount: 200
+    amount: 250
   - statName: Atk
     amount: 10
+  - statName: Def
+    amount: 5456123

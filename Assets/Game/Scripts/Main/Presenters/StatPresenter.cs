@@ -1,6 +1,7 @@
 #region
 
 using DDDCore.Adapter.Presenter.Unity;
+using Main.Controller;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,6 +18,11 @@ namespace Main.Presenters
         [Inject]
         private ActorMapper actorMapper;
 
+        [Inject]
+        private StatController statController;
+
+        private string cacheActorId;
+
         [Required]
         [SerializeField]
         private Button button_DealDamage;
@@ -29,8 +35,9 @@ namespace Main.Presenters
         {
             ButtonBinding(button_DealDamage , () =>
             {
-                // todo : modify amount
-                // actorController.DealDamage(CacheActorId , 10);
+                var statName = "Hp";
+                var amount   = -(int)(Random.value * 20);
+                statController.ModifyStatAmount(cacheActorId , statName , amount);
             });
         }
 
@@ -40,8 +47,16 @@ namespace Main.Presenters
 
         public void CreateStatText(string actorId , string statName , int amount)
         {
+            cacheActorId = actorId;
             var actorComponent = actorMapper.GetActorComponent(actorId);
             actorComponent.CreateStat(statName , amount);
+        }
+
+
+        public void ModifyAmountText(string actorId , string statName , int amount)
+        {
+            var actorComponent = actorMapper.GetActorComponent(actorId);
+            actorComponent.SetStatText(statName , amount);
         }
 
     #endregion

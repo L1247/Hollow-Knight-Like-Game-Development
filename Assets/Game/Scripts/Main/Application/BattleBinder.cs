@@ -69,7 +69,9 @@ namespace Main.Application
         private void BindRepositories()
         {
             Container.Bind<ActorRepository>().AsSingle();
-            Container.Bind<IRepository<IStat>>().To<StatRepository>().AsSingle();
+            var statRepository = new StatRepository();
+            Container.Bind<IRepository<IStat>>().To<StatRepository>().FromInstance(statRepository).AsCached();
+            Container.Bind<IStatRepository>().To<StatRepository>().FromInstance(statRepository).AsCached();
             Container.Bind<IDataRepository>().To<DataRepository>().AsSingle();
         }
 
@@ -81,6 +83,7 @@ namespace Main.Application
             Container.Bind<MakeActorDieUseCase>().AsSingle();
             // stat
             Container.Bind<CreateStatUseCase>().AsSingle();
+            Container.Bind<ModifyAmountUseCase>().AsSingle();
         }
 
     #endregion

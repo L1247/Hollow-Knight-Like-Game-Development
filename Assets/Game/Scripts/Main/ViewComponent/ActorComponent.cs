@@ -1,5 +1,6 @@
 #region
 
+using System.Collections.Generic;
 using Main.ViewComponent.Events;
 using Sirenix.OdinInspector;
 using UniRx;
@@ -45,6 +46,8 @@ namespace Main.ViewComponent
 
         private int statIndex;
 
+        private readonly Dictionary<string , StatComponent> statComponents = new Dictionary<string , StatComponent>();
+
         [SerializeField]
         [Required]
         private Animator animator;
@@ -77,7 +80,7 @@ namespace Main.ViewComponent
             boxCollider_Hitbox.OnTriggerEnter2DAsObservable()
                               .Subscribe(collider2D => OnHitboxTriggered(collider2D))
                               .AddTo(gameObject);
-            statTemplate?.gameObject.SetActive(false);
+            if (statTemplate != null) statTemplate.gameObject.SetActive(false);
         }
 
         public void Update()
@@ -105,6 +108,7 @@ namespace Main.ViewComponent
             var statComponent = statInstance.GetComponent<StatComponent>();
             statComponent.SetText(statName , amount);
             statInstance.SetActive(true);
+            statComponents.Add(statName , statComponent);
             statIndex++;
         }
 
@@ -160,6 +164,12 @@ namespace Main.ViewComponent
             // 攻擊中不可以切換移動動畫
             if (characterCondition.IsMoving == false)
                 unityComponent.PlayAnimation(animationName);
+        }
+
+        public void SetStatText(string statName , int amount)
+        {
+            var statComponent = statComponents[statName];
+            statComponent.SetText(statName , amount);
         }
 
         public void SetText(string displayText)
