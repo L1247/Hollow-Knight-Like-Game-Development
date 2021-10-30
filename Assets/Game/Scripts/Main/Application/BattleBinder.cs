@@ -38,10 +38,10 @@ namespace Main.Application
             // EventHandler
             Container.Bind<ViewEventHandler>().AsSingle().NonLazy();
             // Controller
-            Container.Bind<ActorContoller>().AsSingle();
+            Container.Bind<ActorController>().AsSingle();
             // Repository
             Container.Bind<ActorRepository>().AsSingle();
-            Container.Bind<iDataRepository>().To<DataRepository>().AsSingle();
+            Container.Bind<IDataRepository>().To<DataRepository>().AsSingle();
             // UseCases
             Container.Bind<CreateActorUseCase>().AsSingle();
             Container.Bind<ChangeDirectionUseCase>().AsSingle();

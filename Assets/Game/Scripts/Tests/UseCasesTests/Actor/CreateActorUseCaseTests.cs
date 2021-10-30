@@ -20,7 +20,7 @@ namespace UseCasesTests.Actor
         {
             var actorId        = "1234";
             var actorDataId    = "Pokemon";
-            var dataRepository = Substitute.For<iDataRepository>();
+            var dataRepository = Substitute.For<IDataRepository>();
             var health         = 123;
             var actorData      = Substitute.For<IActorData>();
             actorData.Health.Returns(health);

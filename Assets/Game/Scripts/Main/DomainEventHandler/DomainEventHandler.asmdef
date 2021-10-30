@@ -1,10 +1,11 @@
 {
-  "name": "Controller",
+  "name": "DomainEventHandler",
   "rootNamespace": "",
   "references": [
-    "GUID:c60536e7e3547fd4daba9fab91875c0a",
+    "GUID:503115bc6a4017d42bbbebc149159003",
+    "GUID:7ac9d861928557b419908e793dfbcce6",
     "GUID:b18a16a3dcf3d01428b99057a0d9b91e",
-    "GUID:503115bc6a4017d42bbbebc149159003"
+    "GUID:5a27b0673e2c14e49b7fd88f81155d68"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

@@ -20,7 +20,7 @@ namespace Main.Presenters
     #region Private Variables
 
         [Inject]
-        private ActorContoller actorContoller;
+        private ActorController actorController;
 
         [Inject]
         private ActorMapper actorMapper;
@@ -53,10 +53,10 @@ namespace Main.Presenters
             ButtonBinding(button_CreateActor_Player , () =>
             {
                 var actorDataId = actorDataOverView.FindAll()[3].ActorDataId;
-                actorContoller.CreateActor(actorDataId);
+                actorController.CreateActor(actorDataId);
             });
-            ButtonBinding(button_DealDamage ,   () => actorContoller.DealDamage(CacheActorId , 10));
-            ButtonBinding(button_MakeActorDie , () => actorContoller.MakeActorDie(CacheActorId));
+            ButtonBinding(button_DealDamage ,   () => actorController.DealDamage(CacheActorId , 10));
+            ButtonBinding(button_MakeActorDie , () => actorController.MakeActorDie(CacheActorId));
         }
 
     #endregion
@@ -125,7 +125,7 @@ namespace Main.Presenters
                 {
                     // mapping input value to domain direction value
                     var dir = horizontalValue == 1 ? 1 : 0;
-                    actorContoller.ChangeDirection(CacheActorId , dir);
+                    actorController.ChangeDirection(CacheActorId , dir);
                 }
             }
         }

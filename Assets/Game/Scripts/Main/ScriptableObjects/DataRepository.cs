@@ -9,7 +9,7 @@ using Zenject;
 
 namespace Main.GameDataStructure
 {
-    public class DataRepository : iDataRepository
+    public class DataRepository : IDataRepository
     {
     #region Private Variables
 

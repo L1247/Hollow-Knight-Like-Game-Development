@@ -1,10 +1,14 @@
+#region
+
 using Main.UseCases.Actor.Create;
 using Main.UseCases.Actor.Edit;
 using Zenject;
 
+#endregion
+
 namespace Main.Controller
 {
-    public class ActorContoller
+    public class ActorController
     {
     #region Private Variables
 

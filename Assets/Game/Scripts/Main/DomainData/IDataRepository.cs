@@ -6,7 +6,7 @@ using Main.DomainData;
 
 namespace Main.UseCases.Repository
 {
-    public interface iDataRepository
+    public interface IDataRepository
     {
     #region Public Methods
 
