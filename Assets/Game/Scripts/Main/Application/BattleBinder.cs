@@ -3,6 +3,7 @@
 using DDDCore;
 using DDDCore.Model;
 using Main.Controller;
+using Main.DomainEventHandler;
 using Main.EventHandler.View;
 using Main.GameDataStructure;
 using Main.Input;
@@ -37,6 +38,7 @@ namespace Main.Application
             Container.Bind<IDomainEventBus>().To<DomainEventBus>().AsSingle();
             // EventHandler
             Container.Bind<ViewEventHandler>().AsSingle().NonLazy();
+            Container.Bind<NotifyStat>().AsSingle().NonLazy();
             // Controller
             Container.Bind<ActorController>().AsSingle();
             // Repository
