@@ -1,5 +1,7 @@
 #region
 
+using System.Collections.Generic;
+using System.Linq;
 using Main.DomainData;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -13,9 +15,10 @@ namespace Main.GameDataStructure
     {
     #region Public Variables
 
-        public int    Atk         => atk;
-        public int    Health      => health;
-        public string ActorDataId => actorDataId;
+        public int             Atk         => atk;
+        public int             Health      => health;
+        public List<IStatData> StatDatas   => statDatas.Cast<IStatData>().ToList();
+        public string          ActorDataId => actorDataId;
 
         public GameObject ActorPrefab;
 
@@ -35,6 +38,11 @@ namespace Main.GameDataStructure
         [SerializeField]
         [Required]
         private string actorDataId;
+
+        [SerializeField]
+        [BoxGroup("數值資料")]
+        [HideLabel]
+        private List<StatData> statDatas;
 
     #endregion
     }

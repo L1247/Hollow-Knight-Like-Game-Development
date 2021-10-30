@@ -1,3 +1,9 @@
+#region
+
+using System.Collections.Generic;
+
+#endregion
+
 namespace Main.DomainData
 {
     public interface IActorData
@@ -7,7 +13,8 @@ namespace Main.DomainData
         int Atk    { get; }
         int Health { get; }
 
-        string ActorDataId { get; }
+        List<IStatData> StatDatas   { get; }
+        string          ActorDataId { get; }
 
     #endregion
     }
