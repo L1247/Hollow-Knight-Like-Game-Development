@@ -11,11 +11,12 @@ using Main.ViewComponent.Events;
 
 namespace Main.EventHandler.View
 {
-    public class ViewEventHandler : DDDCore.EventHandler
+    public class ActorViewEventHandler : DDDCore.EventHandler
     {
     #region Constructor
 
-        public ViewEventHandler(IDomainEventBus domainEventBus , ActorPresenter actorPresenter) : base(domainEventBus)
+        public ActorViewEventHandler(IDomainEventBus domainEventBus , ActorPresenter actorPresenter) : base(
+            domainEventBus)
         {
             handlerType = HandlerType.View;
 

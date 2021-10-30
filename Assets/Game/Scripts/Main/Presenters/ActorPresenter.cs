@@ -36,9 +36,6 @@ namespace Main.Presenters
         [Required]
         private Button button_CreateActor_Player;
 
-        [SerializeField]
-        [Required]
-        private Button button_DealDamage;
 
         [SerializeField]
         [Required]
@@ -54,11 +51,6 @@ namespace Main.Presenters
             {
                 var actorDataId = actorDataOverView.FindAll()[3].ActorDataId;
                 actorController.CreateActor(actorDataId);
-            });
-            ButtonBinding(button_DealDamage , () =>
-            {
-                // todo : modify amount
-                // actorController.DealDamage(CacheActorId , 10);
             });
             ButtonBinding(button_MakeActorDie , () => actorController.MakeActorDie(CacheActorId));
         }
@@ -97,11 +89,6 @@ namespace Main.Presenters
             }
         }
 
-        public void OnDamageDealt(string actorId , int currentHealth)
-        {
-            var actorComponent = actorMapper.GetActorComponent(actorId);
-            actorComponent.SetHealthText(currentHealth);
-        }
 
         public void OnDirectionChanged(string actorId , int direction)
         {
