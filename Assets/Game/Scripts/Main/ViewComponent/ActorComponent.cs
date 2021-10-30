@@ -1,3 +1,6 @@
+#region
+
+using System.Collections.Generic;
 using Main.ViewComponent.Events;
 using Sirenix.OdinInspector;
 using UniRx;
@@ -6,6 +9,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using Utilities.Contract;
 using Zenject;
+
+#endregion
 
 namespace Main.ViewComponent
 {
@@ -25,9 +30,6 @@ namespace Main.ViewComponent
         public int JumpForce;
 
         [Required]
-        public Text text_Health;
-
-        [Required]
         public Text text_IdAndDataId;
 
         [Required]
@@ -42,6 +44,10 @@ namespace Main.ViewComponent
         [Inject]
         private SignalBus signalBus;
 
+        private int statIndex;
+
+        private readonly Dictionary<string , StatComponent> statComponents = new Dictionary<string , StatComponent>();
+
         [SerializeField]
         [Required]
         private Animator animator;
@@ -54,30 +60,34 @@ namespace Main.ViewComponent
         [Required]
         private float radius = 0.1f;
 
+        [SerializeField]
+        private Transform statParent;
+
+        [SerializeField]
+        private GameObject statTemplate;
+
     #endregion
 
-    #region Events
+    #region Unity events
 
-        public void OnAttackEnd()
+        private void Awake()
         {
-            characterCondition.IsAttacking = false;
+            var rigi2d = GetComponent<Rigidbody2D>();
+            unityComponent                = new UnityComponent(animator , rigi2d , transform , radius);
+            characterCondition            = new CharacterCondition();
+            characterCondition.IsOnGround = true;
+            // Listen hit box trigger event
+            boxCollider_Hitbox.OnTriggerEnter2DAsObservable()
+                              .Subscribe(collider2D => OnHitboxTriggered(collider2D))
+                              .AddTo(gameObject);
+            if (statTemplate != null) statTemplate.gameObject.SetActive(false);
         }
 
-        private void OnDrawGizmos()
+        public void Update()
         {
-            if (unityComponent == null) return;
-            Gizmos.color = Color.green;
-            Gizmos.DrawSphere(unityComponent.GetGroundCheckPosition() , radius);
-        }
-
-        private void OnHitboxTriggered(Collider2D collider)
-        {
-            var colliderGameObject = collider.gameObject;
-            if (colliderGameObject != gameObject)
-            {
-                var triggerActorComponent = colliderGameObject.GetComponent<ActorComponent>();
-                signalBus.Fire(new HitboxTriggered(triggerActorComponent));
-            }
+            Contract.RequireNotNull(characterCondition , "characterCondition");
+            characterCondition.IsOnGround = unityComponent.IsGrounding();
+            if (characterCondition.CanMoving()) MoveCharacter();
         }
 
     #endregion
@@ -89,6 +99,17 @@ namespace Main.ViewComponent
             if (characterCondition.IsDead) return;
             characterCondition.IsAttacking = true;
             unityComponent.PlayAnimation("Attack" , OnAttackEnd);
+        }
+
+        public void CreateStat(string statName , int amount)
+        {
+            var statInstance = Instantiate(statTemplate , statParent , true);
+            statInstance.transform.position += Vector3.up * 0.5f * statIndex;
+            var statComponent = statInstance.GetComponent<StatComponent>();
+            statComponent.SetText(statName , amount);
+            statInstance.SetActive(true);
+            statComponents.Add(statName , statComponent);
+            statIndex++;
         }
 
         public Vector3 GetMovement()
@@ -109,7 +130,6 @@ namespace Main.ViewComponent
         {
             characterCondition.IsDead = true;
             unityComponent.PlayAnimation("Die");
-            if (text_Health != null) text_Health.enabled           = false;
             if (text_IdAndDataId != null) text_IdAndDataId.enabled = false;
         }
 
@@ -118,6 +138,11 @@ namespace Main.ViewComponent
             var movement = GetMovement();
             unityComponent.MoveCharacter(movement);
             unityComponent.PlayAnimation("Run");
+        }
+
+        public void OnAttackEnd()
+        {
+            characterCondition.IsAttacking = false;
         }
 
         public void SetDirection(int directionValue)
@@ -130,11 +155,6 @@ namespace Main.ViewComponent
             Renderer.transform.localScale = new Vector3(x , 1 , 1);
         }
 
-        public void SetHealthText(int health)
-        {
-            var displayText = $"Health:{health}";
-            text_Health.text = displayText;
-        }
 
         public void SetIsMoving(bool isMoving)
         {
@@ -146,32 +166,36 @@ namespace Main.ViewComponent
                 unityComponent.PlayAnimation(animationName);
         }
 
+        public void SetStatText(string statName , int amount)
+        {
+            var statComponent = statComponents[statName];
+            statComponent.SetText(statName , amount);
+        }
+
         public void SetText(string displayText)
         {
             text_IdAndDataId.text = displayText;
-        }
-
-        public void Update()
-        {
-            Contract.RequireNotNull(characterCondition , "characterCondition");
-            characterCondition.IsOnGround = unityComponent.IsGrounding();
-            if (characterCondition.CanMoving()) MoveCharacter();
         }
 
     #endregion
 
     #region Private Methods
 
-        private void Awake()
+        private void OnDrawGizmos()
         {
-            var rigi2d = GetComponent<Rigidbody2D>();
-            unityComponent                = new UnityComponent(animator , rigi2d , transform , radius);
-            characterCondition            = new CharacterCondition();
-            characterCondition.IsOnGround = true;
-            // Listen hit box trigger event
-            boxCollider_Hitbox.OnTriggerEnter2DAsObservable()
-                              .Subscribe(collider2D => OnHitboxTriggered(collider2D))
-                              .AddTo(gameObject);
+            if (unityComponent == null) return;
+            Gizmos.color = Color.green;
+            Gizmos.DrawSphere(unityComponent.GetGroundCheckPosition() , radius);
+        }
+
+        private void OnHitboxTriggered(Collider2D collider)
+        {
+            var colliderGameObject = collider.gameObject;
+            if (colliderGameObject != gameObject)
+            {
+                var triggerActorComponent = colliderGameObject.GetComponent<ActorComponent>();
+                signalBus.Fire(new HitboxTriggered(triggerActorComponent));
+            }
         }
 
     #endregion

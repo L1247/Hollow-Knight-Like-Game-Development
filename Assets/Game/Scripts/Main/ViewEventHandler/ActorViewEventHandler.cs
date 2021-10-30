@@ -11,11 +11,12 @@ using Main.ViewComponent.Events;
 
 namespace Main.EventHandler.View
 {
-    public class ViewEventHandler : DDDCore.EventHandler
+    public class ActorViewEventHandler : DDDCore.EventHandler
     {
     #region Constructor
 
-        public ViewEventHandler(IDomainEventBus domainEventBus , ActorPresenter actorPresenter) : base(domainEventBus)
+        public ActorViewEventHandler(IDomainEventBus domainEventBus , ActorPresenter actorPresenter) : base(
+            domainEventBus)
         {
             handlerType = HandlerType.View;
 
@@ -28,10 +29,6 @@ namespace Main.EventHandler.View
             Register<DirectionChanged>(changed =>
             {
                 actorPresenter.OnDirectionChanged(changed.ActorId , changed.Direction);
-            });
-            Register<DamageDealt>(damageDealt =>
-            {
-                actorPresenter.OnDamageDealt(damageDealt.ActorId , damageDealt.CurrentHealth);
             });
             Register<ActorDead>(dead => { actorPresenter.OnActorDead(dead.ActorId); });
 

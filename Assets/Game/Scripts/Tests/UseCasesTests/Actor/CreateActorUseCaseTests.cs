@@ -20,10 +20,8 @@ namespace UseCasesTests.Actor
         {
             var actorId        = "1234";
             var actorDataId    = "Pokemon";
-            var dataRepository = Substitute.For<iDataRepository>();
-            var health         = 123;
+            var dataRepository = Substitute.For<IDataRepository>();
             var actorData      = Substitute.For<IActorData>();
-            actorData.Health.Returns(health);
             dataRepository.GetActorData(actorDataId).Returns(actorData);
 
             var actorRepository    = new ActorRepository();
@@ -40,9 +38,8 @@ namespace UseCasesTests.Actor
             Assert.NotNull(actor.ActorDataId);
             Assert.AreEqual(actorDataId , actor.ActorDataId);
             // 角色預設面右
-            Assert.AreEqual(1 ,      actor.Direction);
-            Assert.AreEqual(health , actor.Health);
-            Assert.AreEqual(false ,  actor.IsDead);
+            Assert.AreEqual(1 ,     actor.Direction);
+            Assert.AreEqual(false , actor.IsDead);
         }
 
     #endregion

@@ -14,5 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ActorPrefab: {fileID: 2318797795964718036, guid: 1a177376e6f739646b0c6f9b5c4ed36e, type: 3}
   actorDataId: ActorDataId3
-  health: 200
-  atk: 10
+  statDatas:
+  - statName: Hp
+    amount: 250
+  - statName: Atk
+    amount: 10
+  - statName: Def
+    amount: 5456123

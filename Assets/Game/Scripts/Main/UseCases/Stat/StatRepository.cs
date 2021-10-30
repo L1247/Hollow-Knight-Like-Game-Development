@@ -1,6 +1,5 @@
 #region
 
-using System;
 using DDDCore.Usecase;
 using Main.Entity;
 
@@ -14,7 +13,8 @@ namespace Main.UseCases.Stat
 
         public IStat FindStat(string actorId , string statName)
         {
-            throw new NotImplementedException();
+            var foundStat = entities.Find(stat => stat.ActorId == actorId && stat.Name == statName);
+            return foundStat;
         }
 
     #endregion

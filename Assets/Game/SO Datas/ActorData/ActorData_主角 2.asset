@@ -13,6 +13,11 @@ MonoBehaviour:
   m_Name: "ActorData_\u4E3B\u89D2 2"
   m_EditorClassIdentifier: 
   ActorPrefab: {fileID: 2318797795964718036, guid: d892f79a05b4b9d4bb32da4346296c44, type: 3}
-  actorDataId: ActorDataId2
-  health: 200
   atk: 10
+  health: 200
+  actorDataId: ActorDataId2
+  statDatas:
+  - statName: Hp
+    amount: 200
+  - statName: Atk
+    amount: 10

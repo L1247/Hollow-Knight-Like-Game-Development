@@ -53,20 +53,6 @@ public class ActorComponentTests
     }
 
     [Test]
-    public void Should_Succeed_When_Call_SetText_ForHealth()
-    {
-        var health = 123;
-        actorComponent.text_Health = textComponent;
-        // arrange
-        var displayText = $"Health:{health}";
-        // act
-        actorComponent.SetHealthText(health);
-        // assert
-        Assert.NotNull(actorComponent.text_Health);
-        Assert.AreEqual(displayText , actorComponent.text_Health.text);
-    }
-
-    [Test]
     [TestCase(1 , -1)]
     [TestCase(0 , 1)]
     public void Should_Succeed_When_Call_SetDirection(int directionValue , int expectedScaleValue)
@@ -158,8 +144,6 @@ public class ActorComponentTests
         var textComponentForHealth = new GameObject().AddComponent<Text>();
         Assert.NotNull(textComponentForHealth);
         actorComponent.text_IdAndDataId = textComponent;
-        actorComponent.text_Health      = textComponentForHealth;
-        Assert.NotNull(actorComponent.text_Health);
         Assert.NotNull(actorComponent.text_IdAndDataId);
         Assert.AreEqual(true , textComponent.enabled);
         Assert.AreEqual(true , textComponentForHealth.enabled);

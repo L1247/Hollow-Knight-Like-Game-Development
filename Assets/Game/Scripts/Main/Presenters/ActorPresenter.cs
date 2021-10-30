@@ -20,7 +20,7 @@ namespace Main.Presenters
     #region Private Variables
 
         [Inject]
-        private ActorContoller actorContoller;
+        private ActorController actorController;
 
         [Inject]
         private ActorMapper actorMapper;
@@ -36,9 +36,6 @@ namespace Main.Presenters
         [Required]
         private Button button_CreateActor_Player;
 
-        [SerializeField]
-        [Required]
-        private Button button_DealDamage;
 
         [SerializeField]
         [Required]
@@ -53,10 +50,9 @@ namespace Main.Presenters
             ButtonBinding(button_CreateActor_Player , () =>
             {
                 var actorDataId = actorDataOverView.FindAll()[3].ActorDataId;
-                actorContoller.CreateActor(actorDataId);
+                actorController.CreateActor(actorDataId);
             });
-            ButtonBinding(button_DealDamage ,   () => actorContoller.DealDamage(CacheActorId , 10));
-            ButtonBinding(button_MakeActorDie , () => actorContoller.MakeActorDie(CacheActorId));
+            ButtonBinding(button_MakeActorDie , () => actorController.MakeActorDie(CacheActorId));
         }
 
     #endregion
@@ -93,11 +89,6 @@ namespace Main.Presenters
             }
         }
 
-        public void OnDamageDealt(string actorId , int currentHealth)
-        {
-            var actorComponent = actorMapper.GetActorComponent(actorId);
-            actorComponent.SetHealthText(currentHealth);
-        }
 
         public void OnDirectionChanged(string actorId , int direction)
         {
@@ -125,7 +116,7 @@ namespace Main.Presenters
                 {
                     // mapping input value to domain direction value
                     var dir = horizontalValue == 1 ? 1 : 0;
-                    actorContoller.ChangeDirection(CacheActorId , dir);
+                    actorController.ChangeDirection(CacheActorId , dir);
                 }
             }
         }
