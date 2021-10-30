@@ -10,9 +10,6 @@ namespace Main.DomainData
     {
     #region Public Variables
 
-        int Atk    { get; }
-        int Health { get; }
-
         List<IStatData> StatDatas   { get; }
         string          ActorDataId { get; }
 

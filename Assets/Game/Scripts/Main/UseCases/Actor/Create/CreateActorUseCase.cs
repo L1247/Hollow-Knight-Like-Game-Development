@@ -50,11 +50,9 @@ namespace Main.UseCases.Actor.Create
             var actorData = dataRepository.GetActorData(actorDataId);
             Contract.RequireNotNull(actorData , "actorDomainData");
 
-            var health = actorData.Health;
             var actor = ActorBuilder.NewInstance()
                                     .SetActorId(input.ActorId)
                                     .SetActorDataId(actorDataId)
-                                    .SetHealth(health)
                                     .Build();
             repository.Save(actor);
             domainEventBus.PostAll(actor);

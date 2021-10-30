@@ -49,29 +49,11 @@ public class ActorEventTests
                                 .Build();
         actor.MakeDie();
         actor.ChangeDirection(direction);
-        Assert.AreEqual( true , actor.IsDead );
+        Assert.AreEqual(true , actor.IsDead);
         var domainEvents = actor.GetDomainEvents();
         Assert.AreEqual(2 , domainEvents.Count);
     }
 
-
-    [Test]
-    public void Should_Publish_Damage_Dealt_When_Deal_Damage()
-    {
-        var actorId = "1234";
-        var health  = 99;
-        var damage  = 87;
-        var actor = ActorBuilder.NewInstance()
-                                .SetActorId(actorId)
-                                .SetHealth(health)
-                                .Build();
-        actor.DealDamage(damage);
-        var domainEvents = actor.GetDomainEvents();
-        Assert.AreEqual(2 , domainEvents.Count);
-        var damageDealt = domainEvents[1] as DamageDealt;
-        Assert.AreEqual(actorId ,         damageDealt.ActorId);
-        Assert.AreEqual(health - damage , damageDealt.CurrentHealth);
-    }
 
     [Test]
     public void Should_Publish_Actor_Dead_When_Make_Die()

@@ -1,13 +1,15 @@
+#region
+
 using System;
 using DDDCore.Model;
+
+#endregion
 
 namespace Entity.Builder
 {
     public class ActorBuilder : AbstractBuilder<ActorBuilder , Actor>
     {
     #region Private Variables
-
-        private int health;
 
         private string actorDataId;
         private string actorId;
@@ -19,7 +21,7 @@ namespace Entity.Builder
         public override Actor Build()
         {
             actorId = actorId == null ? Guid.NewGuid().ToString() : actorId;
-            var actor = new Actor(actorId , actorDataId , health);
+            var actor = new Actor(actorId , actorDataId);
             return actor;
         }
 
@@ -32,12 +34,6 @@ namespace Entity.Builder
         public ActorBuilder SetActorId(string actorId)
         {
             this.actorId = actorId;
-            return this;
-        }
-
-        public ActorBuilder SetHealth(int health)
-        {
-            this.health = health;
             return this;
         }
 

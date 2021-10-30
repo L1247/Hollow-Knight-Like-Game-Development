@@ -29,10 +29,6 @@ namespace Main.EventHandler.View
             {
                 actorPresenter.OnDirectionChanged(changed.ActorId , changed.Direction);
             });
-            Register<DamageDealt>(damageDealt =>
-            {
-                actorPresenter.OnDamageDealt(damageDealt.ActorId , damageDealt.CurrentHealth);
-            });
             Register<ActorDead>(dead => { actorPresenter.OnActorDead(dead.ActorId); });
 
             var signalBus = domainEventBus.SignalBus;

@@ -18,8 +18,6 @@ namespace Main.Controller
         [Inject]
         private CreateActorUseCase createActorUseCase;
 
-        [Inject]
-        private DealDamageUseCase dealDamageUseCase;
 
         [Inject]
         private MakeActorDieUseCase makeActorDieUseCase;
@@ -43,13 +41,6 @@ namespace Main.Controller
             createActorUseCase.Execute(input);
         }
 
-        public void DealDamage(string actorId , int damage)
-        {
-            var input = new DealDamageInput();
-            input.ActorId = actorId;
-            input.Damage  = damage;
-            dealDamageUseCase.Execute(input);
-        }
 
         public void MakeActorDie(string actorId)
         {

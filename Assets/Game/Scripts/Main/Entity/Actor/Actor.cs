@@ -1,5 +1,9 @@
+#region
+
 using DDDCore.Model;
 using Entity.Events;
+
+#endregion
 
 namespace Entity
 {
@@ -9,17 +13,15 @@ namespace Entity
 
         public bool   IsDead      { get; private set; }
         public int    Direction   { get; private set; }
-        public int    Health      { get; private set; }
         public string ActorDataId { get; }
 
     #endregion
 
     #region Constructor
 
-        public Actor(string actorId , string actorDataId , int health) : base(actorId)
+        public Actor(string actorId , string actorDataId) : base(actorId)
         {
             ActorDataId = actorDataId;
-            Health      = health;
             Direction   = 1;
             AddDomainEvent(new ActorCreated(GetId() , ActorDataId , Direction));
         }
@@ -37,8 +39,7 @@ namespace Entity
 
         public void DealDamage(int damage)
         {
-            Health -= damage;
-            AddDomainEvent(new DamageDealt(GetId() , Health));
+            // AddDomainEvent(new DamageDealt(GetId() , Health));
         }
 
         public void MakeDie()

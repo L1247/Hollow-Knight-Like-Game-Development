@@ -55,7 +55,11 @@ namespace Main.Presenters
                 var actorDataId = actorDataOverView.FindAll()[3].ActorDataId;
                 actorController.CreateActor(actorDataId);
             });
-            ButtonBinding(button_DealDamage ,   () => actorController.DealDamage(CacheActorId , 10));
+            ButtonBinding(button_DealDamage , () =>
+            {
+                // todo : modify amount
+                // actorController.DealDamage(CacheActorId , 10);
+            });
             ButtonBinding(button_MakeActorDie , () => actorController.MakeActorDie(CacheActorId));
         }
 
