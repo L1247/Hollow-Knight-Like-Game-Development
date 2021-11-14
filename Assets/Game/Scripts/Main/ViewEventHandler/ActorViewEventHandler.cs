@@ -6,6 +6,7 @@ using Main.Input.Event;
 using Main.Input.Events;
 using Main.Presenters;
 using Main.ViewComponent.Events;
+using Zenject;
 
 #endregion
 
@@ -15,7 +16,8 @@ namespace Main.EventHandler.View
     {
     #region Constructor
 
-        public ActorViewEventHandler(IDomainEventBus domainEventBus , ActorPresenter actorPresenter) : base(
+        public ActorViewEventHandler(SignalBus      signalBus , IDomainEventBus domainEventBus ,
+                                     ActorPresenter actorPresenter) : base(
             domainEventBus)
         {
             handlerType = HandlerType.View;
@@ -32,7 +34,6 @@ namespace Main.EventHandler.View
             });
             Register<ActorDead>(dead => { actorPresenter.OnActorDead(dead.ActorId); });
 
-            var signalBus = domainEventBus.SignalBus;
             // some view event
             signalBus.Subscribe<InputHorizontal>(actorPresenter.OnHorizontalChanged);
             signalBus.Subscribe<ButtonDownJump>(actorPresenter.OnButtonDownJump);
