@@ -2,7 +2,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using DDDCore.Model;
 using Zenject;
 
@@ -57,13 +56,9 @@ namespace DDDCore
 
         public void PostAll(IAggregateRoot aggregateRoot)
         {
-            var domainEvents = aggregateRoot.GetDomainEvents();
-            var cacheEvents  = domainEvents.Select(_ => _).ToList();
-            aggregateRoot.ClearDomainEvents();
-            foreach (var domainEvent in cacheEvents)
+            foreach (var domainEvent in aggregateRoot.GetDomainEvents())
                 Post(domainEvent);
-
-            domainEvents.Clear();
+            aggregateRoot.ClearDomainEvents();
         }
 
         public void Register<T>(Action<T> callBackAction , bool isEarly = false)
