@@ -33,7 +33,7 @@ namespace UseCasesTests.Stat
             input.Amount   = amount;
             createStatUseCase.Execute(input);
 
-            var stats = repository.FindAll();
+            var stats = repository.GetAll();
             Assert.AreEqual(1 , stats.Count , "stats.count is not equal");
             var stat = stats[0];
             // assert properties

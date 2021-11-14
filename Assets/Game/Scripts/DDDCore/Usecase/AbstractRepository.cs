@@ -11,7 +11,13 @@ namespace DDDCore.Usecase
     {
     #region Protected Variables
 
-        protected List<T> entities = new List<T>();
+        protected Dictionary<string , T> idEntities = new Dictionary<string , T>();
+
+    #endregion
+
+    #region Private Variables
+
+        private readonly List<T> entities = new List<T>();
 
     #endregion
 
@@ -19,26 +25,29 @@ namespace DDDCore.Usecase
 
         public bool ContainsId(string id)
         {
-            return entities.Contains(FindById(id));
+            return idEntities.ContainsKey(id);
         }
 
         public virtual void DeleteById(string id)
         {
+            idEntities.Remove(id);
             entities.Remove(FindById(id));
-        }
-
-        public virtual List<T> FindAll()
-        {
-            return entities;
         }
 
         public virtual T FindById(string id)
         {
-            return entities.Find(_ => _.GetId() == id);
+            if (ContainsId(id)) return idEntities[id];
+            return default;
+        }
+
+        public virtual List<T> GetAll()
+        {
+            return entities;
         }
 
         public virtual void Save(T entity)
         {
+            idEntities.Add(entity.GetId() , entity);
             entities.Add(entity);
         }
 

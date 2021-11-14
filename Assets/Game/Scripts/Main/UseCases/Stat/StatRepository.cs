@@ -13,8 +13,7 @@ namespace Main.UseCases.Stat
 
         public IStat FindStat(string actorId , string statName)
         {
-            var foundStat = entities.Find(stat => stat.ActorId == actorId && stat.Name == statName);
-            return foundStat;
+            return GetAll().Find(stat => stat.ActorId == actorId && stat.Name == statName);
         }
 
     #endregion

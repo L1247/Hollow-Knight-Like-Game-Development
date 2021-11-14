@@ -13,9 +13,9 @@ namespace DDDCore.Usecase
         bool ContainsId(string id);
 
         void    DeleteById(string id);
-        List<T> FindAll();
-        T       FindById(string id);
-        void    Save(T          entity);
+        T       FindById(string   id);
+        List<T> GetAll();
+        void    Save(T entity);
 
     #endregion
     }
