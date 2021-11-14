@@ -1,4 +1,8 @@
+#region
+
 using DDDCore.Model;
+
+#endregion
 
 namespace Entity.Events
 {

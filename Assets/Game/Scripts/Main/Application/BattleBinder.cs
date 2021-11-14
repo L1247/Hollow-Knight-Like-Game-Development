@@ -34,13 +34,11 @@ namespace Main.Application
             var option = Container.BindMessagePipe();
             Container.BindMessageBroker<DomainEvent>(option);
             SignalBusInstaller.Install(Container);
-            // Container.DeclareSignal<DomainEvent>();
             Container.DeclareSignal<InputHorizontal>();
             Container.DeclareSignal<ButtonDownJump>();
             Container.DeclareSignal<ButtonDownAttack>();
             Container.DeclareSignal<rAnimationEvent>();
             Container.DeclareSignal<HitboxTriggered>();
-            // Container.Bind<EventStore>().AsSingle().NonLazy();
             Container.Bind<IDomainEventBus>().To<DomainEventBus>().AsSingle();
             BindEventHandlers();
             BindControllers();

@@ -36,7 +36,7 @@ namespace DDDCore
 
         public virtual void HandleEvent(DomainEvent domainEvent)
         {
-            var type        = domainEvent.GetType();
+            var type        = domainEvent.Type;
             var containsKey = callBacks.ContainsKey(type);
             if (containsKey)
             {
