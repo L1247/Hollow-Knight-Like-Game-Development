@@ -2,7 +2,6 @@
 
 using System;
 using DDDCore.Model;
-using Zenject;
 
 #endregion
 
@@ -10,12 +9,6 @@ namespace DDDCore
 {
     public interface IDomainEventBus
     {
-    #region Public Variables
-
-        SignalBus SignalBus { get; }
-
-    #endregion
-
     #region Public Methods
 
         void HandleEvent(DomainEvent domainEvent);
@@ -27,5 +20,7 @@ namespace DDDCore
         where T : DomainEvent;
 
     #endregion
+
+        // SignalBus SignalBus { get; }
     }
 }

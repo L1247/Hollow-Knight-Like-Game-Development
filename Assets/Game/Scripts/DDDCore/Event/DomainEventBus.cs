@@ -2,8 +2,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using DDDCore.Model;
+using MessagePipe;
 using Zenject;
 
 #endregion
@@ -12,27 +12,22 @@ namespace DDDCore
 {
     public class DomainEventBus : IDomainEventBus
     {
-    #region Public Variables
-
-        public SignalBus SignalBus { get; }
-
-    #endregion
-
     #region Private Variables
 
         private readonly Dictionary<Type , List<Action<object>>> callBacks
             = new Dictionary<Type , List<Action<object>>>();
+
+        private readonly IPublisher<DomainEvent> publisher;
 
     #endregion
 
     #region Constructor
 
         [Inject]
-        public DomainEventBus(SignalBus signalBus)
+        public DomainEventBus(ISubscriber<DomainEvent> subscriber , IPublisher<DomainEvent> publisher)
         {
-            SignalBus = signalBus;
-            SignalBus = signalBus;
-            SignalBus.Subscribe<DomainEvent>(HandleEvent);
+            this.publisher = publisher;
+            subscriber.Subscribe(HandleEvent);
         }
 
     #endregion
@@ -41,7 +36,7 @@ namespace DDDCore
 
         public virtual void HandleEvent(DomainEvent domainEvent)
         {
-            var type        = domainEvent.GetType();
+            var type        = domainEvent.Type;
             var containsKey = callBacks.ContainsKey(type);
             if (containsKey)
             {
@@ -52,18 +47,15 @@ namespace DDDCore
 
         public void Post(DomainEvent domainEvent)
         {
-            SignalBus.TryFire(domainEvent);
+            // SignalBus.TryFire(domainEvent);
+            publisher.Publish(domainEvent);
         }
 
         public void PostAll(IAggregateRoot aggregateRoot)
         {
-            var domainEvents = aggregateRoot.GetDomainEvents();
-            var cacheEvents  = domainEvents.Select(_ => _).ToList();
-            aggregateRoot.ClearDomainEvents();
-            foreach (var domainEvent in cacheEvents)
+            foreach (var domainEvent in aggregateRoot.GetDomainEvents())
                 Post(domainEvent);
-
-            domainEvents.Clear();
+            aggregateRoot.ClearDomainEvents();
         }
 
         public void Register<T>(Action<T> callBackAction , bool isEarly = false)

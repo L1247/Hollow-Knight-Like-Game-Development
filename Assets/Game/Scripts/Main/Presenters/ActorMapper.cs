@@ -21,7 +21,7 @@ namespace Main.Presenters
         [Inject]
         private IActorDataOverView actorDataOverView;
 
-        private readonly List<ActorViewData> actorViewDatas = new List<ActorViewData>();
+        private readonly Dictionary<string , ActorViewData> actorViewDatas = new Dictionary<string , ActorViewData>();
 
     #endregion
 
@@ -38,14 +38,17 @@ namespace Main.Presenters
             actorComponent.SetText(text_IdAndDataId);
             actorComponent.SetDirection(direction);
             var actorViewData = new ActorViewData(actorId , actorDataId , actorComponent);
-            actorViewDatas.Add(actorViewData);
+            actorViewDatas.Add(actorId , actorViewData);
         }
 
         public ActorComponent GetActorComponent(string actorId)
         {
             Contract.RequireString(actorId , "ActorId");
-            var actorViewData = actorViewDatas.Find(data => data.ActorId == actorId);
-            return actorViewData.ActorComponent;
+            ActorComponent actorComponent = null;
+            if (actorViewDatas.ContainsKey(actorId))
+                actorComponent = actorViewDatas[actorId].ActorComponent;
+
+            return actorComponent;
         }
 
     #endregion

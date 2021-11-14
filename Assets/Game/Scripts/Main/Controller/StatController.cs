@@ -17,26 +17,37 @@ namespace Main.Controller
         [Inject]
         private ModifyAmountUseCase modifyAmountUseCase;
 
+        private readonly ModifyAmountInput modifyAmountInput;
+        private readonly CreateStatInput   createStatInput;
+
+    #endregion
+
+    #region Constructor
+
+        public StatController()
+        {
+            modifyAmountInput = new ModifyAmountInput();
+            createStatInput   = new CreateStatInput();
+        }
+
     #endregion
 
     #region Public Methods
 
         public void CreateStat(string actorId , string statName , int amount)
         {
-            var input = new CreateStatInput();
-            input.ActorId  = actorId;
-            input.StatName = statName;
-            input.Amount   = amount;
-            createStatUseCase.Execute(input);
+            createStatInput.ActorId  = actorId;
+            createStatInput.StatName = statName;
+            createStatInput.Amount   = amount;
+            createStatUseCase.Execute(createStatInput);
         }
 
         public void ModifyStatAmount(string actorId , string statName , int amount)
         {
-            var input = new ModifyAmountInput();
-            input.ActorId  = actorId;
-            input.StatName = statName;
-            input.Amount   = amount;
-            modifyAmountUseCase.Execute(input);
+            modifyAmountInput.ActorId  = actorId;
+            modifyAmountInput.StatName = statName;
+            modifyAmountInput.Amount   = amount;
+            modifyAmountUseCase.Execute(modifyAmountInput);
         }
 
     #endregion

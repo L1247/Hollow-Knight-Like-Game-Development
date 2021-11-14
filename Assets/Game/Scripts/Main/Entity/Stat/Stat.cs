@@ -18,6 +18,12 @@ namespace Main.Entity
 
     #endregion
 
+    #region Private Variables
+
+        private AmountModified amountModified;
+
+    #endregion
+
     #region Constructor
 
         public Stat(string statId , string actorId , string statName , int amount) : base(statId)
@@ -34,6 +40,7 @@ namespace Main.Entity
         public void Create()
         {
             AddDomainEvent(new StatCreated(ActorId , Name , Amount));
+            amountModified = new AmountModified();
         }
 
         public void SetActorId(string actorId)
@@ -44,7 +51,11 @@ namespace Main.Entity
         public void SetAmount(int amount)
         {
             Amount = amount;
-            AddDomainEvent(new AmountModified(ActorId , Name , Amount));
+            amountModified.Clear();
+            amountModified.ActorId  = ActorId;
+            amountModified.Amount   = amount;
+            amountModified.StatName = Name;
+            AddDomainEvent(amountModified);
         }
 
         public void SetName(string statName)
